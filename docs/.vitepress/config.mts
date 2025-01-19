@@ -4,5 +4,4 @@ import { defineConfig } from "vitepress";
 export default defineConfig({
   title: "Example Site",
   description: "A VitePress Site.",
-  appearance: true,
 });

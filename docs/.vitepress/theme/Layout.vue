@@ -3,6 +3,11 @@ import { useData } from "vitepress";
 
 // https://vitepress.dev/reference/runtime-api#usedata
 const { site, frontmatter } = useData();
+
+const switchDarkMode = (): void => {
+  const htmlEl: HTMLElement | null = document.querySelector("html");
+  htmlEl?.classList.toggle("dark");
+};
 </script>
 
 <template>
@@ -17,5 +22,11 @@ const { site, frontmatter } = useData();
   <div v-else>
     <a href="/">Home</a>
     <Content />
+  </div>
+  <div
+    class="dark-mode-switcher bg-neutral-300 text-neutral-700 dark:bg-neutral-700 dark:text-neutral-300"
+    @click="switchDarkMode"
+  >
+    Switch
   </div>
 </template>
