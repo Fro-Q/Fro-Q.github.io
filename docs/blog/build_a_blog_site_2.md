@@ -371,12 +371,13 @@ const switchDarkMode = (): void => {  // [!code ++:4]
   <div v-else>
     <a href="/">Home</a>
     <Content />
-  </div> <!-- [!code ++:+1] --> <!-- [!code ++:+2] --> <!-- [!code ++:+3] --> <!-- [!code ++:+4] -->
+  </div>
+  <!-- [!code ++:6] -->
   <div
     class="dark-mode-switcher bg-neutral-300 text-neutral-700 dark:bg-neutral-700 dark:text-neutral-300"
     @click="switchDarkMode"
   >
-    Switch  <!-- [!code ++:2] -->
+    Switch
   </div>
 </template>
 ```
@@ -406,12 +407,13 @@ const switchDarkMode = () => {  // [!code ++:4]
   <div v-else>
     <a href="/">Home</a>
     <Content />
-  </div> <!-- [!code ++:+1] --> <!-- [!code ++:+2] --> <!-- [!code ++:+3] --> <!-- [!code ++:+4] -->
+  </div>
+  <!-- [!code ++:6] -->
   <div
     class="dark-mode-switcher bg-neutral-300 text-neutral-700 dark:bg-neutral-700 dark:text-neutral-300"
     @click="switchDarkMode"
   >
-    Switch  <!-- [!code ++:2] -->
+    Switch
   </div>
 </template>
 ```

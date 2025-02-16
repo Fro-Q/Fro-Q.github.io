@@ -124,11 +124,11 @@
     @apply flex min-h-screen flex-col;
 
     &::-webkit-scrollbar {
-      @apply w-px;
+      @apply w-1;
     }
 
     &::-webkit-scrollbar-thumb {
-      @apply bg-neutral-100 dark:bg-neutral-900;
+      @apply bg-neutral-900 dark:bg-neutral-100;
     }
   }
 }
@@ -138,7 +138,7 @@
     @apply font-sans text-xs antialiased selection:bg-neutral-400/20 md:text-base;
 
     &::-webkit-scrollbar {
-      @apply w-px;
+      @apply w-1;
     }
 
     &::-webkit-scrollbar-thumb {
@@ -181,7 +181,7 @@
     @apply fixed left-0 top-[100px] z-50 flex max-h-[320px] min-w-[200px] max-w-[400px] -translate-x-[90%] flex-col items-start overflow-auto border border-neutral-700 bg-neutral-50 bg-opacity-80 text-sm text-neutral-300 opacity-20 transition-all duration-200 hover:translate-x-0 hover:opacity-100 hover:backdrop-blur-sm md:translate-x-0 dark:border-neutral-300 dark:bg-neutral-950 dark:text-neutral-700;
 
     &::-webkit-scrollbar {
-      @apply w-px;
+      @apply w-1;
     }
 
     &::-webkit-scrollbar-thumb {
@@ -192,7 +192,7 @@
       @apply m-0 list-none px-5;
 
       &::-webkit-scrollbar {
-        @apply w-px;
+        @apply w-1;
       }
 
       &::-webkit-scrollbar-thumb {
@@ -230,10 +230,10 @@
     }
 
     & pre {
-      @apply overflow-x-auto py-5;
+      @apply overflow-x-auto whitespace-pre py-5;
 
       &::-webkit-scrollbar {
-        @apply h-px;
+        @apply h-1;
       }
 
       &::-webkit-scrollbar-thumb {
@@ -248,6 +248,12 @@
             @apply border-b-2 border-yellow-500 bg-yellow-500/10;
           }
         }
+      }
+
+      & .line {
+        /* @apply block min-h-4; */
+        /* @apply relative m-0 h-[em] min-h-0 */
+        /* @apply whitespace-pre; */
       }
 
       & .line.highlighted {
@@ -285,13 +291,29 @@
           @apply relative bg-green-500/10 before:text-green-500 before:content-["+"];
         }
       }
+
+      & .line .folded-content {
+        @apply opacity-50;
+      }
+
+      & .line[class*="fold-node-"].fold {
+        @apply -mx-8 inline-block w-[calc(100%+4rem)] bg-neutral-200 px-8 before:absolute before:-translate-x-5 dark:bg-neutral-800;
+      }
+
+      & .line .fold-button {
+        /* @apply absolute inline-block -translate-x-5 rotate-90 bg-transparent before:text-neutral-500 before:transition-colors before:content-[">"] before:hover:text-neutral-700 dark:before:hover:text-neutral-300; */
+      }
+
+      & .line.fold .fold-button {
+        /* @apply rotate-0 before:text-neutral-700 before:dark:text-neutral-300; */
+      }
     }
 
     &.line-numbers-mode {
       @apply pl-[2.4rem];
 
       & .line-numbers-wrapper {
-        @apply absolute bottom-0 left-0 top-0 z-10 w-[2.4rem] border-r border-neutral-300 pt-5 text-center font-mono text-neutral-400 transition-colors duration-200 dark:border-neutral-700 dark:text-neutral-400;
+        @apply absolute bottom-0 left-0 top-0 z-10 w-[2.4rem] border-r border-neutral-300 pt-5 text-center font-mono text-neutral-400 transition-colors duration-200 dark:border-neutral-700 dark:text-neutral-600;
       }
     }
   }
@@ -308,7 +330,7 @@
       @apply rounded-t-md border border-neutral-300 dark:border-neutral-700;
 
       &::-webkit-scrollbar {
-        @apply h-px;
+        @apply h-1;
       }
 
       &::-webkit-scrollbar-thumb {
@@ -501,6 +523,58 @@
     & .footnote-backref {
       @apply text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100;
     }
+  }
+}
+
+[class^="language-"] code span.line {
+  position: relative;
+}
+
+[class^="language-"] code span.line .fold-button {
+  opacity: 0.4;
+  cursor: pointer;
+  width: 1rem;
+  height: 1rem;
+  position: absolute;
+  translate: -1.3rem -50%;
+  scale: 0.75;
+  top: 50%;
+}
+[class^="language-"] code span.line.fold .fold-button {
+  rotate: -90deg;
+  opacity: 1;
+}
+
+[class^="language-"] code span.line .fold-button:hover {
+  opacity: 1;
+}
+
+[class^="language-"] code span.line .fold-button::before {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='currentColor' %3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+
+  @media (prefers-color-scheme: dark) {
+    filter: invert(100%);
+  }
+}
+
+[class^="language-"] code span.line.fold {
+  background-color: rgba(255, 255, 255, 0.05);
+  transition: background-color 0.5s;
+  margin: 0 -24px;
+  padding: 0 24px;
+  width: calc(100% + 2 * 24px);
+  display: inline-block;
+}
+
+[class^="language-"] .line-numbers-wrapper span.line-number {
+  transition: color 0.2s;
+}
+
+[class^="language-"] .line-numbers-wrapper span.line-number.fold {
+  color: black;
+
+  @media (prefers-color-scheme: dark) {
+    color: white;
   }
 }
 

@@ -8,7 +8,7 @@ import { transformerColorizedBrackets } from "@shikijs/colorized-brackets";
 import { transformerTwoslash } from "@shikijs/vitepress-twoslash";
 import { createFileSystemTypesCache } from "@shikijs/vitepress-twoslash/cache-fs";
 
-import { customTransformerNotationDiff } from "./theme/utils/customTransformers";
+import { transformerNotationFold } from "./theme/utils/customTransformers";
 
 const rssOptions = {
   baseUrl: "https://fro-blo.com/",
@@ -171,7 +171,7 @@ export default defineConfigWithTheme({
       transformerTwoslash({
         typesCache: createFileSystemTypesCache(),
       }),
-      customTransformerNotationDiff(),
+      transformerNotationFold(),
     ],
     container: {
       tipLabel: "点触",

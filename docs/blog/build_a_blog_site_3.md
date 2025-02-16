@@ -157,7 +157,7 @@ const switchDarkMode = (): void => {
 
 ::: code-group
 
-```vue [./docs/.vitepress/theme/Layout.vue] {10,11}
+```vue [./docs/.vitepress/theme/Layout.vue] {11}
 <script setup lang="ts">
 // ...
 </script>
@@ -200,7 +200,7 @@ This is definitely the home page.  <!-- [!code ++] -->
 </script>
 
 <template>
-  <!-- ... -->  <!-- [!code ++:+3] --> <!-- [!code ++:+4] -->
+  <!-- ... -->  <!-- [!code ++:3-4] -->
   <Content
     class="mx-auto max-w-[700px]"
     id="content"
