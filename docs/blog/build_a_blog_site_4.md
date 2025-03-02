@@ -90,8 +90,6 @@ let darkMode = ref({
 });
 
 const toggleDarkClass = (value: boolean) => {
-  console.log("Toggle Dark Class " + value);
-
   if (value) {
     htmlEl.classList.add("dark");
   } else {
@@ -215,8 +213,6 @@ let darkMode = ref({
 });
 
 const toggleDarkClass = (value: boolean) => {
-  console.log("Toggle Dark Class " + value);
-
   if (value) {
     htmlEl?.classList.add("dark");
   } else {
@@ -260,8 +256,6 @@ let darkMode = ref({
 });
 
 const toggleDarkClass = (value: boolean) => {
-  console.log("Toggle Dark Class " + value);
-
   if (value) {
     htmlEl.classList.add("dark");
   } else {

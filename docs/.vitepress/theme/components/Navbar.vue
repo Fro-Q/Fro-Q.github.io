@@ -1,6 +1,6 @@
 <script setup>
 import { useData } from "vitepress";
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, onMounted, ref, triggerRef } from "vue";
 import { selfDesc } from "../utils/selfDesc";
 
 const { page, site, frontmatter } = useData();
@@ -8,30 +8,30 @@ const { page, site, frontmatter } = useData();
 const socialLinks = site.value.themeConfig.socialLinks;
 const navUtilsConfig = site.value.themeConfig.navUtils;
 
-const navUtilsState = ref(
-  navUtilsConfig.reduce((acc, util) => {
-    acc[util.id] = false;
-    return acc;
-  }, {}),
-);
+const htmlEl = document.querySelector("html");
 
-const toggleNavUtil = (id, className) => {
-  htmlEl.classList.toggle(className);
-  navUtilsState.value[id] = !navUtilsState.value[id];
+let darkMode = ref({
+  get state() {
+    return htmlEl.classList.contains("dark");
+  },
+
+  set state(value) {
+    toggleDarkClass(value);
+  },
+});
+
+const toggleDarkClass = (value) => {
+  if (value) {
+    htmlEl.classList.add("dark");
+  } else {
+    htmlEl.classList.remove("dark");
+  }
 };
 
 onMounted(() => {
-  const htmlEl = document.documentElement;
-  const isDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
-
-  isDarkScheme.addEventListener("change", (event) => {
-    navUtilsState.value["darkMode"] = !navUtilsState.value["darkMode"];
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+    triggerRef(darkMode);
   });
-
-  navUtilsState.value = navUtilsConfig.reduce((acc, util) => {
-    acc[util.id] = htmlEl.classList.contains(util.className);
-    return acc;
-  }, {});
 });
 </script>
 
@@ -80,20 +80,13 @@ onMounted(() => {
             :key="util.ariaLabel"
           >
             <div
-              @click="toggleNavUtil(util.id, util.className)"
+              @click="darkMode.state = htmlEl.classList.contains('dark') ? false : true"
               class="link m-1 block cursor-pointer text-xl transition-colors duration-200"
               :title="util.ariaLabel"
             >
               <div
-                v-html="util.icon.svg[navUtilsState[util.id] ? 'on' : 'off']"
+                v-html="util.icon.svg[darkMode.state ? 'on' : 'off']"
                 class="icon flex h-6 w-6 items-center justify-center transition-colors duration-200"
-                :class="
-                  util.id == 'colorMode' ?
-                    navUtilsState[util.id] ?
-                      'text-emerald-500 hover:text-emerald-600 dark:text-emerald-500 dark:hover:text-emerald-400'
-                    : 'text-neutral-500 hover:text-neutral-800 dark:text-neutral-500 dark:hover:text-neutral-200'
-                  : 'text-neutral-500 hover:text-neutral-800 dark:text-neutral-500 dark:hover:text-neutral-200'
-                "
               ></div>
             </div>
           </div>
