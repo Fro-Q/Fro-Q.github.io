@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useData } from "vitepress";
-import PageContentHome from "./PageContentHome.vue";
-import PageContentPost from "./PageContentPost.vue";
+import { useData } from 'vitepress'
+import PageContentHome from './PageContentHome.vue'
+import PageContentPost from './PageContentPost.vue'
 
-const { frontmatter } = useData();
+const { frontmatter } = useData()
 </script>
 
 <template>

@@ -1,45 +1,41 @@
 <script setup lang="ts">
-import { onMounted, ref, triggerRef } from "vue";
+import { onMounted, ref, triggerRef } from 'vue'
 
-const htmlEl: HTMLElement | null = document.querySelector("html");
+const htmlEl: HTMLElement | null = document.querySelector('html')
 
 if (!htmlEl) {
-  throw new Error("HTML element not found");
+  throw new Error('HTML element not found')
 }
 
-let darkMode = ref({
+const darkMode = ref({
   get state(): boolean {
-    return htmlEl.classList.contains("dark");
+    return htmlEl.classList.contains('dark')
   },
 
   set state(value: boolean) {
-    toggleDarkClass(value);
+    if (value) {
+      htmlEl.classList.add('dark')
+    }
+    else {
+      htmlEl.classList.remove('dark')
+    }
   },
-});
-
-const toggleDarkClass = (value: boolean) => {
-  if (value) {
-    htmlEl.classList.add("dark");
-  } else {
-    htmlEl.classList.remove("dark");
-  }
-};
+})
 
 onMounted(() => {
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
-    triggerRef(darkMode);
-  });
-});
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    triggerRef(darkMode)
+  })
+})
 </script>
 
 <template>
-  <nav class="flex flex-row justify-between p-4">
+  <nav class="flex flex-row justify-between p-4 dark:bg-red:10">
     <div class="m-2">
       <a
         class="font-[noteworthy] text-5xl text-neutral-800 dark:text-neutral-200"
         href="/"
-        >HOME</a
-      >
+      >HOME</a>
     </div>
     <div class="flex flex-row items-center gap-6 text-xl">
       <a
@@ -72,11 +68,11 @@ onMounted(() => {
         @click="darkMode.state = htmlEl.classList.contains('dark') ? false : true"
       >
         <svg
+          v-if="darkMode.state"
           xmlns="http://www.w3.org/2000/svg"
           width="1em"
           height="1em"
           viewBox="0 0 24 24"
-          v-if="darkMode.state"
         >
           <path
             fill="currentColor"
@@ -84,11 +80,11 @@ onMounted(() => {
           />
         </svg>
         <svg
+          v-else
           xmlns="http://www.w3.org/2000/svg"
           width="1em"
           height="1em"
           viewBox="0 0 24 24"
-          v-else
         >
           <path
             fill="currentColor"
