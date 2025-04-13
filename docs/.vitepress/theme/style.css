@@ -1,11 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 html {
   font-family: Arial, Helvetica;
-}
- 
-body {
-  @apply dark:bg-neutral-900 dark:text-neutral-100;
 }

@@ -30,7 +30,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <nav class="flex flex-row justify-between p-4 dark:bg-red:10">
+  <nav class="flex flex-row justify-between p-4">
     <div class="m-2">
       <a
         class="font-[noteworthy] text-5xl text-neutral-800 dark:text-neutral-200"
