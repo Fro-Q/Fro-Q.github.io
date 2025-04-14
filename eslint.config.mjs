@@ -9,5 +9,10 @@ export default antfu(
         multiline: { max: 1 },
       }],
     },
+    formatters: {
+      css: true,
+      html: true,
+      markdown: 'prettier',
+    },
   },
 )
