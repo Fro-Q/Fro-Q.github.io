@@ -1,8 +1,20 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useData } from 'vitepress'
+
+const { frontmatter } = useData()
+</script>
 
 <template>
-  <Content
+  <div
+    un-my-10
+    un-text="5xl/relaxed"
+    un-page-content
+    un-font-serif
+  >
+    {{ frontmatter.title }}
+  </div>
+  <content
     id="content"
-    class="mx-auto max-w-[700px]"
+    un-page-content
   />
 </template>

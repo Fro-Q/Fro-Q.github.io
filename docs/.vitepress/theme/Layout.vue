@@ -5,7 +5,11 @@ import PageNav from './components/PageNav.vue'
 </script>
 
 <template>
-  <div class="dark:bg-neutral-900 dark:text-neutral-100 min-h-100vh">
+  <div
+    un-min-h-100vh
+    un-bg="neutral-50 dark:neutral-950"
+    un-text="neutral-700 dark:neutral-300"
+  >
     <PageNav />
     <PageContent />
     <PageFooter />
