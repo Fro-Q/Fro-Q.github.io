@@ -1,7 +1,29 @@
 <script setup lang="ts">
+import mediumZoom from 'medium-zoom'
+import { useRoute } from 'vitepress'
+import { nextTick, onMounted, watch } from 'vue'
 import PageContent from './components/PageContent.vue'
 import PageFooter from './components/PageFooter.vue'
 import PageNav from './components/PageNav.vue'
+
+const route = useRoute()
+
+function initZoom() {
+  mediumZoom('#content p img', {
+    margin: 24,
+    background: 'var(--image-mask-bg)',
+    container: document.body,
+  })
+}
+
+onMounted(() => {
+  initZoom()
+})
+
+watch(
+  () => route.path,
+  () => nextTick(() => initZoom()),
+)
 </script>
 
 <template>

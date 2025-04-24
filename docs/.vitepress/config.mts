@@ -1,4 +1,8 @@
-import unocss from 'unocss/vite'
+import anchor from 'markdown-it-anchor'
+import markdownItFootnote from 'markdown-it-footnote'
+import markdownItHashtag from 'markdown-it-hashtag'
+import markdownItMark from 'markdown-it-mark'
+import UnoCSS from 'unocss/vite'
 import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
@@ -7,7 +11,7 @@ export default defineConfig({
   description: 'A VitePress Site.',
   vite: {
     plugins: [
-      unocss(),
+      UnoCSS(),
     ],
   },
   vue: {
@@ -15,6 +19,18 @@ export default defineConfig({
       compilerOptions: {
         isCustomElement: tag => tag.startsWith('un-'),
       },
+    },
+  },
+  markdown: {
+    anchor: {
+      permalink: anchor.permalink.headerLink(),
+    },
+    math: true,
+    config: (md) => {
+      md
+        .use(markdownItFootnote)
+        .use(markdownItMark)
+        .use(markdownItHashtag)
     },
   },
 })

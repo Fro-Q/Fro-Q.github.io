@@ -1,14 +1,5 @@
 ---
 title: 'Header with `inline code` and $\LaTeX$'
-category: Test
-head:
-  - - meta
-    - name: description
-      content: Description with `inline code` and $\LaTeX$.
-  - - meta
-    - name: keywords
-      content: keyword1 keyword2
-author: froq
 created: 2025-04-14
 last_modified: 2025-04-14
 ---
@@ -19,15 +10,15 @@ last_modified: 2025-04-14
 
 #### Header 4 (`inline code`, $\LaTeX$)
 
-##### Header 5 ([internal link](api-examples.md), [external link](https://example.com))
+##### Header 5
 
-###### Header 6 (<https://example.com>)
+###### Header 6
 
 ---
 
 ### Paragraph
 
-This is a paragraph, which contains **strong**, _em_, ==mark==(optional), <u>underline</u>, ~~strikethrough~~, `inline code`, $\LaTeX$, [internal link](api-examples.md), [external link](https://example.com) and pure link <https://example.com> element.
+This is a paragraph, which contains **strong**, _em_, ==mark==(optional), <u>underline</u>, ~~strikethrough~~, `inline code`, $\LaTeX$, [internal `link`](api-examples.md), [external link](https://example.com) and pure link <https://example.com> element.
 
 ### Code Block
 
@@ -113,8 +104,6 @@ This is a dangerous warning with a warning block nested inside.
 This is a warning.
 :::
 
-:::
-
 ::: details
 This is a details block...
 
@@ -123,7 +112,6 @@ This is a details block...
 ::: danger
 This is a dangerous warning.
 :::
-:::
 
 ### Ordered List and Unordered List
 
@@ -131,11 +119,20 @@ This is a dangerous warning.
    1. With a sub-ordered list.
    - And an unordered list.
      - With a sub-unordered list.
+2. End here.
 
 ### Table
 
-| name  | description                          |
-| :---: | :----------------------------------- |
+| name  |             description              |
+| :---: | :----------------------------------: |
 | table | This is a table.<br>Multi-line cell. |
-|  row  | Another row.                         |
-| style | _And_ **some** `other` ==style==.    |
+|  row  |             Another row.             |
+| style |  _And_ **some** `other` ==style==.   |
+
+### Mark, Footnotes and Hashtags
+
+This is a paragraph with ==mark==, footnote[^1], and #hashtag.
+
+![Innei: Shiki 性能优化 - 按需加载语法解析](https://innei.in/_next/image?url=https%3A%2F%2Fobject.innei.in%2Fbed%2F2024%2F0420_1713622248563.png&w=3840&q=75)
+
+[^1]: Content of a footnote.

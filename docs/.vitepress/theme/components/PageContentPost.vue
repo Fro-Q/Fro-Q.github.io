@@ -13,8 +13,10 @@ const { frontmatter } = useData()
   >
     {{ frontmatter.title }}
   </div>
-  <content
-    id="content"
-    un-page-content
-  />
+  <un-page-content>
+    <content
+      id="content"
+      un-page-content
+    />
+  </un-page-content>
 </template>

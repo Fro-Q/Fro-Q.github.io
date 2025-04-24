@@ -8,6 +8,7 @@
   "dependencies": {
     "@unocss/reset": "66.1.0-beta.3",
     "eslint": "^9.24.0",
+    "medium-zoom": "^1.1.0",
     "vitepress": "^1.6.3",
     "vue": "^3.5.13"
   },
@@ -19,6 +20,11 @@
     "@unocss/eslint-plugin": "66.1.0-beta.11",
     "cz-conventional-changelog": "^3.3.0",
     "eslint-plugin-format": "^1.0.1",
+    "markdown-it-anchor": "^9.2.0",
+    "markdown-it-footnote": "^4.0.0",
+    "markdown-it-hashtag": "^0.4.0",
+    "markdown-it-mark": "^4.0.0",
+    "markdown-it-mathjax3": "^4.3.2",
     "sass-embedded": "^1.86.3",
     "unocss": "66.1.0-beta.3"
   },

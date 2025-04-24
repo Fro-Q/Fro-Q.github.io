@@ -5,9 +5,17 @@ import {
   presetMini,
   presetTagify,
   transformerDirectives,
+  transformerVariantGroup,
 } from 'unocss'
 
 export default defineConfig({
+  content: {
+    pipeline: {
+      include: [
+        /\.(vue|svelte|[jt]sx|mdx?|astro|elm|php|phtml|html|css)($|\?)/,
+      ],
+    },
+  },
   shortcuts: {
     'page-content': 'mx-auto max-w-[700px]',
   },
@@ -30,6 +38,7 @@ export default defineConfig({
   ],
   transformers: [
     transformerDirectives(),
+    transformerVariantGroup(),
   ],
   layers: {
     default: 0,
