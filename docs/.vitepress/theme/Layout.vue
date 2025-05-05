@@ -9,7 +9,7 @@ import PageNav from './components/PageNav.vue'
 const route = useRoute()
 
 function initZoom() {
-  mediumZoom('#content p img', {
+  mediumZoom('#content figure img', {
     margin: 24,
     background: 'var(--image-mask-bg)',
     container: document.body,

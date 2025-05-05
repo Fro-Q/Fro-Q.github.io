@@ -328,9 +328,18 @@ html {
   }
 
   /* img */
-  & img {
+  & figure{
     --uno: 'my-8';
-    --uno: 'border border-neutral-700 dark:border-neutral-300';
+
+    & img {
+      --uno: 'border border-neutral-300 dark:border-neutral-700';
+    }
+
+    & figcaption {
+      --uno: 'pt-4';
+      --uno: 'text-neutral-600 dark:text-neutral-400';
+      --uno: 'text-sm/9 text-center';
+    }
   }
 }
 

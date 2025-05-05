@@ -1,6 +1,7 @@
 import anchor from 'markdown-it-anchor'
 import markdownItFootnote from 'markdown-it-footnote'
 import markdownItHashtag from 'markdown-it-hashtag'
+import markdownItFigures from 'markdown-it-implicit-figures'
 import markdownItMark from 'markdown-it-mark'
 import UnoCSS from 'unocss/vite'
 import { defineConfig } from 'vitepress'
@@ -31,6 +32,9 @@ export default defineConfig({
         .use(markdownItFootnote)
         .use(markdownItMark)
         .use(markdownItHashtag)
+        .use(markdownItFigures, {
+          figcaption: true,
+        })
     },
   },
 })
