@@ -5,7 +5,8 @@ html {
 
   /* background color for medium-zoom */
   --image-mask-bg: #fafafa;
-  @media (prefers-color-scheme: dark) {
+
+  &.dark {
     --image-mask-bg: #0a0a0a;
   }
 }
@@ -32,18 +33,23 @@ html {
   & h1 {
     --uno: 'text-4xl/10 before:content-["#1"]';
   }
+
   & h2 {
     --uno: 'text-3xl/10 before:content-["#2"]';
   }
+
   & h3 {
     --uno: 'text-2xl/10 before:content-["#3"]';
   }
+
   & h4 {
     --uno: 'text-xl/10 before:content-["#4"]';
   }
+
   & h5 {
     --uno: 'text-lg/10 before:content-["#5"]';
   }
+
   & h6 {
     --uno: 'text-base/10 before:content-["#6"]';
   }
@@ -58,7 +64,7 @@ html {
     --uno: 'relative inline-block text-nowrap';
     --uno: 'text-neutral-900 dark:text-neutral-100';
     /* underline implemented by ::before */
-    --uno: 'before:(content-[""] absolute bottom-2 w-full h-px bg-neutral-500)';
+    --uno: 'before:(content-[""] absolute bottom-0.5em w-full h-px bg-neutral-500)';
     --uno: 'before:(transition duration-200) after:(transition duration-200)';
     /* link icon */
     --uno: 'after:(content-[""] i-ph-link-duotone inline-block align-middle ml-1 text-neutral-500)';
@@ -75,8 +81,7 @@ html {
 
   /* inline code */
   & :not(pre) > code {
-    --uno: 'mx-1';
-    --uno: 'before:content-["`"] after:content-["`"]';
+    --uno: 'px-1';
     --uno: 'bg-neutral-200/50 dark:bg-neutral-800/50';
     --uno: 'text-neutral-500';
     --uno: 'border border-neutral-300 dark:border-neutral-700';
@@ -104,12 +109,68 @@ html {
 
       /* code wrapper */
       & code {
-        --uno: 'px-8 block';
+        --uno: 'px-8 block min-w-full w-fit';
 
         /* highlight color for each span */
         & span {
           --uno: 'text-[var(--shiki-light,inherit)] dark:text-[var(--shiki-dark,inherit)]';
+          --uno: 'border-b-none';
         }
+      }
+    }
+
+    /* line notation style */
+    & .line {
+      --uno: 'inline-block w-[calc(100%+4rem)] h-20px';
+      --uno: '-mx-8 px-8';
+
+      /* highlighted line */
+      &.highlighted {
+        --uno: 'bg-neutral-200 dark:bg-neutral-800';
+        --uno: 'rounded-sm';
+
+        --uno: 'before:(absolute -translate-x-5)';
+
+        /* error level */
+        &.error {
+          --uno: 'bg-red-500/10 dark:bg-red-500/10';
+          --uno: 'before:(text-red-500 content-[""] i-ph-x h-[inherit])';
+        }
+
+        &.warning {
+          --uno: 'bg-yellow-500/10 dark:bg-yellow-500/10';
+          --uno: 'before:(text-yellow-500 content-[""] i-ph-warning h-[inherit])';
+        }
+      }
+
+      /* diff */
+      &.diff {
+        --uno: 'before:(absolute -translate-x-5)';
+
+        &.add {
+          --uno: 'bg-green-500/10 dark:bg-green-500/10';
+          --uno: 'before:(text-green-500 content-[""] i-ph-plus h-[inherit])';
+        }
+
+        &.remove {
+          --uno: 'bg-red-500/10 dark:bg-red-500/10 opacity-50';
+          --uno: 'before:(text-red-500 content-[""] i-ph-minus h-[inherit])';
+        }
+      }
+    }
+
+    /* focus */
+    & pre.has-focused-lines {
+      & .line {
+        --uno: 'opacity-50';
+        --uno: 'transition duration-200';
+        filter: blur(0.1em);
+      }
+
+      &:hover .line,
+      & .line.has-focus {
+        --uno: 'opacity-100';
+        filter: blur(0);
       }
     }
 
@@ -147,6 +208,63 @@ html {
     &:hover {
       & button.copy {
         --uno: 'opacity-100';
+      }
+    }
+
+    /* line numbers on */
+    &.line-numbers-mode {
+      --uno: 'pl-10';
+
+      & .line-numbers-wrapper {
+        --uno: 'absolute bottom-0 left-0 top-0 w-10';
+        --uno: 'border-r border-neutral-300 dark:border-neutral-700';
+        --uno: 'pt-6';
+        --uno: 'text-(center neutral-500)';
+        --uno: 'font-mono';
+      }
+    }
+  }
+
+  /* code group */
+  & .vp-code-group {
+    --uno: 'relative my-8 w-full';
+    --uno: 'text-sm';
+    --uno: 'bg-neutral-100 dark:bg-neutral-900';
+    --uno: 'rounded-md';
+
+    & .tabs {
+      --uno: 'border border-neutral-300 dark:border-neutral-700';
+      --uno: 'rounded-t-md';
+
+      & label {
+        --uno: 'inline-block cursor-pointer';
+        --uno: 'border-(t-2 transparent)';
+        --uno: 'p-(x-4 y-2)';
+        --uno: 'font-mono text-neutral-600 dark:text-neutral-400';
+        --uno: 'transition-colors duration-200';
+      }
+
+      /* hide radio button */
+      & input {
+        --uno: 'opacity-0';
+
+        &:checked + label {
+          --uno: 'text-neutral-900';
+          --uno: 'border-neutral-700';
+          --uno: 'dark:(text-neutral-100 border-neutral-300)';
+        }
+      }
+    }
+
+    & .blocks {
+      & > * {
+        --uno: 'my-0';
+        --uno: 'border-t-none';
+        --uno: 'rounded-t-none';
+
+        &:not(.active) {
+          --uno: 'hidden';
+        }
       }
     }
   }
@@ -328,7 +446,7 @@ html {
   }
 
   /* img */
-  & figure{
+  & figure {
     --uno: 'my-8';
 
     & img {
@@ -341,8 +459,73 @@ html {
       --uno: 'text-sm/9 text-center';
     }
   }
+
+  /* toc */
+  & nav.table-of-contents {
+    --uno: 'rounded-r-md';
+    --uno: 'pr-5';
+    --uno: 'fixed top-100px left-0 z-10';
+    --uno: 'max-h-320px min-w-200px max-w-400px';
+    --uno: 'overflow-auto';
+    --uno: 'text-sm';
+
+    --uno: 'bg-neutral-100/60 dark:bg-neutral-900/60';
+    --uno: 'border border-neutral-300 dark:border-neutral-700';
+    --uno: 'opacity-10 hover:opacity-100';
+    --uno: 'transition duration-200';
+
+    &::-webkit-scrollbar {
+      --uno: 'w-1px';
+    }
+
+    &:hover {
+      backdrop-filter: blur(10px);
+    }
+
+    & li {
+      list-style: none;
+      --uno: 'my-4 px-0 mx-0';
+    }
+  }
+}
+
+.medium-zoom-overlay {
+  --uno: 'z-100';
+}
+
+img.medium-zoom-image.medium-zoom-image--opened {
+  --uno: 'z-110';
 }
 
 mjx-container.MathJax svg {
-  display: inline-block;
+  --uno: 'inline-block';
+}
+
+/* twoslash floating */
+.twoslash-floating {
+  backdrop-filter: blur(10px);
+
+  --twoslash-popup-bg: rgb(245 245 245 / 0.5);
+
+  .dark & {
+    --twoslash-popup-bg: rgb(23 23 23 / 0.5);
+  }
+
+  & span {
+    --uno: 'text-[var(--shiki-light,inherit)] dark:text-[var(--shiki-dark,inherit)]';
+  }
+
+  & a {
+    --uno: 'decoration-(underline neutral-500)';
+    --uno: 'transition duration-200';
+    --uno: 'hover:(decoration-neutral-800 dark:decoration-neutral-200)';
+  }
+
+  & p code {
+    --uno: 'px-1';
+    --uno: 'bg-neutral-200/50 dark:bg-neutral-800/50';
+    --uno: 'text-neutral-500';
+    --uno: 'border border-neutral-300 dark:border-neutral-700';
+    --uno: 'rounded-sm';
+  }
 }

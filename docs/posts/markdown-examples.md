@@ -4,6 +4,8 @@ created: 2025-04-14
 last_modified: 2025-04-14
 ---
 
+[[toc]]
+
 ## Header 2 (==mark==, **strong**, _em_)
 
 ### Header 3 (<u>underline</u>, ~~strikethrough~~)
@@ -133,6 +135,41 @@ This is a dangerous warning.
 
 This is a paragraph with ==mark==, footnote[^1], and #hashtag.
 
-![Innei: Shiki 性能优化 - 按需加载语法解析](https://innei.in/_next/image?url=https%3A%2F%2Fobject.innei.in%2Fbed%2F2024%2F0420_1713622248563.png&w=3840&q=75)
+![[Innei: Shiki 性能优化 - 按需加载语法解析](https://innei.in/posts/dev-story/shiki-dynamic-load-language)](https://innei.in/_next/image?url=https%3A%2F%2Fobject.innei.in%2Fbed%2F2024%2F0420_1713622248563.png&w=3840&q=75)
+
+[你好](/)
+
+```ts:line-numbers twoslash
+console.log('1')  // [!code highlight]
+console.log('2')  // [!code ++]
+console.log('3')  // [!code --]
+console.log('4')  // [!code error]
+console.log('5')  // [!code warning]
+console.log('6')
+console.log('7')
+console.log('8')
+console.log('9')
+console.log('10')
+console.log('11')
+console.log('12')
+```
+
+```ts:line-numbers twoslash
+console.log('1')  // [!code focus]
+console.log('2')
+console.log('3')
+```
+
+::: code-group
+
+```ts [./test.ts]
+const a: number = 1
+```
+
+```js [1]
+const b = 2
+```
+
+:::
 
 [^1]: Content of a footnote.
