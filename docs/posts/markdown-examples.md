@@ -2,6 +2,15 @@
 title: 'Header with `inline code` and $\LaTeX$'
 created: 2025-04-14
 last_modified: 2025-04-14
+category: 共读
+tags:
+  - 标签1
+  - 标签2
+  - 标签3
+---
+
+This is a excerpt.
+
 ---
 
 [[toc]]

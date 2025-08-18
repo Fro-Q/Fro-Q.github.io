@@ -17,7 +17,7 @@ export default defineConfig({
     },
   },
   shortcuts: {
-    'page-content': 'mx-auto max-w-[700px]',
+    'page-content': 'mx-auto max-w-[700px] min-h-[calc(100vh-100px)] block',
   },
   presets: [
     presetMini(),
