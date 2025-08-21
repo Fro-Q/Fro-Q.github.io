@@ -1,6 +1,5 @@
 ---
 title: '*La Peste* · A. Camus《鼠疫》'
-timestampId: 220329a
 category: 前脩
 head:
   - - meta
@@ -9,14 +8,11 @@ head:
   - - meta
     - name: keywords
       content: 摘抄 excerpt 鼠疫 la_peste 加缪 a.camus
-  - - meta
-    - name: id
-      content: 220329a
 created: 2022-03-29 23:56
 last_modified: 2022-03-29 23:56
 ---
 
-摘抄——*La Peste* · A. Camus《鼠疫》
+摘抄——_La Peste_ · A. Camus《鼠疫》
 
 ---
 

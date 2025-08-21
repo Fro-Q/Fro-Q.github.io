@@ -1,6 +1,5 @@
 ---
 title: '需要时间'
-timestampId: 230621a
 category: 代序
 head:
   - - meta
@@ -9,9 +8,6 @@ head:
   - - meta
     - name: keywords
       content: 闲聊 个人
-  - - meta
-    - name: id
-      content: 230621a
 created: 2023-06-21 16:00
 last_modified: 2025-01-08 07:51
 ---

@@ -1,6 +1,5 @@
 ---
 title: 'MathJax 中的上下标位置'
-timestampId: 250101a
 category: 共读
 head:
   - - meta
@@ -9,9 +8,6 @@ head:
   - - meta
     - name: keywords
       content: mathjax latex latex_symbol latex符号 subscript superscript sub sup 下标 上标 上下标 displaystyle textstyle limits
-  - - meta
-    - name: id
-      content: 250101a
 created: 2025-01-01 21:42
 last_modified: 2025-01-01 21:42
 ---
@@ -36,9 +32,9 @@ last_modified: 2025-01-01 21:42
 
 - `\textstyle \sum_{i=1}^{\infty} A_i` 或仅 `\sum_{i=1}^{\infty} A_i`：$\textstyle \sum_{i=1}^{\infty} A_i$
 - `\displaystyle \sum_{i=1}^{\infty} A_i`：$\displaystyle \sum_{i=1}^{\infty} A_i$
-- `$$\textstyle \sum_{i=1}^{\infty} A_i$$`：  
+- `$$\textstyle \sum_{i=1}^{\infty} A_i$$`：
   $$\textstyle \sum_{i=1}^{\infty} A_i$$
-- `$$\displaystyle \sum_{i=1}^{\infty} A_i$$` 或仅 `$$\sum_{i=1}^{\infty} A_i$$`：  
+- `$$\displaystyle \sum_{i=1}^{\infty} A_i$$` 或仅 `$$\sum_{i=1}^{\infty} A_i$$`：
   $$\sum_{i=1}^{\infty} A_i$$
 
 ## 使用 `\limits` 强制在上方和下方显示

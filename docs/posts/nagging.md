@@ -1,6 +1,5 @@
 ---
 title: '碎碎念'
-timestampId: 230808a
 category: 代序
 head:
   - - meta
@@ -9,9 +8,6 @@ head:
   - - meta
     - name: keywords
       content: 闲聊 个人
-  - - meta
-    - name: id
-      content: 230808a
 created: 2023-08-08 09:00
 last_modified: 2024-09-09 20:21
 ---

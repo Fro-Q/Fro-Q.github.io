@@ -1,6 +1,5 @@
 ---
 title: '我在干何'
-timestampId: 240128a
 category: 代序
 head:
   - - meta
@@ -9,9 +8,6 @@ head:
   - - meta
     - name: keywords
       content: CSS Obsidian 主题 博客 个人网站
-  - - meta
-    - name: id
-      content: 240128a
 created: 2024-01-28 05:00
 last_modified: 2024-09-09 21:00
 ---
@@ -38,7 +34,7 @@ last_modified: 2024-09-09 21:00
 
 - 3 月 23 日我在自己的日记里提到了「想学 CSS，初步感觉用处很大，包括但不限于调整公众号格式、Obsidian 格式等等等等格式……」，28 日又提到「想搞个人博客，码在这…」。
 - 在 6 月 1 日的 [好久不见:P](https://mp.weixin.qq.com/s/OnDiN2K2UIo1H4oQK3J7xA) 里，我提到我在鼓捣博客网站，在 [博客园](https://www.cnblogs.com/ypsr) 上有了一个成品，但由于前端不熟练所以仅限于基于模版的小改动。此外，我目前在用的是 [Gridea](https://open.gridea.dev)，它提供了一个客户端可以直接上传（甚至直接在内置编辑器中撰写） Mardown 文档并生成静态站点，非常友好。
-- 7 月 8 日，我写了一篇名为「正在做一个 Obsidian 主题」的文章，但没发在公众号上，感兴趣的话可以去 [看看](https://fro-blo.com/blog/making-obsidian-theme.html)。在这篇文章里，我大概讲了一下我为什么要自己做一个主题，顺便讲了自己写文章鼓捣「工具」的历史。我从 metion 接触 Markdown，在转向使用 MarkText 后开始研究文章的输出样式，并接触 CSS，而后开始使用 Obsidian，并由于对编辑器外观的需求开始着手主题开发。这时主题开发还处于大前期，「除了提供了一些配色更改的设置、对一些内置样式如 `<strong>`、`<emphasis>`、`<highlight>` 进行了修改之外，UI 的美化、其他元素（ol、il、code、callout 等）的样式设计、文章排版之类的任务还暂时没有进行」。
+- 7 月 8 日，我写了一篇名为「正在做一个 Obsidian 主题」的文章，但没发在公众号上，感兴趣的话可以去 [看看](https://fro-blo.com/blog/making-obsidian-theme.html)。在这篇文章里，我大概讲了一下我为什么要自己做一个主题，顺便讲了自己写文章鼓捣「工具」的历史。我从 metion 接触 Markdown，在转向使用 MarkText 后开始研究文章的输出样式，并接触 CSS，而后开始使用 Obsidian，并由于对编辑器外观的需求开始着手主题开发。这时主题开发还处于大前期，「除了提供了一些配色更改的设置、对一些内置样式如 `<strong>`、`<emphasis>`、`<highlight>` 进行了修改之外，UI 的美化、其他元素（ol、il、code、callout 等）的样式设计、文章排版之类的任务还暂时没有进行」。
 - 8 月 8 日，在 [碎碎念](https://mp.weixin.qq.com/s/hxOJcdqRqdSpMoTBv5uJEw) 中我提到，Obsidian 的主题已经交 PR 了（虽然在那以后一个星期还在不断处理打回来的请求），由于 Gridea 改样式不方便所以想自己做个 App 实现 md-to-HTML 的转换以及整个站点文件树的生成（这个想法确实有点年轻了），报考了三级网络技术。
 
 总结下来就两件大事：Obsidian 主题和博客网站。

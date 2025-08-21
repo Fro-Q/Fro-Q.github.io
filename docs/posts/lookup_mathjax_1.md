@@ -1,6 +1,5 @@
 ---
 title: '询 · MathJax \ LaTeX 公式（一）'
-timestampId: 241230a
 category: 共读
 head:
   - - meta
@@ -9,9 +8,6 @@ head:
   - - meta
     - name: keywords
       content: mathjax latex greek_letter 希腊字母
-  - - meta
-    - name: id
-      content: 241230a
 created: 2024-12-30 23:42
 last_modified: 2025-01-09 08:29
 ---
@@ -56,17 +52,17 @@ last_modified: 2025-01-09 08:29
 
 注意到部分小写字符具有 `var-` 变体，如 `\varepsilon`、`\vartheta`、`\varpi` 等。关于此现象的更多讨论，请阅读 [MathJax 中希腊字母的 `\var-` 变体](mathjax_greek_var.md)。
 
-尽管 [*The Comprehensive $\LaTeX$ Symbol List*](https://sg.mirrors.cicku.me/ctan/info/symbols/comprehensive/symbols-a4.pdf) 中没有列出，但对于所有的大写字符，加上 `var-` 前缀即可得到其斜体变体，如表中括号内所示。
+尽管 [_The Comprehensive $\LaTeX$ Symbol List_](https://sg.mirrors.cicku.me/ctan/info/symbols/comprehensive/symbols-a4.pdf) 中没有列出，但对于所有的大写字符，加上 `var-` 前缀即可得到其斜体变体，如表中括号内所示。
 
 ## 希伯来字母
 
-| 渲染                           | 输入                           |
+| 渲染                         | 输入                         |
 | ---------------------------- | ---------------------------- |
 | $\beth$, $\gimel$, $\daleth$ | `\beth`, `\gimel`, `\daleth` |
 
 ## 字母型符号
 
-| 渲染                                             | 输入                                             |
+| 渲染                                           | 输入                                           |
 | ---------------------------------------------- | ---------------------------------------------- |
 | $\bot$, $\top$                                 | `\bot`, `\top`                                 |
 | $\ell$, $\hbar$, $\hslash$, $\imath$, $\jmath$ | `\ell`, `\hbar`, `\hslash`, `\imath`, `\jmath` |

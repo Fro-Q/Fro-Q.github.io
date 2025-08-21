@@ -1,6 +1,5 @@
 ---
 title: "*Le mythe de Sisyphe* · A. Camus《西西弗神话》"
-timestampId: 240308a
 category: 前脩
 head:
   - - meta
@@ -9,14 +8,11 @@ head:
   - - meta
     - name: keywords
       content: 摘抄 excerpt 西西弗神话 le_mythe_de_sisyphe 加缪 a.camus
-  - - meta
-    - name: id
-      content: 240308a
 created: 2024-03-08 04:39
 last_modified: 2024-04-24 03:55
 ---
 
-摘抄——*Le mythe de Sisyphe* · A. Camus《西西弗神话》
+摘抄——_Le mythe de Sisyphe_ · A. Camus《西西弗神话》
 
 ---
 
@@ -24,7 +20,7 @@ last_modified: 2024-04-24 03:55
 
 ## 2024 / 03 / 08
 
-> 哦，我的灵魂并不向往不朽，而是要穷尽可能之地  
+> 哦，我的灵魂并不向往不朽，而是要穷尽可能之地
 > ——品达《皮托竞技会颂歌》之三
 
 > 自杀可以有很多原因，总的说来，最显见的不见得是起到最大作用的。我们很少会在深思熟虑之后再自杀（但这个假设却并不能被排除）。危机的起因往往是不受控制的。报纸上经常说“个人的悲伤”或是“无法医治的疾病”。这些解释当然有效。但是还需要知道，是不是有一天，绝望之人的某位朋友和他讲话时态度冷漠。如果这样，朋友就是有罪的。因为这一行为足以加剧原本悬而未决的所有怨恨和倦怠。

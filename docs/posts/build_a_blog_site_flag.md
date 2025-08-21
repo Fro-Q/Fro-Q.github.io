@@ -1,6 +1,5 @@
 ---
 title: '博客网站搭建'
-timestampId: 240918a
 category: 成言
 head:
   - - meta
@@ -9,9 +8,6 @@ head:
   - - meta
     - name: keywords
       content: vitepress blog personal_website vue tutorial 博客 个人网站 教程
-  - - meta
-    - name: id
-      content: 240918a
 created: 2024-09-18 15:26
 last_modified: 2025-01-08 07:47
 ---

@@ -1,6 +1,5 @@
 ---
 title: '询 · MathJax \ LaTeX 公式（三）'
-timestampId: 250102a
 category: 共读
 head:
   - - meta
@@ -9,9 +8,6 @@ head:
   - - meta
     - name: keywords
       content: mathjax latex binary_relation arrow 二元关系符 箭头
-  - - meta
-    - name: id
-      content: 250102a
 created: 2025-01-02 01:09
 last_modified: 2025-01-02 09:05
 ---
@@ -24,7 +20,7 @@ last_modified: 2025-01-02 09:05
 
 ## 二元关系符｜Binary Relations
 
-| 渲染                                                                         | 输入                                                                         |
+| 渲染                                                                       | 输入                                                                       |
 | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
 | $=$, $\equiv$, $\sim$, $\simeq$, $\cong$, $\asymp$                         | `=`, `\equiv`, `\sim`, `\simeq`, `\cong`, `\asymp`                         |
 | $\vdash$, $\vDash$, $\Vdash$, $\Vvdash$                                    | `\vdash`, `\vDash`, `\Vdash`, `\Vvdash`                                    |
@@ -44,7 +40,7 @@ last_modified: 2025-01-02 09:05
 
 ## 箭头｜Arrows
 
-| 渲染                                                                             | 输入                                                                             |
+| 渲染                                                                           | 输入                                                                           |
 | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
 | $\leftarrow$, $\rightarrow$, $\leftrightarrow$                                 | `\leftarrow`, `\rightarrow`, `\leftrightarrow`                                 |
 | $\Leftarrow$, $\Rightarrow$, $\Leftrightarrow$                                 | `\Leftarrow`, `\Rightarrow`, `\Leftrightarrow`                                 |

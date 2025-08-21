@@ -1,6 +1,5 @@
 ---
 title: '从零开始搭建博客网站（七）'
-timestampId: 250422a
 category: 共读
 head:
   - - meta
@@ -8,10 +7,7 @@ head:
       content: 从零开始搭建博客网站（七）：Markdown 样式一些扩展。
   - - meta
     - name: keywords
-      content: 博客网站 个人网站 博客 vitepress vue vite tailwindcss github_pages typescript
-  - - meta
-    - name: id
-      content: 250422a
+      content: 博客网站 个人网站 博客 vitepress vue vite unocss github_pages typescript
 created: 2025-04-22 01:05
 last_modified: 2025-04-24 21:32
 ---
@@ -29,7 +25,7 @@ last_modified: 2025-04-24 21:32
 这是因为 `markdown-it` 本身是不解析数学公式的，
 需要依靠插件来实现。
 VitePress 内置了这个配置，
-不过仍需要自行安装 `markdown-it-mathjax3` 
+不过仍需要自行安装 `markdown-it-mathjax3`
 以及 [配置一下 `config.mts`](https://github.com/vuejs/vitepress/blob/fb67f9c75fde865b410f919d2ac1ba1cd8dc40f1/src/node/markdown/markdown.ts#L175-L183)：
 
 ```ts {7}
@@ -84,9 +80,9 @@ export default defineConfig({
     // ...
     config: (md) => {
       md
-      .use(markdownItFootnote)
-      .use(markdownItMark)
-      .use(markdownItHashtag)
+        .use(markdownItFootnote)
+        .use(markdownItMark)
+        .use(markdownItHashtag)
     },
   },
 })
@@ -135,7 +131,6 @@ export default defineConfig({
 长这样：
 
 ![小绿](build_a_blog_site_7_assets/ATTCH_20250422020143021.png)
-
 
 ## 图片
 
@@ -211,7 +206,6 @@ html {
   &.dark {
     --image-mask-bg: #0a0a0a;
   }
-
 }
 ```
 

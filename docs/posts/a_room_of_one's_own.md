@@ -1,6 +1,5 @@
 ---
 title: "*A Room of One's Own* · V. Woolf《自己的房间》"
-timestampId: 220201a
 category: 前脩
 head:
   - - meta
@@ -9,14 +8,11 @@ head:
   - - meta
     - name: keywords
       content: 摘抄 excerpt 自己的房间 a_room_of_one's_own 伍尔芙 伍尔夫 v.woolf
-  - - meta
-    - name: id
-      content: 220201a
 created: 2022-02-01 18:08
 last_modified: 2022-03-05 09:50
 ---
 
-摘抄——*A Room of One's Own* · V. Woolf《自己的房间》
+摘抄——_A Room of One's Own_ · V. Woolf《自己的房间》
 
 ---
 

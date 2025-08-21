@@ -1,6 +1,5 @@
 ---
 title: "从零开始搭建博客网站（五）"
-timestampId: 250206a
 category: 共读
 head:
   - - meta
@@ -8,10 +7,7 @@ head:
       content: 从零开始搭建博客网站（五）：文章列表。
   - - meta
     - name: keywords
-      content: 博客网站 个人网站 博客 vitepress vue vite tailwindcss github_pages typescript
-  - - meta
-    - name: id
-      content: 250206a
+      content: 博客网站 个人网站 博客 vitepress vue vite unocss github_pages typescript
 created: 2025-02-06 22:18
 last_modified: 2025-02-07 02:04
 ---

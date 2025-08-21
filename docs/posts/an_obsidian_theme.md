@@ -1,6 +1,5 @@
 ---
 title: '正在做一个 Obsidian 主题'
-timestampId: 230708a
 category: 代序
 head:
   - - meta
@@ -9,9 +8,6 @@ head:
   - - meta
     - name: keywords
       content: Obsidian 主题 CSS
-  - - meta
-    - name: id
-      content: 230708a
 created: 2023-07-08 23:00
 last_modified: 2024-09-09 21:35
 ---
@@ -46,8 +42,8 @@ metion 在很长一段时间内是我的主力写作工具，公众号前期的�
 
 MarkText 说到底只是编辑器，而随着对笔记体系的逐渐完善，我开始产生对更高维度的功能的需求。恰逢此时，我接触到了 Zettelkasten。
 
-::: info  
-[Zettelkasten](https://en.wikipedia.org/wiki/Zettelkasten) 是德国社会学家 Niklas Luhmann 提出的概念，翻译成英语就是 Box of Notes，也即卡片盒笔记法，在这里不进行过多解释，感兴趣的朋友可以自己去了解。Obsidian 的理念与 Zettelkasten 非常兼容，它提供了双向链接、图谱视图、tag 和搜索等功能，便于创建、连接和浏览笔记，从而建立知识网络并使其逐渐丰富。  
+::: info
+[Zettelkasten](https://en.wikipedia.org/wiki/Zettelkasten) 是德国社会学家 Niklas Luhmann 提出的概念，翻译成英语就是 Box of Notes，也即卡片盒笔记法，在这里不进行过多解释，感兴趣的朋友可以自己去了解。Obsidian 的理念与 Zettelkasten 非常兼容，它提供了双向链接、图谱视图、tag 和搜索等功能，便于创建、连接和浏览笔记，从而建立知识网络并使其逐渐丰富。
 :::
 
 也正是这个时候，我开始正式地使用上了 Obsidian。不得不说，在接近两个学期的使用中，它确实为我提供了极大的帮助。虽然在早期，由于社区生态过于优秀，我一度疯狂捣鼓过插件主题，不过后来由于精力不足，加之我逐渐褪下了「形式主义」，便退烧了。
@@ -66,7 +62,7 @@ MarkText 说到底只是编辑器，而随着对笔记体系的逐渐完善，�
 
 ![test.css](an_obsidian_theme_assets/ATTCH_20240924171000161.png)
 
-目前整个开发还处于很前期的阶段，除了提供了一些配色更改的设置、对一些内置样式如 **strong**、*emphasis*、==highlight== 进行了修改之外，UI 的美化、其他元素（ol、il、code、callout 等）的样式设计、文章排版之类的任务还暂时没有进行。不过问题不大，早晚而已。
+目前整个开发还处于很前期的阶段，除了提供了一些配色更改的设置、对一些内置样式如 **strong**、_emphasis_、==highlight== 进行了修改之外，UI 的美化、其他元素（ol、il、code、callout 等）的样式设计、文章排版之类的任务还暂时没有进行。不过问题不大，早晚而已。
 
 前两天在 puq 发的那个「调查」，就是由于我发现在中文编辑中，斜体的应用面似乎很窄，所以在考虑要不要弃用掉 italic 的设计而将 `<em>` 元素应用其他的样式。还在思考中。
 

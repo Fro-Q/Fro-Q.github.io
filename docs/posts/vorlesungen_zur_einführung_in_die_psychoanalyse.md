@@ -1,6 +1,5 @@
 ---
 title: '*Vorlesungen zur Einführung in die Psychoanalyse* · S. Freud《精神分析引论》'
-timestampId: 220204a
 category: 前脩
 head:
   - - meta
@@ -9,14 +8,11 @@ head:
   - - meta
     - name: keywords
       content: 摘抄 excerpt 精神分析引论 vorlesungen_zur_einführung_in_die_psychoanalyse 弗洛伊德 s.freud
-  - - meta
-    - name: id
-      content: 220204a
 created: 2022-02-04 00:59
 last_modified: 2023-12-20 09:31
 ---
 
-摘抄——*Vorlesungen zur Einführung in die Psychoanalyse* · S. Freud《精神分析引论》
+摘抄——_Vorlesungen zur Einführung in die Psychoanalyse_ · S. Freud《精神分析引论》
 
 ---
 

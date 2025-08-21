@@ -1,6 +1,5 @@
 ---
 title: "从零开始搭建博客网站（八）"
-timestampId: 250424a
 category: 共读
 head:
   - - meta
@@ -8,10 +7,7 @@ head:
       content: 从零开始搭建博客网站（八）：文章大纲与代码块一大坨配置。
   - - meta
     - name: keywords
-      content: 博客网站 个人网站 博客 vitepress vue vite tailwindcss github_pages typescript
-  - - meta
-    - name: id
-      content: 250424a
+      content: 博客网站 个人网站 博客 vitepress vue vite unocss github_pages typescript
 created: 2025-04-24 21:32
 last_modified: 2025-05-09 04:30
 ---
@@ -54,7 +50,7 @@ export default defineConfig({
       ],
     },
   },
-});
+})
 ```
 
 这里可以根据个人习惯来配置。
@@ -72,20 +68,20 @@ export default defineConfig({
   /* ... */
   /* toc */
   & nav.table-of-contents {
-    --uno: "rounded-r-md";
-    --uno: "pr-5";
-    --uno: "fixed top-100px left-0 z-10";
-    --uno: "max-h-320px min-w-200px max-w-400px";
-    --uno: "overflow-auto";
-    --uno: "text-sm";
+    --uno: 'rounded-r-md';
+    --uno: 'pr-5';
+    --uno: 'fixed top-100px left-0 z-10';
+    --uno: 'max-h-320px min-w-200px max-w-400px';
+    --uno: 'overflow-auto';
+    --uno: 'text-sm';
 
-    --uno: "bg-neutral-100/60 dark:bg-neutral-900/60";
-    --uno: "border border-neutral-300 dark:border-neutral-700";
-    --uno: "opacity-10 hover:opacity-100";
-    --uno: "transition duration-200";
+    --uno: 'bg-neutral-100/60 dark:bg-neutral-900/60';
+    --uno: 'border border-neutral-300 dark:border-neutral-700';
+    --uno: 'opacity-10 hover:opacity-100';
+    --uno: 'transition duration-200';
 
     &::-webkit-scrollbar {
-      --uno: "w-1px";
+      --uno: 'w-1px';
     }
 
     &:hover {
@@ -94,7 +90,7 @@ export default defineConfig({
 
     & li {
       list-style: none;
-      --uno: "my-4 px-0 mx-0";
+      --uno: 'my-4 px-0 mx-0';
     }
   }
 }
@@ -133,14 +129,14 @@ VitePress 提供
 
     /* line numbers on */
     &.line-numbers-mode {
-      --uno: "pl-10";
+      --uno: 'pl-10';
 
       & .line-numbers-wrapper {
-        --uno: "absolute bottom-0 left-0 top-0 w-10";
-        --uno: "border-r border-neutral-300 dark:border-neutral-700";
-        --uno: "pt-6";
-        --uno: "text-(center neutral-500)";
-        --uno: "font-mono";
+        --uno: 'absolute bottom-0 left-0 top-0 w-10';
+        --uno: 'border-r border-neutral-300 dark:border-neutral-700';
+        --uno: 'pt-6';
+        --uno: 'text-(center neutral-500)';
+        --uno: 'font-mono';
       }
     }
   }
@@ -162,11 +158,11 @@ export default defineConfig({
   markdown: {
     // ...
     theme: {
-      light: "vitesse-light",
-      dark: "vitesse-black",
+      light: 'vitesse-light',
+      dark: 'vitesse-black',
     },
   },
-});
+})
 ```
 
 ### 代码块行标记
@@ -185,12 +181,12 @@ VitePress 中默认开启了 `transformerNotationDiff`、
 
 ```ts twoslash {1-4,12-19}
 // @noErrors
-import { transformerColorizedBrackets } from "@shikijs/colorized-brackets";
-import { transformerMetaWordHighlight, transformerNotationWordHighlight } from "@shikijs/transformers";
-import { transformerTwoslash } from "@shikijs/vitepress-twoslash";
-import { createFileSystemTypesCache } from "@shikijs/vitepress-twoslash/cache-fs";
+import { transformerColorizedBrackets } from '@shikijs/colorized-brackets'
+import { transformerMetaWordHighlight, transformerNotationWordHighlight } from '@shikijs/transformers'
+import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
+import { createFileSystemTypesCache } from '@shikijs/vitepress-twoslash/cache-fs'
 // ...
-import { defineConfig } from "vitepress";
+import { defineConfig } from 'vitepress'
 
 export default defineConfig({
   // ...
@@ -205,24 +201,24 @@ export default defineConfig({
       transformerColorizedBrackets(),
     ],
   },
-});
+})
 ```
 
 再在 `index.ts` 中引入 twoslash 的样式和客户端组件：
 
 ```ts {1-3,10}
 // ...
-import TwoslashFloatingVue from "@shikijs/vitepress-twoslash/client";
-import "@shikijs/vitepress-twoslash/style.css";
-import "vitepress/dist/client/theme-default/styles/vars.css";
+import TwoslashFloatingVue from '@shikijs/vitepress-twoslash/client'
+import '@shikijs/vitepress-twoslash/style.css'
+import 'vitepress/dist/client/theme-default/styles/vars.css'
 // ...
 
 export default {
   // ...
   enhanceApp({ app }) {
-    app.use(TwoslashFloatingVue);
+    app.use(TwoslashFloatingVue)
   },
-} satisfies Theme;
+} satisfies Theme
 ```
 
 现在可以使用相关的 transformer 来标记代码块了。
@@ -254,43 +250,43 @@ console.log('12')
 ```css
 #content {
   /* ... */
-  & [class^="language-"] {
+  & [class^='language-'] {
     /* ... */
     /* line notation style */
     & .line {
-      --uno: "inline-block w-[calc(100%+4rem)] h-20px";
-      --uno: "-mx-8 px-8";
+      --uno: 'inline-block w-[calc(100%+4rem)] h-20px';
+      --uno: '-mx-8 px-8';
 
       /* highlighted line */
       &.highlighted {
-        --uno: "bg-neutral-200 dark:bg-neutral-800";
-        --uno: "rounded-sm";
+        --uno: 'bg-neutral-200 dark:bg-neutral-800';
+        --uno: 'rounded-sm';
 
-        --uno: "before:(absolute -translate-x-5)";
+        --uno: 'before:(absolute -translate-x-5)';
 
         /* error level */
         &.error {
-          --uno: "bg-red-500/10 dark:bg-red-500/10";
+          --uno: 'bg-red-500/10 dark:bg-red-500/10';
           --uno: 'before:(text-red-500 content-[""] i-ph-x h-[inherit])';
         }
 
         &.warning {
-          --uno: "bg-yellow-500/10 dark:bg-yellow-500/10";
+          --uno: 'bg-yellow-500/10 dark:bg-yellow-500/10';
           --uno: 'before:(text-yellow-500 content-[""] i-ph-warning h-[inherit])';
         }
       }
 
       /* diff */
       &.diff {
-        --uno: "before:(absolute -translate-x-5)";
+        --uno: 'before:(absolute -translate-x-5)';
 
         &.add {
-          --uno: "bg-green-500/10 dark:bg-green-500/10";
+          --uno: 'bg-green-500/10 dark:bg-green-500/10';
           --uno: 'before:(text-green-500 content-[""] i-ph-plus h-[inherit])';
         }
 
         &.remove {
-          --uno: "bg-red-500/10 dark:bg-red-500/10 opacity-50";
+          --uno: 'bg-red-500/10 dark:bg-red-500/10 opacity-50';
           --uno: 'before:(text-red-500 content-[""] i-ph-minus h-[inherit])';
         }
       }
@@ -299,14 +295,14 @@ console.log('12')
     /* focus */
     & pre.has-focused-lines {
       & .line {
-        --uno: "opacity-50";
-        --uno: "transition duration-200";
+        --uno: 'opacity-50';
+        --uno: 'transition duration-200';
         filter: blur(0.1em);
       }
 
       &:hover .line,
       & .line.has-focus {
-        --uno: "opacity-100";
+        --uno: 'opacity-100';
         filter: blur(0);
       }
     }
@@ -325,21 +321,21 @@ console.log('12')
   }
 
   & span {
-    --uno: "text-[var(--shiki-light,inherit)] dark:text-[var(--shiki-dark,inherit)]";
+    --uno: 'text-[var(--shiki-light,inherit)] dark:text-[var(--shiki-dark,inherit)]';
   }
 
   & a {
-    --uno: "decoration-(underline neutral-500)";
-    --uno: "transition duration-200";
-    --uno: "hover:(decoration-neutral-800 dark:decoration-neutral-200)";
+    --uno: 'decoration-(underline neutral-500)';
+    --uno: 'transition duration-200';
+    --uno: 'hover:(decoration-neutral-800 dark:decoration-neutral-200)';
   }
 
   & p code {
-    --uno: "px-1";
-    --uno: "bg-neutral-200/50 dark:bg-neutral-800/50";
-    --uno: "text-neutral-500";
-    --uno: "border border-neutral-300 dark:border-neutral-700";
-    --uno: "rounded-sm";
+    --uno: 'px-1';
+    --uno: 'bg-neutral-200/50 dark:bg-neutral-800/50';
+    --uno: 'text-neutral-500';
+    --uno: 'border border-neutral-300 dark:border-neutral-700';
+    --uno: 'rounded-sm';
   }
 }
 ```
@@ -364,31 +360,31 @@ VitePress 还支持「code-group」，
 
   /* code group */
   & .vp-code-group {
-    --uno: "relative my-8 w-full";
-    --uno: "text-sm";
-    --uno: "bg-neutral-100 dark:bg-neutral-900";
-    --uno: "rounded-md";
+    --uno: 'relative my-8 w-full';
+    --uno: 'text-sm';
+    --uno: 'bg-neutral-100 dark:bg-neutral-900';
+    --uno: 'rounded-md';
 
     & .tabs {
-      --uno: "border border-neutral-300 dark:border-neutral-700";
-      --uno: "rounded-t-md";
+      --uno: 'border border-neutral-300 dark:border-neutral-700';
+      --uno: 'rounded-t-md';
 
       & label {
-        --uno: "inline-block cursor-pointer";
-        --uno: "border-(t-2 transparent)";
-        --uno: "p-(x-4 y-2)";
-        --uno: "font-mono text-neutral-600 dark:text-neutral-400";
-        --uno: "transition-colors duration-200";
+        --uno: 'inline-block cursor-pointer';
+        --uno: 'border-(t-2 transparent)';
+        --uno: 'p-(x-4 y-2)';
+        --uno: 'font-mono text-neutral-600 dark:text-neutral-400';
+        --uno: 'transition-colors duration-200';
       }
 
       /* hide radio button */
       & input {
-        --uno: "opacity-0";
+        --uno: 'opacity-0';
 
         &:checked + label {
-          --uno: "text-neutral-900";
-          --uno: "border-neutral-700";
-          --uno: "dark:(text-neutral-100 border-neutral-300)";
+          --uno: 'text-neutral-900';
+          --uno: 'border-neutral-700';
+          --uno: 'dark:(text-neutral-100 border-neutral-300)';
         }
       }
     }

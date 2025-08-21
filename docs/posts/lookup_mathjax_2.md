@@ -1,6 +1,5 @@
 ---
 title: '询 · MathJax \ LaTeX 公式（二）'
-timestampId: 241231a
 category: 共读
 head:
   - - meta
@@ -9,9 +8,6 @@ head:
   - - meta
     - name: keywords
       content: mathjax latex binary_operator variable_sized_operator 二元运算符 可变尺寸运算符
-  - - meta
-    - name: id
-      content: 241231a
 created: 2024-12-31 22:17
 last_modified: 2025-01-01 20:37
 ---
@@ -24,7 +20,7 @@ last_modified: 2025-01-01 20:37
 
 ## 二元运算符｜Binary Operators
 
-| 渲染                                                          | 输入                                                          |
+| 渲染                                                        | 输入                                                        |
 | ----------------------------------------------------------- | ----------------------------------------------------------- |
 | $+$, $-$, $\times$, $\div$, $\cdot$, $\setminus$, $\circ$   | `+`, `-`, `\times`, `\div`, `\cdot`, `\setminus`, `\circ`   |
 | $\oplus$, $\ominus$, $\otimes$, $\oslash$, $\odot$          | `\oplus`, `\ominus`, `\otimes`, `\oslash`, `\odot`          |
@@ -36,7 +32,7 @@ last_modified: 2025-01-01 20:37
 
 ## 可变尺寸运算符｜Variable-sized Operators
 
-| 渲染                                                        | 输入                                                        |
+| 渲染                                                      | 输入                                                      |
 | --------------------------------------------------------- | --------------------------------------------------------- |
 | $\bigcap$, $\bigcup$, $\bigsqcup$, $\bigwedge$, $\bigvee$ | `\bigcap`, `\bigcup`, `\bigsqcup`, `\bigwedge`, `\bigvee` |
 | $\prod$, $\coprod$                                        | `\prod`, `\coprod`                                        |

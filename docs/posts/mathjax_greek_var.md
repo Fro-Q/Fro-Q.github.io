@@ -1,6 +1,5 @@
 ---
 title: 'MathJax 中希腊字母的 `\var-` 变体'
-timestampId: 240925a
 category: 共读
 head:
   - - meta
@@ -9,9 +8,6 @@ head:
   - - meta
     - name: keywords
       content: mathjax latex epsilon varepsilon theta vartheta rho varrho phi varphi latex_symbol latex符号
-  - - meta
-    - name: id
-      content: 240925a
 created: 2024-09-25 14:33
 last_modified: 2025-01-01 21:47
 ---
@@ -26,7 +22,7 @@ last_modified: 2025-01-01 21:47
 
 部分小写希腊字母具有 `\var-` 变体，如：
 
-| 渲染                        | 输入                        |
+| 渲染                      | 输入                      |
 | ------------------------- | ------------------------- |
 | $\epsilon$, $\varepsilon$ | `\epsilon`, `\varepsilon` |
 | $\theta$, $\vartheta$     | `\theta`, `\vartheta`     |
@@ -40,20 +36,20 @@ last_modified: 2025-01-01 21:47
 
 ### 总观：Letter 或 Symbol
 
-[*Unicode Standard, Version 16.0*](https://www.unicode.org/standard/standard.html) [Character Code Charts](https://www.unicode.org/charts/)（下简称 *Code Charts*）中的 [Greek](https://www.unicode.org/charts/PDF/U0370.pdf) 部分提及了部分字母与其变体。$\varepsilon$ (`\varepsilon`)、$\theta$ (`\theta`)、$\kappa$ (`\kappa`)、$\pi$ (`\pi`)、$\rho$ (`\rho`)、$\sigma$ (`\sigma`) 和 $\varsigma$ (`\varsigma`) 在「Letter」中被形容为 Greek small letter；而 $\vartheta$ (`\vartheta`) 、$\phi$ (`\phi`) 、$\varpi$ (`\varpi`) 、$\varkappa$ (`\varkappa`)、$\varrho$ (`\varrho`)、$\epsilon$ (`\epsilon`) 在「Variant letterforms (and symbols)」部分中被称为 Greek symbol。
+[_Unicode Standard, Version 16.0_](https://www.unicode.org/standard/standard.html) [Character Code Charts](https://www.unicode.org/charts/)（下简称 _Code Charts_）中的 [Greek](https://www.unicode.org/charts/PDF/U0370.pdf) 部分提及了部分字母与其变体。$\varepsilon$ (`\varepsilon`)、$\theta$ (`\theta`)、$\kappa$ (`\kappa`)、$\pi$ (`\pi`)、$\rho$ (`\rho`)、$\sigma$ (`\sigma`) 和 $\varsigma$ (`\varsigma`) 在「Letter」中被形容为 Greek small letter；而 $\vartheta$ (`\vartheta`) 、$\phi$ (`\phi`) 、$\varpi$ (`\varpi`) 、$\varkappa$ (`\varkappa`)、$\varrho$ (`\varrho`)、$\epsilon$ (`\epsilon`) 在「Variant letterforms (and symbols)」部分中被称为 Greek symbol。
 
-[*Unicode Standard, Version 16.0*](https://www.unicode.org/standard/standard.html) [Core Spec](https://www.unicode.org/versions/Unicode16.0.0/core-spec/) （下简称 *Core Spec*）的 [Chapter 7 | Greek](https://www.unicode.org/versions/Unicode16.0.0/core-spec/chapter-7/#G10832) 中明确提到，$\vartheta$、$\phi$、$\varkappa$、$\varrho$、$\epsilon$ 不可用于希腊文本中，仅能用于数学或技术用途。
+[_Unicode Standard, Version 16.0_](https://www.unicode.org/standard/standard.html) [Core Spec](https://www.unicode.org/versions/Unicode16.0.0/core-spec/) （下简称 _Core Spec_）的 [Chapter 7 | Greek](https://www.unicode.org/versions/Unicode16.0.0/core-spec/chapter-7/#G10832) 中明确提到，$\vartheta$、$\phi$、$\varkappa$、$\varrho$、$\epsilon$ 不可用于希腊文本中，仅能用于数学或技术用途。
 
 ### `\epsilon` 与 `\varepsilon`
 
-形似翻转阿拉伯数字 3 的 $\varepsilon$ 被称为 Greek small letter epsilon，是于希腊文本中被使用的形式；而 $\epsilon$ 称为 Greek lunate epsilon symbol，即月形 epsilon，继承自早期的安色尔体 [^1]，被认为是「直立的 epsilon」，且如 *Core Spec* 中所言，仅能用于数学或技术用途。
+形似翻转阿拉伯数字 3 的 $\varepsilon$ 被称为 Greek small letter epsilon，是于希腊文本中被使用的形式；而 $\epsilon$ 称为 Greek lunate epsilon symbol，即月形 epsilon，继承自早期的安色尔体 [^1]，被认为是「直立的 epsilon」，且如 _Core Spec_ 中所言，仅能用于数学或技术用途。
 
 ### `\theta` 与 `\vartheta`
 
 与上一组相反，$\theta$ 被认为是 Greek small letter theta，可用于希腊文本；而 $\vartheta$ 被认为是 Greek theta symbol，也称 <u>script</u> theta，仅能用于数学或技术用途。
 
-:::tip  
-*Core Spec* 的 [Chapter 22 | Letterlike Symbols](https://www.unicode.org/versions/Unicode16.0.0/core-spec/chapter-22/#G12468) 中提到，script style，即（数学）手稿风格或书法风格，有 chancery 和 roundhand 两种特定变体风格。  
+:::tip
+_Core Spec_ 的 [Chapter 22 | Letterlike Symbols](https://www.unicode.org/versions/Unicode16.0.0/core-spec/chapter-22/#G12468) 中提到，script style，即（数学）手稿风格或书法风格，有 chancery 和 roundhand 两种特定变体风格。
 :::
 
 ### `\pi` 与 `\varpi`
@@ -68,10 +64,10 @@ last_modified: 2025-01-01 21:47
 
 此组是最不同的一组。二者都可被用于希腊文本。不同之处在于 $\varsigma$ 为 Greek small letter final sigma，即位于词尾的 sigma 字型；$\sigma$ 则是中规中矩的 Greek small letter sigma，即 sigma 的普通字型，也可用作表示数字 200。
 
-:::warning  
+:::warning
 注意，不要把 $\varsigma$ 和 $ϛ$[^2] (stigma) 混淆。后者是 $\sigma\tau$ (sigma-tau) 连字，也可用作表示数字 6。
 
-从形式上区分二者可能有些困难，stigma 的圈会比 final sigma 更大，且向右延伸更远。然而由于 sigma-tau 连字不会出现在词尾，而 final sigma 也不会出现在词内部，且不会用作表示数字，故二者通常可以通过上下文较为轻易地区分开。[^3]  
+从形式上区分二者可能有些困难，stigma 的圈会比 final sigma 更大，且向右延伸更远。然而由于 sigma-tau 连字不会出现在词尾，而 final sigma 也不会出现在词内部，且不会用作表示数字，故二者通常可以通过上下文较为轻易地区分开。[^3]
 :::
 
 ### `\phi` 与 `\varphi`
@@ -86,7 +82,7 @@ last_modified: 2025-01-01 21:47
 
 大部分大写希腊字母直接由相应的拉丁字母表示，如 alpha、beta、epsilon、zeta、eta、iota、kappa、mu、nu、omicron、rho、tau 和 chi。对于剩余的字母，直接输入首字母大写的字符名将渲染出直体样式，而其 `\var-` 变体则会渲染出斜体样式，如表所示：
 
-| 渲染                        | 输入                        |
+| 渲染                      | 输入                      |
 | ------------------------- | ------------------------- |
 | $\Gamma$, $\varGamma$     | `\Gamma`, `\varGamma`     |
 | $\Delta$, $\varDelta$     | `\Delta`, `\varDelta`     |
@@ -101,5 +97,7 @@ last_modified: 2025-01-01 21:47
 | $\Omega$, $\varOmega$     | `\Omega`, `\varOmega`     |
 
 [^1]: [Wikipedia, Epsilon](https://en.wikipedia.org/wiki/Epsilon)
+
 [^2]: 由于 `\stigma` 无法通过 Markdown 中的 MathJax 输入，这里直接使用了 Unicode 字符。
-[^3]: [Wikipedia, Stigma (ligature)](https://en.wikipedia.org/wiki/Stigma_(ligature))
+
+[^3]: [Wikipedia, Stigma (ligature)](<https://en.wikipedia.org/wiki/Stigma_(ligature)>)

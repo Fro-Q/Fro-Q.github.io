@@ -1,6 +1,5 @@
 ---
 title: "从零开始搭建博客网站（九）"
-timestampId: 250509a
 category: 共读
 head:
   - - meta
@@ -8,10 +7,7 @@ head:
       content: 从零开始搭建博客网站（九）：文章的更多信息。
   - - meta
     - name: keywords
-      content: 博客网站 个人网站 博客 vitepress vue vite tailwindcss github_pages typescript
-  - - meta
-    - name: id
-      content: 250509a
+      content: 博客网站 个人网站 博客 vitepress vue vite unocss github_pages typescript
 created: 2025-05-09 04:31
 last_modified: 2025-05-09 04:31
 ---
@@ -49,14 +45,14 @@ last_modified: 2025-05-09 04:31
 // ...
 
 export interface Data {
-  url: string;
-  frontmatter: Record<string, any>;
-  excerpt?: string;
+  url: string
+  frontmatter: Record<string, any>
+  excerpt?: string
 }
 
 // ...
 
-export default createContentLoader("posts/*.md", {
+export default createContentLoader('posts/*.md', {
   includeSrc: true,
   excerpt: true,
   transform(raw) {
@@ -64,9 +60,9 @@ export default createContentLoader("posts/*.md", {
       url,
       frontmatter,
       excerpt,
-    }));
+    }))
   },
-});
+})
 ```
 
 ### 在 frontmatter 中添加
@@ -97,16 +93,16 @@ tags:
 ```ts
 // ...
 
-function formatDate(raw: string): { raw: Date; formattedString: string } {
-  const date = new Date(raw);
+function formatDate(raw: string): { raw: Date, formattedString: string } {
+  const date = new Date(raw)
   return {
     raw: date,
-    formattedString: date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
+    formattedString: date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
     }),
-  };
+  }
 }
 
 // ...
@@ -117,29 +113,29 @@ function formatDate(raw: string): { raw: Date; formattedString: string } {
 ````ts
 function calculateReadingTime(text?: string): ReadingTimeInfo {
   if (!text) {
-    return { minutes: 0, words: 0 };
+    return { minutes: 0, words: 0 }
   }
 
-  const WORDS_PER_MINUTE_ZH = 400;
-  const WORDS_PER_MINUTE_EN = 225;
-  const BLOCKS_PER_MINUTE_CODE = 1;
+  const WORDS_PER_MINUTE_ZH = 400
+  const WORDS_PER_MINUTE_EN = 225
+  const BLOCKS_PER_MINUTE_CODE = 1
 
   const content = text
-    .replace(/---[\s\S]*?---/, "") // Remove frontmatter
-    .replace(/<[\s\S]*?>/g, ""); // Remove HTML tags
+    .replace(/---[\s\S]*?---/, '') // Remove frontmatter
+    .replace(/<[\s\S]*?>/g, '') // Remove HTML tags
 
-  const countZh = content.match(/[\u4E00-\u9FA5]/g)?.length || 0;
-  const countEn = content.match(/[a-z]/gi)?.length || 0;
-  const countCodeBlocks = content.match(/```[\s\S]*?```/g)?.length || 0;
+  const countZh = content.match(/[\u4E00-\u9FA5]/g)?.length || 0
+  const countEn = content.match(/[a-z]/gi)?.length || 0
+  const countCodeBlocks = content.match(/```[\s\S]*?```/g)?.length || 0
 
-  const minutes = Math.ceil(countZh / WORDS_PER_MINUTE_ZH + countEn / WORDS_PER_MINUTE_EN + countCodeBlocks * BLOCKS_PER_MINUTE_CODE);
+  const minutes = Math.ceil(countZh / WORDS_PER_MINUTE_ZH + countEn / WORDS_PER_MINUTE_EN + countCodeBlocks * BLOCKS_PER_MINUTE_CODE)
 
-  const words = Math.ceil((countZh + countEn) / 100) * 100;
+  const words = Math.ceil((countZh + countEn) / 100) * 100
 
   return {
     minutes,
     words,
-  };
+  }
 }
 ````
 
@@ -152,70 +148,70 @@ function calculateReadingTime(text?: string): ReadingTimeInfo {
 再把类型检查做好：
 
 ````ts twoslash
-import { createContentLoader } from "vitepress";
+import { createContentLoader } from 'vitepress'
 
 interface FormattedDate {
-  raw: Date;
-  formattedString: string;
+  raw: Date
+  formattedString: string
 }
 
 interface ReadingTimeInfo {
-  minutes: number;
-  words: number;
+  minutes: number
+  words: number
 }
 
 export interface Data {
-  url: string;
-  frontmatter: Record<string, any>;
-  excerpt?: string;
-  created: FormattedDate;
-  lastModified: FormattedDate;
-  readingInfo: ReadingTimeInfo;
+  url: string
+  frontmatter: Record<string, any>
+  excerpt?: string
+  created: FormattedDate
+  lastModified: FormattedDate
+  readingInfo: ReadingTimeInfo
 }
 
-declare const data: Data[];
-export { data };
+declare const data: Data[]
+export { data }
 
 function formatDate(raw: string): FormattedDate {
-  const date = new Date(raw);
+  const date = new Date(raw)
   return {
     raw: date,
-    formattedString: date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
+    formattedString: date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
     }),
-  };
+  }
 }
 
 function calculateReadingTime(text?: string): ReadingTimeInfo {
   if (!text) {
-    return { minutes: 0, words: 0 };
+    return { minutes: 0, words: 0 }
   }
 
-  const WORDS_PER_MINUTE_ZH = 400;
-  const WORDS_PER_MINUTE_EN = 225;
-  const BLOCKS_PER_MINUTE_CODE = 1;
+  const WORDS_PER_MINUTE_ZH = 400
+  const WORDS_PER_MINUTE_EN = 225
+  const BLOCKS_PER_MINUTE_CODE = 1
 
   const content = text
-    .replace(/---[\s\S]*?---/, "") // Remove frontmatter
-    .replace(/<[\s\S]*?>/g, ""); // Remove HTML tags
+    .replace(/---[\s\S]*?---/, '') // Remove frontmatter
+    .replace(/<[\s\S]*?>/g, '') // Remove HTML tags
 
-  const countZh = content.match(/[\u4E00-\u9FA5]/g)?.length || 0;
-  const countEn = content.match(/[a-z]/gi)?.length || 0;
-  const countCodeBlocks = content.match(/```[\s\S]*?```/g)?.length || 0;
+  const countZh = content.match(/[\u4E00-\u9FA5]/g)?.length || 0
+  const countEn = content.match(/[a-z]/gi)?.length || 0
+  const countCodeBlocks = content.match(/```[\s\S]*?```/g)?.length || 0
 
-  const minutes = Math.ceil(countZh / WORDS_PER_MINUTE_ZH + countEn / WORDS_PER_MINUTE_EN + countCodeBlocks * BLOCKS_PER_MINUTE_CODE);
+  const minutes = Math.ceil(countZh / WORDS_PER_MINUTE_ZH + countEn / WORDS_PER_MINUTE_EN + countCodeBlocks * BLOCKS_PER_MINUTE_CODE)
 
-  const words = Math.ceil((countZh + countEn) / 100) * 100;
+  const words = Math.ceil((countZh + countEn) / 100) * 100
 
   return {
     minutes,
     words,
-  };
+  }
 }
 
-export default createContentLoader("posts/*.md", {
+export default createContentLoader('posts/*.md', {
   includeSrc: true,
   excerpt: true,
   transform(raw) {
@@ -226,9 +222,9 @@ export default createContentLoader("posts/*.md", {
       created: formatDate(frontmatter.created),
       lastModified: formatDate(frontmatter.last_modified),
       readingInfo: calculateReadingTime(src),
-    }));
+    }))
   },
-});
+})
 ````
 
 ### 在页面中使用
@@ -243,18 +239,18 @@ export default createContentLoader("posts/*.md", {
 
 ```vue {3,7,9-13}
 <script setup lang="ts">
-import { useData } from "vitepress";
-import { data as posts } from "../src/posts.data";
+import { useData } from 'vitepress'
+import { data as posts } from '../src/posts.data'
 
-const { frontmatter } = useData();
+const { frontmatter } = useData()
 
-const post = posts.filter((post) => post.frontmatter.title === frontmatter.value.title)[0];
+const post = posts.filter(post => post.frontmatter.title === frontmatter.value.title)[0]
 
 const metaStrings = [
   post.created.formattedString,
   `约 ${post.readingInfo.words} 字`,
   `${post.readingInfo.minutes} 分钟`,
-];
+]
 </script>
 
 <!-- ... -->

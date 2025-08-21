@@ -1,6 +1,5 @@
 ---
 title: '从零开始搭建博客网站（六）'
-timestampId: 250217a
 category: 共读
 head:
   - - meta
@@ -8,10 +7,7 @@ head:
       content: 从零开始搭建博客网站（六）：文章 Markdown 样式。
   - - meta
     - name: keywords
-      content: 博客网站 个人网站 博客 vitepress vue vite tailwindcss github_pages typescript
-  - - meta
-    - name: id
-      content: 250217a
+      content: 博客网站 个人网站 博客 vitepress vue vite unocss github_pages typescript
 created: 2025-02-17 18:24
 last_modified: 2025-04-22 01:05
 ---
@@ -71,9 +67,9 @@ VitePress 使用
 
 <template>
   <Content
+    id="content"
     un-max-auto
     un-max-w="[700px]"
-    id="content"
   />
 </template>
 ```
@@ -176,14 +172,14 @@ html {
 
 下面是常见的行内元素，
 包括 **strong**、
-*em*、
+_em_、
 [link](/)、
 `inline code`、
 ~~strikethrough~~、
 <u>underline</u>：
 
 ```css
-#content{
+#content {
   /* ... */
 
   /* strong */
@@ -271,8 +267,8 @@ export default defineConfig({
 ```css /:not(href^="#")/
 #content {
   /* ... */
-  
-  & a:not(href^="#") {
+
+  & a:not(href^='#') {
     /* ... */
   }
 }

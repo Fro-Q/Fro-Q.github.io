@@ -1,6 +1,5 @@
 ---
 title: '从零开始搭建博客网站（三）'
-timestampId: 250120a
 category: 共读
 head:
   - - meta
@@ -8,10 +7,7 @@ head:
       content: 从零开始搭建博客网站（三）：像样的页面与文件结构优化。
   - - meta
     - name: keywords
-      content: 博客网站 个人网站 博客 vitepress vue vite tailwindcss github_pages typescript
-  - - meta
-    - name: id
-      content: 250120a
+      content: 博客网站 个人网站 博客 vitepress vue vite unocss github_pages typescript
 created: 2025-01-20 01:03
 last_modified: 2025-01-22 05:22
 ---

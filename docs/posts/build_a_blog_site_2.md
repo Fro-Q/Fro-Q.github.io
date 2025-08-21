@@ -1,6 +1,5 @@
 ---
 title: "从零开始搭建博客网站（二）"
-timestampId: 250114a
 category: 共读
 head:
   - - meta
@@ -8,10 +7,7 @@ head:
       content: 从零开始搭建博客网站（二）：开发环境、`.gitignore` 与黑暗模式。
   - - meta
     - name: keywords
-      content: 博客网站 个人网站 博客 vitepress vue vite tailwindcss github_pages typescript
-  - - meta
-    - name: id
-      content: 250114a
+      content: 博客网站 个人网站 博客 vitepress vue vite unocss github_pages typescript
 created: 2025-01-14 20:21
 last_modified: 2025-01-20 04:12
 ---
