@@ -37,7 +37,7 @@ const metaStrings = [
         {{ metaString }}
       </div>
     </div>
-    <content
+    <Content
       id="content"
     />
   </un-page-content>

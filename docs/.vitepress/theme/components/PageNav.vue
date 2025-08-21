@@ -75,7 +75,7 @@ onMounted(() => {
         @click="darkMode.state = htmlEl.classList.contains('dark') ? false : true"
       >
         <un-i-ph-moon-duotone v-if="darkMode.state" />
-        <un-i-ph-sun v-else />
+        <un-i-ph-sun-duotone v-else />
       </div>
     </div>
   </nav>
