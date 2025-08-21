@@ -1,6 +1,6 @@
 ---
 title: '从零开始搭建博客网站（七）'
-# timestampId: 250422a
+timestampId: 250422a
 category: 共读
 head:
   - - meta
@@ -24,21 +24,28 @@ last_modified: 2025-04-24 21:32
 
 ## 数学公式
 
-发现了的人可能已经发现了，上期实现的效果里并没有数学公式。这是因为 `markdown-it` 本身是不解析数学公式的，需要依靠插件来实现。VitePress 内置了这个配置，不过仍需要自行安装 `markdown-it-mathjax3` 以及[配置一下 `config.mts`](https://github.com/vuejs/vitepress/blob/fb67f9c75fde865b410f919d2ac1ba1cd8dc40f1/src/node/markdown/markdown.ts#L175-L183)：
+发现了的人可能已经发现了，
+上期实现的效果里并没有数学公式。
+这是因为 `markdown-it` 本身是不解析数学公式的，
+需要依靠插件来实现。
+VitePress 内置了这个配置，
+不过仍需要自行安装 `markdown-it-mathjax3` 
+以及 [配置一下 `config.mts`](https://github.com/vuejs/vitepress/blob/fb67f9c75fde865b410f919d2ac1ba1cd8dc40f1/src/node/markdown/markdown.ts#L175-L183)：
 
-```ts
+```ts {7}
 // ...
 
 export default defineConfig({
   // ...
   markdown: {
     // ...
-    math: true,  // [!code ++]
+    math: true,
   },
 })
 ```
 
-然后，在 `style.css` 里设置渲染出的 `svg` 为行块：
+然后，
+在 `style.css` 里设置渲染出的 `svg` 为行块：
 
 ```css
 mjx-container.MathJax svg {
@@ -50,9 +57,14 @@ bingo!
 
 ## 其他几个 Markdown 语法扩展
 
-虽然 `markdown-it` 默认的解析应该够用了，不过确实还有可以扩展的地方。比如 `[^1]` 标记的脚注、`==` 标记的高亮，以及 `#` 标记的标签。
+虽然 `markdown-it` 默认的解析应该够用了，
+不过确实还有可以扩展的地方。
+比如 `[^1]` 标记的 footnote、
+`==` 标记的 highlight，
+以及 `#` 标记的 hashtag。
 
-具体语法不细讲。先安装一下这几个插件：
+具体语法不细讲。
+先安装一下这几个插件：
 
 ```shell
 pnpm install -D markdown-it-footnote markdown-it-mark markdown-it-hashtag
@@ -60,8 +72,8 @@ pnpm install -D markdown-it-footnote markdown-it-mark markdown-it-hashtag
 
 然后在 `config.mts` 中配置：
 
-```ts
-import markdownItFootnote from 'markdown-it-footnote'  // [!code ++:3]
+```ts {1-3,10-15}
+import markdownItFootnote from 'markdown-it-footnote'
 import markdownItHashtag from 'markdown-it-hashtag'
 import markdownItMark from 'markdown-it-mark'
 // ...
@@ -70,7 +82,7 @@ export default defineConfig({
   // ...
   markdown: {
     // ...
-    config: (md) => {  // [!code ++:6]
+    config: (md) => {
       md
       .use(markdownItFootnote)
       .use(markdownItMark)
@@ -85,7 +97,6 @@ export default defineConfig({
 ```css
 #content {
   /* ... */
-  /* mark */
   & mark {
     --uno: 'relative';
     --uno: 'bg-transparent';
@@ -96,7 +107,6 @@ export default defineConfig({
     --uno: 'before:(bg-emerald-500/80)';
   }
 
-  /* hashtag */
   & a.tag {
     --uno: 'font-mono relative';
     --uno: 'px-1';
@@ -111,7 +121,7 @@ export default defineConfig({
 }
 ```
 
-记得再去改一下链接的选择器，把 .tag 也排除掉：
+记得再去改一下链接的选择器，把 `.tag` 也排除掉：
 
 ```css /.tag/
 #content {
@@ -129,13 +139,15 @@ export default defineConfig({
 
 ## 图片
 
-为 Markdown 内嵌图片微调一下样式，主要是居中、边框、标题文字和放大。
+为 Markdown 内嵌图片微调一下样式，
+主要是居中、边框、标题文字和放大。
 
-实现标题文字需要用到 `markdown-it-implicit-figures` 插件。安装之后记得去 `config.mts` 中配置：
+实现标题文字需要用到 `markdown-it-implicit-figures` 插件。
+安装之后记得去 `config.mts` 中配置：
 
-```ts [config.mts]
+```ts {2,12-14}
 // ...
-import markdownItFigures from 'markdown-it-implicit-figures'  // [!code ++]
+import markdownItFigures from 'markdown-it-implicit-figures'
 // ...
 
 export default defineConfig({
@@ -144,8 +156,8 @@ export default defineConfig({
     // ...
     config: (md) => {
       md
-        // ...
-        .use(markdownItFigures, {  // [!code ++:3]
+      // ...
+        .use(markdownItFigures, {
           figcaption: true,
         })
     },
@@ -153,16 +165,18 @@ export default defineConfig({
 })
 ```
 
-这里用 `medium-zoom` 来实现图片的点击放大。先 `pnpm` 安装一下，然后去 `Layout.vue` 中搞一下：
+这里用 `medium-zoom` 来实现图片的点击放大。
+先 `pnpm` 安装一下，
+然后去 `Layout.vue` 中搞一下：
 
-```vue
+```vue {2-4,7-24}
 <script setup lang="ts">
-import mediumZoom from 'medium-zoom'  // [!code ++:3]
+import mediumZoom from 'medium-zoom'
 import { useRoute } from 'vitepress'
 import { nextTick, onMounted, watch } from 'vue'
 // ...
 
-const route = useRoute()  // [!code ++:18]
+const route = useRoute()
 
 function initZoom() {
   mediumZoom('#content figure img', {
@@ -181,9 +195,8 @@ watch(
   () => nextTick(() => initZoom()),
 )
 </script>
-<template>
+
 <!-- ... -->
-</template>
 ```
 
 这里的 `var(--image-mask-bg)` 在`style.css` 中定义：
