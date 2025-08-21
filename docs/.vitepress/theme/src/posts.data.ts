@@ -77,5 +77,6 @@ export default createContentLoader('posts/*.md', {
       lastModified: formatDate(frontmatter.last_modified),
       readingInfo: calculateReadingTime(src),
     }))
+      .sort((a, b) => b.created.raw.getTime() - a.created.raw.getTime())
   },
 })
