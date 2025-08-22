@@ -2,5 +2,6 @@
   "i18n-ally.localesPaths": [
     "docs"
   ],
-  "arrayIndexInlay.enabled": false
+  "arrayIndexInlay.enabled": false,
+  "pnpmCatalogLens.enabled": false
 }

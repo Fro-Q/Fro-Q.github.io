@@ -148,6 +148,7 @@ export default createContentLoader('posts/*.md', {
 import { data as posts } from '../src/posts.data'
 
 // ...
+/* eslint-enable import/first */
 </script>
 
 <!-- ... -->
