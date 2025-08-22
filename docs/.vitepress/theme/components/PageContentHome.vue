@@ -17,7 +17,7 @@ const categories = ['全', ...new Set(posts.map(post => post.frontmatter.categor
 </script>
 
 <template>
-  <un-page-content>
+  <un-page-content un-min-h-100vh>
     <h1
       un-text="center 4xl"
       un-m-4
@@ -32,7 +32,7 @@ const categories = ['全', ...new Set(posts.map(post => post.frontmatter.categor
       <p>{{ site.description }}</p>
     </div>
   </un-page-content>
-  <un-page-content>
+  <un-page-content un-min-h-100vh>
     <h2
       un-my-4
       un-text-4xl
@@ -60,6 +60,7 @@ const categories = ['全', ...new Set(posts.map(post => post.frontmatter.categor
     </div>
   </un-page-content>
   <un-page-content
+    un-min-h-100vh
     v-for="category in categories"
     :key="category"
   >
