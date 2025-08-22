@@ -10,6 +10,7 @@ export default antfu(
         singleline: { max: 1 },
         multiline: { max: 1 },
       }],
+      'unused-imports/no-unused-imports': 'off',
     },
     formatters: {
       css: true,
