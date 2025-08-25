@@ -12,8 +12,8 @@ head:
   - - meta
     - name: id
       content: 250414a
-created: 
-last_modified: 
+created:
+last_modified:
 ---
 
 {{ excerpt }}
@@ -21,4 +21,3 @@ last_modified:
 ---
 
 [[toc]]
-

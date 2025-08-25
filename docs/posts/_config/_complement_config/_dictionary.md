@@ -16,12 +16,12 @@ created: 2024-02-16 14:00
 last_modified: 2024-08-04 01:72
 ---
 
-℃||ssd|摄氏度|  
+℃||ssd|摄氏度|
 ::: danger\n[caret]\n:::||::: danger
 
 ::: info\n[caret]\n:::||::: info
 
-::: details\n[caret]\n:::||::: details  
-::: warning\n[caret]\n:::||::: warning  
-::: tip\n[caret]\n:::||::: tip  
+::: details\n[caret]\n:::||::: details
+::: warning\n[caret]\n:::||::: warning
+::: tip\n[caret]\n:::||::: tip
 <Badge text="<caret>" type="" />||Badge
