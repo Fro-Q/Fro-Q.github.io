@@ -74,8 +74,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Not needed if lastUpdated is not enabled
-          # [!code highlight:3]
-      - uses: pnpm/action-setup@v3 # Uncomment this block if you're using pnpm
+      - uses: pnpm/action-setup@v3 # Uncomment this block if you're using pnpm  [!code highlight:3]
         with:
           version: 9 # Not needed if you've set "packageManager" in package.json
       # - uses: oven-sh/setup-bun@v1 # Uncomment this if you're using Bun
@@ -83,16 +82,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          # [!code highlight]
-          cache: pnpm # or npm / yarn
+          cache: pnpm # or npm / yarn  [!code highlight]
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Install dependencies
-        # [!code highlight]
-        run: pnpm install # or npm cli / yarn install / bun install
+        run: pnpm install # or npm cli / yarn install / bun install  [!code highlight]
       - name: Build with VitePress
-        # [!code highlight]
-        run: pnpm docs:build # or npm run docs:build / yarn docs:build / bun run docs:build
+        run: pnpm docs:build # or npm run docs:build / yarn docs:build / bun run docs:build  [!code highlight]
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

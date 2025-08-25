@@ -121,7 +121,7 @@ html {
 
     /* line notation style */
     & .line {
-      --uno: 'inline-block w-[calc(100%+4rem)] h-20px';
+      --uno: 'inline-block w-[calc(100%+4rem)] max-h-20px';
       --uno: '-mx-8 px-8';
 
       /* highlighted line */
@@ -221,6 +221,10 @@ html {
         --uno: 'pt-6';
         --uno: 'text-(center neutral-500)';
         --uno: 'font-mono';
+
+        & .line-number {
+          --uno: 'h-20px';
+        }
       }
     }
   }
