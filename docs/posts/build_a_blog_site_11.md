@@ -39,7 +39,7 @@ VitePress 已经提供了一个 [GitHub Actions 工作流](https://vitepress.dev
 可以直接部署到 GitHub Pages。
 根据上面链接中的指引，把相应的内容直接复制到刚刚打开的 GitHub Actions 编辑器中：
 
-```yaml
+```yml:line-numbers
 # Sample workflow for building and deploying a VitePress site to GitHub Pages
 #
 name: Deploy VitePress site to Pages
@@ -74,21 +74,25 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Not needed if lastUpdated is not enabled
-      # - uses: pnpm/action-setup@v3 # Uncomment this block if you're using pnpm
-      #   with:
-      #     version: 9 # Not needed if you've set "packageManager" in package.json
+          # [!code highlight:3]
+      - uses: pnpm/action-setup@v3 # Uncomment this block if you're using pnpm
+        with:
+          version: 9 # Not needed if you've set "packageManager" in package.json
       # - uses: oven-sh/setup-bun@v1 # Uncomment this if you're using Bun
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm # or pnpm / yarn
+          # [!code highlight]
+          cache: pnpm # or npm / yarn
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Install dependencies
-        run: npm ci # or pnpm install / yarn install / bun install
+        # [!code highlight]
+        run: pnpm install # or npm cli / yarn install / bun install
       - name: Build with VitePress
-        run: npm run docs:build # or pnpm docs:build / yarn docs:build / bun run docs:build
+        # [!code highlight]
+        run: pnpm docs:build # or npm run docs:build / yarn docs:build / bun run docs:build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -107,3 +111,10 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 ```
+
+注意上面高亮的地方，由于我使用 `pnpm`，
+所以我按照注释中的指导改了一些部分。
+
+保存，然后 GitHub 就会自动构建和部署了。
+
+后续每次向仓库推送代码，GitHub Actions 会自动部署到 GitHub Pages。
