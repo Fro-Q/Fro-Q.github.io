@@ -1,11 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref, triggerRef } from 'vue'
 
-const htmlEl: HTMLElement | null = document.querySelector('html')
-
-if (!htmlEl) {
-  throw new Error('HTML element not found')
-}
+const htmlEl: HTMLElement = document.querySelector('html')!
 
 const darkMode = ref({
   get state(): boolean {

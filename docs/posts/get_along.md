@@ -13,7 +13,7 @@ last_modified: 2024-09-09 20:02
 ---
 
 <script setup>
-import GetAlong from '@theme/components/GetAlong.vue';
+import PageContentContact from '@theme/components/PageContentContact.vue'
 </script>
 
-<GetAlong />
+<PageContentContact />

@@ -231,54 +231,6 @@ function toggleDarkClass(value: boolean) {
 虽然可以加入新的验证逻辑去解决，
 但无疑会增加代码的复杂度。
 
-#### 类型收窄｜Type Narrowing
-
-另一种方案是使用简单的 narrowing 来解决这个问题。
-在这个例子中，我们可以判断 `htmlEl` 是否为 `null`，
-如果是的话，提前抛出错误:
-
-```vue twoslash {6-9}
-<script setup lang="ts">
-import { onMounted, ref, triggerRef } from 'vue'
-
-const htmlEl: HTMLElement | null = document.querySelector('html')
-//    ^?
-
-if (!htmlEl) {
-  throw new Error('HTML element not found')
-}
-
-const darkMode = ref({
-  get state(): boolean {
-    return htmlEl.classList.contains('dark')
-    //     ^?
-  },
-
-  set state(value: boolean) {
-    toggleDarkClass(value)
-  },
-})
-
-function toggleDarkClass(value: boolean) {
-  if (value) {
-    htmlEl.classList.add('dark')
-  }
-  else {
-    htmlEl.classList.remove('dark')
-  }
-}
-</script>
-
-<!-- ... -->
-```
-
-可以看到，
-虽然 `htmlEl` 的类型在定义时确实是 `HTMLElement | null`，
-但在 narrowing 之后，
-其类型就只剩下了 `HTMLElement`。
-
-这里我们使用最后一种方式来处理。
-
 ### 模板中的处理
 
 有了 `darkMode` 这个状态和 `toggleDarkClass()` 函数，
