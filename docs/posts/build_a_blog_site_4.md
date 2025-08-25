@@ -231,10 +231,11 @@ function toggleDarkClass(value: boolean) {
 虽然可以加入新的验证逻辑去解决，
 但无疑会增加代码的复杂度。
 
-#### 单独验证
+#### 类型收窄｜Type Narrowing
 
-另一种解决方案是单独验证 `htmlEl` 是否为 `null` 或 `undefined`：
-如果是，则提前抛出错误：
+另一种方案是使用简单的 narrowing 来解决这个问题。
+在这个例子中，我们可以判断 `htmlEl` 是否为 `null`，
+如果是的话，提前抛出错误:
 
 ```vue twoslash {6-9}
 <script setup lang="ts">
@@ -273,7 +274,7 @@ function toggleDarkClass(value: boolean) {
 
 可以看到，
 虽然 `htmlEl` 的类型在定义时确实是 `HTMLElement | null`，
-但在检查并抛出错误之后，
+但在 narrowing 之后，
 其类型就只剩下了 `HTMLElement`。
 
 这里我们使用最后一种方式来处理。
