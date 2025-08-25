@@ -8,7 +8,18 @@ import {
   transformerVariantGroup,
 } from 'unocss'
 
+import contacts from './docs/.vitepress/theme/src/contacts.json'
+
+const safeIcons = contacts.map(c => c.iconUno)
+const safeColors = contacts.map(c => c.colorUno)
+
 export default defineConfig({
+  safelist: [
+    ...safeIcons,
+    ...safeColors.map(c => `border-${c}-500`),
+    ...safeColors.map(c => `text-${c}-500`),
+    ...safeColors.map(c => `hover:text-${c}-500`),
+  ],
   content: {
     pipeline: {
       include: [
