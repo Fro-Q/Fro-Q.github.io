@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import contacts from '../src/contacts.json'
+import contacts from '../src/contacts.json' assert { type: 'json' }
 </script>
 
 <template>
