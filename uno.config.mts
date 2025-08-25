@@ -8,25 +8,25 @@ import {
   transformerVariantGroup,
 } from 'unocss'
 
-// import contacts from './docs/.vitepress/theme/src/contacts.json'
-const contacts = [
-  {
-    iconUno: 'i-ph-mastodon-logo-duotone',
-    colorUno: 'purple',
-  },
-  {
-    iconUno: 'i-ph-github-logo-duotone',
-    colorUno: 'zinc',
-  },
-  {
-    iconUno: 'i-ph-at-duotone',
-    colorUno: 'cyan',
-  },
-  {
-    iconUno: 'i-ph-wechat-logo-duotone',
-    colorUno: 'green',
-  },
-]
+import contacts from './docs/.vitepress/theme/src/contacts.json' with { type: 'json' }
+// const contacts = [
+//   {
+//     iconUno: 'i-ph-mastodon-logo-duotone',
+//     colorUno: 'purple',
+//   },
+//   {
+//     iconUno: 'i-ph-github-logo-duotone',
+//     colorUno: 'zinc',
+//   },
+//   {
+//     iconUno: 'i-ph-at-duotone',
+//     colorUno: 'cyan',
+//   },
+//   {
+//     iconUno: 'i-ph-wechat-logo-duotone',
+//     colorUno: 'green',
+//   },
+// ]
 
 const safeIcons = contacts.map(c => c.iconUno)
 const safeColors = contacts.map(c => c.colorUno)
