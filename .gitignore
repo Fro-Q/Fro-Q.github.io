@@ -2,4 +2,7 @@ node_modules/
 docs/.vitepress/cache/
 docs/.vitepress/dist/
 docs/posts/.obsidian/
-.vitepress/cache/
+docs/blog/_template/
+docs/blog/_config/
+.DS_Store
+docs/.DS_Store
