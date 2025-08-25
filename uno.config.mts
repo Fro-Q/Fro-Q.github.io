@@ -8,7 +8,7 @@ import {
   transformerVariantGroup,
 } from 'unocss'
 
-import contacts from './docs/.vitepress/theme/src/contacts.json'
+import contacts from './docs/.vitepress/theme/src/contacts.json' assert { type: 'json' }
 
 const safeIcons = contacts.map(c => c.iconUno)
 const safeColors = contacts.map(c => c.colorUno)
