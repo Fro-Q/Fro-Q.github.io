@@ -235,6 +235,8 @@ html {
     & .tabs {
       --uno: 'border border-neutral-300 dark:border-neutral-700';
       --uno: 'rounded-t-md';
+      --uno: 'flex';
+      --uno: 'overflow-x-auto';
 
       & label {
         --uno: 'inline-block cursor-pointer';
