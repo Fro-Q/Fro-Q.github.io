@@ -1,5 +1,27 @@
+@font-face {
+  font-family: 'Lxgw WenKai Mono';
+  src: url('./fonts/Lxgw\ WenKai\ Mono\ Light.ttf');
+}
+
+@font-face {
+  font-family: 'FusionKai J';
+  src: url('./fonts/FusionKaiJ-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'YshiPenShutiTC';
+  src: url('./fonts/YshiPenShutiTC-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'QiushuiShotaiTC';
+  src: url('./fonts/QiushuiShotai.ttf');
+}
+
 html {
-  font-family: 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'YshiPenShutiTC', 'QiushuiShotaiTC', 'FusionKai J', 'Lxgw WenKai Mono';
+  font-size: 20px;
+  scroll-behavior: smooth;
   /* smooth */
   --uno: 'antialiased';
 
@@ -80,7 +102,7 @@ html {
   }
 
   /* inline code */
-  & :not(pre) > code {
+  & :not(pre)>code {
     --uno: 'px-1';
     --uno: 'bg-neutral-200/50 dark:bg-neutral-800/50';
     --uno: 'text-neutral-500';
@@ -254,7 +276,7 @@ html {
       & input {
         --uno: 'opacity-0';
 
-        &:checked + label {
+        &:checked+label {
           --uno: 'text-neutral-900';
           --uno: 'border-neutral-700';
           --uno: 'dark:(text-neutral-100 border-neutral-300)';
@@ -263,7 +285,7 @@ html {
     }
 
     & .blocks {
-      & > * {
+      &>* {
         --uno: 'my-0';
         --uno: 'border-t-none';
         --uno: 'rounded-t-none';

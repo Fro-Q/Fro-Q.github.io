@@ -18,7 +18,6 @@ const metaStrings = [
     <div
       un-my-10
       un-text="5xl/relaxed"
-      un-font-serif
       un-max-w-full
     >
       {{ frontmatter.title }}
@@ -28,7 +27,6 @@ const metaStrings = [
       un-flex
       un-gap-5
       un-justify-end
-      un-font-serif
     >
       <div
         v-for="metaString in metaStrings"
