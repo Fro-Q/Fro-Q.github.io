@@ -38,7 +38,7 @@ onMounted(() => {
         un-text="5xl neutral-600 dark:neutral-400"
         href="/"
       >
-        <SvgFroqLogo id="froQ" />
+        <SvgFroqLogo :animated="true" />
       </a>
     </un-m-2>
     <div
@@ -79,32 +79,3 @@ onMounted(() => {
     </div>
   </nav>
 </template>
-
-<style scoped>
-@keyframes grow {
-  0% {
-    stroke-dashoffset: 1px;
-    stroke-dasharray: 0 var(--signature-length);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  45% {
-    stroke-dasharray: var(--signature-length) 0;
-  }
-  /* Moving back */
-  65% {
-    stroke-dasharray: var(--signature-length) 0;
-  }
-  95%,
-  to {
-    stroke-dasharray: 0 var(--signature-length);
-  }
-}
-#froQ {
-  --signature-length: 2000px;
-  stroke-dasharray: 40 0;
-  animation: grow 10s ease-in-out infinite;
-}
-</style>
