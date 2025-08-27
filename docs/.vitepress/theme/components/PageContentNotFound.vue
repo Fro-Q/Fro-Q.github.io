@@ -44,7 +44,7 @@ function metaStrings(post: Data) {
       un-mb-10
     >
       <a
-        href="/contact/"
+        href="/posts/get_along/"
         un-text-emerald-500
         un-underline="~ dotted"
         un-hover="rotate-3 scale-105"
