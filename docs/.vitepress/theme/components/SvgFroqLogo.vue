@@ -33,13 +33,10 @@ defineProps<{
   10% {
     opacity: 1;
   }
-  45% {
+  50% {
     stroke-dasharray: var(--signature-length) 0;
   }
-  /* Moving back */
-  65% {
-    stroke-dasharray: var(--signature-length) 0;
-  }
+
   95%,
   to {
     stroke-dasharray: 0 var(--signature-length);
@@ -48,6 +45,6 @@ defineProps<{
 #animated {
   --signature-length: 2000px;
   stroke-dasharray: 40 0;
-  animation: grow 10s ease-in-out infinite;
+  animation: grow 10s linear infinite;
 }
 </style>
