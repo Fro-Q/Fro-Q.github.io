@@ -143,13 +143,13 @@ html {
 
     /* line notation style */
     & .line {
-      --uno: 'inline-block w-[calc(100%+4rem)] max-h-20px';
+      --uno: 'inline-block w-[calc(100%+4rem)] h-4';
       --uno: '-mx-8 px-8';
 
       /* highlighted line */
       &.highlighted {
         --uno: 'bg-neutral-200 dark:bg-neutral-800';
-        --uno: 'rounded-sm';
+        --uno: 'h-max';
 
         --uno: 'before:(absolute -translate-x-5)';
 
@@ -245,6 +245,7 @@ html {
         --uno: 'font-mono';
 
         & .line-number {
+          --uno: 'inline-block';
           --uno: 'h-20px';
         }
       }
