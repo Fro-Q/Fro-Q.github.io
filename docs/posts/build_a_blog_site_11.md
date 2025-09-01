@@ -1,6 +1,6 @@
 ---
 title: "从零开始搭建博客网站（十一）"
-category: 共读
+category: 共讀
 head:
   - - meta
     - name: description

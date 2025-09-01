@@ -1,6 +1,6 @@
 ---
 title: '询 · MathJax (LaTeX) · 索引'
-category: 共读
+category: 共讀
 head:
   - - meta
     - name: description

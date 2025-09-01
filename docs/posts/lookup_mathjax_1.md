@@ -1,6 +1,6 @@
 ---
 title: '询 · MathJax \ LaTeX 公式（一）'
-category: 共读
+category: 共讀
 head:
   - - meta
     - name: description

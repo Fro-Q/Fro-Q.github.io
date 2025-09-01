@@ -1,6 +1,6 @@
 ---
 title: 优化一个博客网站（一）
-category: 共读
+category: 共讀
 head:
   - - meta
     - name: description
@@ -17,6 +17,10 @@ last_modified: 2025-08-26 09:37
 ---
 
 [[toc]]
+
+<script setup lang="ts">
+import SvgFroqLogo from '@theme/components/SvgFroqLogo.vue'
+</script>
 
 ## 承上
 
@@ -39,4 +43,14 @@ last_modified: 2025-08-26 09:37
 
 ### 主页
 
-沿袭一下之前扉页的设计
+沿袭一下之前扉页的设计：
+
+![扉页](optimize_the_blog_site_1_assets/ATTCH_20250827144925.png)
+
+这里的实现都很简单，就不多说了。
+
+左上角的 logo 是一个带动画的 svg，
+这个想法来自 [Anthony Fu](https://antfu.me/) 的博客
+[Animated SVG Logo](https://antfu.me/posts/animated-svg-logo)。
+
+<SvgFroqLogo :animated="true" un-w-full un-h-50 un-m-2/>
