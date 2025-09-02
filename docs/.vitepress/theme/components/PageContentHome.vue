@@ -49,6 +49,7 @@ onMounted(() => {
         // remove scroll event listener when the element leaves the viewport
         document.removeEventListener('scroll', () => handleScroll(el))
       }
+      handleScroll(el)
     })
   }, { threshold: 0 }) // trigger when the element enters the viewport
 
