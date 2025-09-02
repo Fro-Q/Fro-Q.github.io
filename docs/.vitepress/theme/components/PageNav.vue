@@ -29,18 +29,9 @@ onMounted(() => {
 <template>
   <nav
     un-flex="~ row"
-    un-justify-between
+    un-justify-end
     un-p-4
   >
-    <un-m-2>
-      <a
-        class="group"
-        un-text="5xl neutral-600 dark:neutral-400"
-        href="/"
-      >
-        <SvgFroqLogo :animated="true" />
-      </a>
-    </un-m-2>
     <div
       un-flex="~ row"
       un-items-center

@@ -4,6 +4,7 @@ import { useRoute } from 'vitepress'
 import { nextTick, onMounted, watch } from 'vue'
 import PageContent from './components/PageContent.vue'
 import PageFooter from './components/PageFooter.vue'
+import PageLogo from './components/PageLogo.vue'
 import PageNav from './components/PageNav.vue'
 
 const route = useRoute()
@@ -32,6 +33,7 @@ watch(
     un-bg="neutral-50 dark:neutral-950"
     un-text="neutral-700 dark:neutral-300"
   >
+    <PageLogo />
     <PageNav />
     <PageContent />
     <PageFooter />
