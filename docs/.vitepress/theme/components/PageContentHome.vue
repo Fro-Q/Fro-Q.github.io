@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { Data } from '../src/posts.data'
-import { useData } from 'vitepress'
-import { onMounted, warn } from 'vue'
+import { onMounted } from 'vue'
 import { data as posts } from '../src/posts.data'
 import LinkUnderline from './LinkUnderline.vue'
 
@@ -202,7 +201,6 @@ onMounted(() => {
       un-flex="~ col"
       un-gap-4
       un-items-end
-      un-border-r="neutral-800 dark:neutral-200 px"
     >
       <div
         v-for="post in posts.filter(post => category === '全' ? posts : post.frontmatter.category === category)"
