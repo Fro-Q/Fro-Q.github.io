@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Data } from '../src/posts.data'
 import { useData } from 'vitepress'
+import { onMounted, warn } from 'vue'
 import { data as posts } from '../src/posts.data'
 import LinkUnderline from './LinkUnderline.vue'
 
@@ -13,6 +14,46 @@ function metaStrings(post: Data) {
 }
 
 const categories = ['全', ...new Set(posts.map(post => post.frontmatter.category))]
+
+onMounted(() => {
+  const handleScroll = (el: HTMLElement) => {
+    const categoryWrapper = el.parentElement
+    if (categoryWrapper) {
+      const scrollY = window.scrollY
+      const wrapperOffsetY = categoryWrapper.offsetTop
+      const wrapperWidth = categoryWrapper.offsetWidth
+      const windowHeight = window.innerHeight
+
+      // if the height of the category wrapper is less than the height of the window,
+      // then the progress bar should be 100%
+      if (categoryWrapper.offsetHeight <= windowHeight) {
+        el.style.setProperty('--progress-bar-width', `${wrapperWidth}px`)
+        return
+      }
+
+      const percentage = Math.min(1, Math.max(0, (scrollY - wrapperOffsetY) / Math.max(0, categoryWrapper.offsetHeight - windowHeight)))
+      el.style.setProperty('--progress-bar-width', `${percentage * wrapperWidth}px`)
+    }
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const el = entry.target as HTMLElement
+      if (entry.isIntersecting) {
+        // add scroll event listener when the element enters the viewport
+        document.addEventListener('scroll', () => handleScroll(el))
+      }
+      else {
+        // remove scroll event listener when the element leaves the viewport
+        document.removeEventListener('scroll', () => handleScroll(el))
+      }
+    })
+  }, { threshold: 0 }) // trigger when the element enters the viewport
+
+  document.querySelectorAll<HTMLElement>('.title-wrapper').forEach((el: HTMLElement) => {
+    observer.observe(el)
+  })
+})
 </script>
 
 <template>
@@ -61,14 +102,35 @@ const categories = ['全', ...new Set(posts.map(post => post.frontmatter.categor
   </un-page-content>
   <un-page-content un-min-h-100vh>
     <div
-      class="gradient-b"
+      class="title-wrapper"
       un-sticky
       un-top-0
       un-py-10
       un-z-10
       un-bg="neutral-50 dark:neutral-950"
-      un-border-b="neutral-200 dark:neutral-800 px"
     >
+      <div
+        class="progress-bar"
+      >
+        <div
+          class="progress-bar-inner"
+          un-bg="sky-600 dark:sky-400"
+          :style="{ width: 'var(--progress-bar-width, 0)' }"
+          un-h-2px
+          un-absolute
+          un-bottom-0
+          un-z-1
+        />
+        <div
+          class="progress-bar-bg"
+          un-bg="neutral-200 dark:neutral-800"
+          un-w-full
+          un-h-2px
+          un-absolute
+          un-bottom-0
+          un-z-0
+        />
+      </div>
       <h2
         un-my-4
         un-text-4xl
@@ -86,9 +148,8 @@ const categories = ['全', ...new Set(posts.map(post => post.frontmatter.categor
       <LinkUnderline
         :href="`#${category}`"
         :text="category"
-        un-text="neutral-700 dark:neutral-300 hover:neutral-950 dark:hover:neutral-50"
-        un-before="bg-rose-600 dark:bg-rose-400 "
-        un-text-2xl
+        un-text="neutral-700 dark:neutral-300 hover:neutral-950 dark:hover:neutral-50 2xl"
+        un-before="bg-rose-600 dark:bg-rose-400"
         un-italic
       />
     </div>
@@ -99,13 +160,35 @@ const categories = ['全', ...new Set(posts.map(post => post.frontmatter.categor
     un-min-h-100vh
   >
     <div
+      class="title-wrapper"
       un-sticky
       un-top-0
       un-py-10
       un-z-10
       un-bg="neutral-50 dark:neutral-950"
-      un-border-b="neutral-200 dark:neutral-800 px"
     >
+      <div
+        class="progress-bar"
+      >
+        <div
+          class="progress-bar-inner"
+          un-bg="sky-600 dark:sky-400"
+          :style="{ width: 'var(--progress-bar-width, 0)' }"
+          un-h-2px
+          un-absolute
+          un-bottom-0
+          un-z-1
+        />
+        <div
+          class="progress-bar-bg"
+          un-bg="neutral-200 dark:neutral-800"
+          un-w-full
+          un-h-2px
+          un-absolute
+          un-bottom-0
+          un-z-0
+        />
+      </div>
       <h2
         :id="category"
         un-my-4
@@ -136,13 +219,6 @@ const categories = ['全', ...new Set(posts.map(post => post.frontmatter.categor
           un-before="bg-emerald-600 dark:bg-emerald-600/80"
           un-text-align="right"
         />
-        <!-- <a
-          un-text-2xl
-          un-text="neutral-600 dark:neutral-400 hover:neutral-900 dark:hover:neutral-100"
-          un-transition-colors
-          un-duration-200
-          :href="post.url"
-        >{{ post.frontmatter.title }}</a> -->
         <p
           un-text-neutral-500
           v-html="post.excerpt"
