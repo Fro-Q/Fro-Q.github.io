@@ -1,5 +1,5 @@
 ---
-title: "*A Room of One's Own* · V. Woolf《自己的房间》"
+title: "*A Room of One's Own*"
 category: 前脩
 head:
   - - meta

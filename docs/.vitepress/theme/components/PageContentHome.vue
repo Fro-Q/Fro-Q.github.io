@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Data } from '../src/posts.data'
-import { onMounted } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { data as posts } from '../src/posts.data'
 import LinkUnderline from './LinkUnderline.vue'
 
@@ -12,7 +12,10 @@ function metaStrings(post: Data) {
   ]
 }
 
-const categories = ['全', ...new Set(posts.map(post => post.frontmatter.category))]
+const categories: string[] = ['全', ...new Set(posts.map(post => post.frontmatter.category))]
+const excerptVisible = ref(
+  Object.fromEntries(categories.map(category => [category, false])),
+)
 
 onMounted(() => {
   const handleScroll = (el: HTMLElement) => {
@@ -195,6 +198,32 @@ onMounted(() => {
       >
         {{ category }}
       </h2>
+      <div
+        un-flex="~ row"
+        un-items-center
+      >
+        <input
+          :id="`${category}-excerpt`"
+          v-model="excerptVisible[category]"
+          type="checkbox"
+          un-appearance-none
+          un-w-4
+          un-h-4
+          un-rounded-sm
+          un-relative
+          un-transition
+          un-border="px neutral-600"
+          un-before="transition content-empty bg-sky-600 dark:bg-sky-400 w-2 h-2 scale-0 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-none"
+          un-checked="border-sky-600 dark:border-sky-400 before:scale-100"
+        >
+        <label
+          :for="`${category}-excerpt`"
+          un-ml-2
+          un-text="neutral-600 dark:neutral-400 base"
+        >
+          摘要
+        </label>
+      </div>
     </div>
     <div
       un-py-10
@@ -218,6 +247,7 @@ onMounted(() => {
           un-text-align="right"
         />
         <p
+          v-show="excerptVisible[category]"
           un-text-neutral-500
           v-html="post.excerpt"
         />

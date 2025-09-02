@@ -1,5 +1,5 @@
 ---
-title: '*Vorlesungen zur Einführung in die Psychoanalyse* · S. Freud《精神分析引论》'
+title: '*Vorlesungen zur Einführung in die Psychoanalyse*'
 category: 前脩
 head:
   - - meta

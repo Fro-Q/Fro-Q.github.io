@@ -1,5 +1,5 @@
 ---
-title: "*Syllogismes de l'amertume* · E.M. Cioran《苦论》"
+title: "*Syllogismes de l'amertume*"
 category: 前脩
 head:
   - - meta

@@ -1,5 +1,5 @@
 ---
-title: "*Le mythe de Sisyphe* · A. Camus《西西弗神话》"
+title: "*Le mythe de Sisyphe*"
 category: 前脩
 head:
   - - meta

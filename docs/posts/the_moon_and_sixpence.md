@@ -1,5 +1,5 @@
 ---
-title: "*The Moon and Sixpence* · W.S. Maugham《月亮与六便士》"
+title: "*The Moon and Sixpence*"
 category: 前脩
 head:
   - - meta

@@ -1,5 +1,5 @@
 ---
-title: "*L'Étranger* · A. Camus《局外人》"
+title: "*L'Étranger*"
 category: 前脩
 head:
   - - meta

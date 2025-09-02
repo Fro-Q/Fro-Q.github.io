@@ -1,5 +1,5 @@
 ---
-title: '*La Peste* · A. Camus《鼠疫》'
+title: '*La Peste*'
 category: 前脩
 head:
   - - meta
