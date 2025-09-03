@@ -1,6 +1,7 @@
 ---
 title: "从零开始搭建博客网站（二）"
 category: 共讀
+series: blog_site
 head:
   - - meta
     - name: description

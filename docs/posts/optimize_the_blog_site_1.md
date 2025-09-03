@@ -1,6 +1,7 @@
 ---
 title: 优化一个博客网站（一）
 category: 共讀
+series: blog_site
 head:
   - - meta
     - name: description
@@ -218,3 +219,147 @@ onMounted(() => {
 乍一看有点密密麻麻的，
 可读性略差。
 可以在每个 category 下加一个切换摘要可见性的 checkbox。
+
+![小小的 checkbox](optimize_the_blog_site_1_assets/ATTCH_1756801047336.gif)
+
+这里用到了 `v-model` 和 `v-show`。
+简单来说，创建了一个用于存储各个 category 摘要可见性的对象，
+将 `input` 的 `v-model` 绑定到这个对象上,
+再通过 `v-show` 来控制摘要的显示与隐藏。
+
+### 文题过长
+
+现在有一个比较丑的情况：
+
+![丑](optimize_the_blog_site_1_assets/ATTCH_1756862054265.png)
+
+使用伪元素实现的下划线效果在单行文字上表现良好,
+但当文字较长时，
+它就会变成这种丑样子。
+虽然可以通过控制标题的字数来尝试避免这种情况，
+但实际很难：
+首先：很显然这里标题不是等宽字体，
+文本整体宽度难以精确计算，
+其次，可以注意到标题中其实可能包含 markdown 标记，
+目前还没有对这些标记做任何处理,
+但一旦将它们都进行渲染，标题的宽度会更难以计算。
+
+这里采用的方案是使用 `text-overflow: ellipsis` 来截断文字，
+保证仅显示一行：
+
+![截断](optimize_the_blog_site_1_assets/ATTCH_1756862708836.png)
+
+所以新的问题在于，
+如何以某种其他的方式显示完整的标题以保证可读性？
+
+简单的一个思路，
+当 hover 时，用一个 tooltip 来显示完整的标题：
+
+![tooltip](optimize_the_blog_site_1_assets/ATTCH_1756863012569.png)
+
+其实就是用 `v-if` 控制一个 `div` 的显示与隐藏,
+不过需要注意处理超出屏幕空间的情况，
+当右侧或者下方空间不足时，需要做出相应的调整。
+
+贴一下实现：
+
+```vue
+<script setup lang="ts">
+import { nextTick, onMounted, reactive, ref } from 'vue'
+
+defineProps<{
+  href: string
+  text: string
+}>()
+
+const showTooltip = ref(false)
+const tooltipRef = ref<HTMLElement | null>(null)
+const mouseX = ref(0)
+const mouseY = ref(0)
+const tooltipStyle = reactive({
+  left: '0px',
+  top: '0px',
+})
+
+async function updateTooltipPosition(e: MouseEvent) {
+  mouseX.value = e.clientX
+  mouseY.value = e.clientY
+
+  if (showTooltip.value) {
+    await nextTick()
+    if (tooltipRef.value) {
+      const tooltipWidth = tooltipRef.value.offsetWidth
+      const tooltipHeight = tooltipRef.value.offsetHeight
+      const viewportWidth = window.innerWidth
+      const viewportHeight = window.innerHeight
+
+      let newLeft = mouseX.value + 10
+      let newTop = mouseY.value + 10
+
+      // Check if tooltip goes off right edge
+      if (newLeft + tooltipWidth > viewportWidth) {
+        newLeft = mouseX.value - tooltipWidth - 10
+      }
+
+      // Check if tooltip goes off bottom edge
+      if (newTop + tooltipHeight > viewportHeight) {
+        newTop = mouseY.value - tooltipHeight - 10
+      }
+
+      tooltipStyle.left = `${newLeft}px`
+      tooltipStyle.top = `${newTop}px`
+    }
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('scroll', () => showTooltip.value = false)
+})
+</script>
+
+<template>
+  <div
+    un="..."
+    @mouseenter="showTooltip = true"
+    @mouseleave="showTooltip = false"
+    @mousemove="showTooltip = true; updateTooltipPosition($event)"
+  >
+    <!-- ...  -->
+    <div
+      v-if="showTooltip"
+      ref="tooltipRef"
+      class="tooltip"
+      :style="tooltipStyle"
+      un-text-align-start
+      un-text-sm
+      un-fixed
+      un-z-50
+      un-bg="neutral-200 dark:neutral-800"
+      un-text-white
+      un-p-2
+      un-rounded-sm
+      un-shadow-lg
+      un-whitespace-nowrap
+    >
+      {{ text }}
+    </div>
+  </div>
+</template>
+```
+
+这里 `onMounted()` 中的代码是为了在页面滚动时关闭 tooltip，
+因为滚动时 `mouseenter` 事件正常触发，
+而 `mousemove` 不会，
+会导致 tooltip 出现在屏幕左上角。
+
+`mousemove` 中将 `showTooltip` 设置为 `true`
+是为了确保鼠标移动时始终显示 tooltip,
+因为在上面的处理中，
+若鼠标是通过屏幕滚动进入这个 `div`，
+`showTooltip` 将会被设为 `false`，
+此时在 `div` 上移动鼠标时不会显示 tooltip。
+
+甚至，把文章按年分组，再把一些文章的信息放在 tooltip 中,
+界面又会简洁很多：
+
+![成型了](optimize_the_blog_site_1_assets/ATTCH_1756883022009.gif)

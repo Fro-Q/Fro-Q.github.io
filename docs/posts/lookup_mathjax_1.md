@@ -1,6 +1,7 @@
 ---
 title: '询 · MathJax \ LaTeX 公式（一）'
 category: 共讀
+series: mathjax_symbol
 head:
   - - meta
     - name: description

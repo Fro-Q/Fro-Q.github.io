@@ -60,7 +60,6 @@ onMounted(() => {
 
 <template>
   <div
-    un-flex-grow-1
     un-min-w-0
     un-inline-block
     un-duration-400

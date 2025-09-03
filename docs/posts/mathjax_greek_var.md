@@ -1,6 +1,7 @@
 ---
 title: 'MathJax 中希腊字母的 `\var-` 变体'
 category: 共讀
+series: mathjax_symbol
 head:
   - - meta
     - name: description

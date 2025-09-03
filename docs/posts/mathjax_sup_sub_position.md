@@ -1,6 +1,7 @@
 ---
 title: 'MathJax 中的上下标位置'
 category: 共讀
+series: mathjax_symbol
 head:
   - - meta
     - name: description

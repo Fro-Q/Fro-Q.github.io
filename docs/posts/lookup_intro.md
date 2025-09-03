@@ -1,6 +1,7 @@
 ---
 title: '询 · 公式 / 快捷键 / 概念 / 定义等等 · 序'
 category: 共讀
+series: mathjax_symbol
 head:
   - - meta
     - name: description
