@@ -10,5 +10,8 @@ const { page, frontmatter } = useData()
 <template>
   <PageContentHome v-if="frontmatter.home" />
   <PageContentNotFound v-else-if="page.isNotFound" />
-  <PageContentPost v-else />
+  <PageContentPost
+    v-else
+    :key="page.filePath"
+  />
 </template>
