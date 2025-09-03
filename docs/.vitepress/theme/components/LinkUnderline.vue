@@ -6,6 +6,7 @@ const props = defineProps<{
   text: string
   tooltip?: boolean
   tooltipAddons?: string[]
+  tooltipText?: string
 }>()
 
 const showTooltip = ref(false)
@@ -111,21 +112,11 @@ onMounted(() => {
         un-flex="~ col"
       >
         <div>
-          {{ text }}
+          {{ tooltipText }}
         </div>
-        <div
-          un-flex="~ row"
-          un-text="sm neutral-600 dark:neutral-400"
-          un-justify-end
-          un-gap-5
-        >
-          <div
-            v-for="addon in tooltipAddons"
-            :key="addon"
-          >
-            {{ addon }}
-          </div>
-        </div>
+        <slot
+          name="tooltipAddons"
+        />
       </div>
     </div>
   </div>

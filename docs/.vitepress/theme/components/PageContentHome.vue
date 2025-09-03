@@ -127,7 +127,7 @@ onMounted(() => {
       >
         <div
           class="progress-bar-inner"
-          un-bg="sky-600 dark:sky-400"
+          un-bg="neutral-600 dark:neutral-400"
           :style="{ width: 'var(--progress-bar-width, 0)' }"
           un-h-2px
           un-absolute
@@ -185,7 +185,7 @@ onMounted(() => {
       >
         <div
           class="progress-bar-inner"
-          un-bg="sky-600 dark:sky-400"
+          un-bg="neutral-600 dark:neutral-400"
           :style="{ width: 'var(--progress-bar-width, 0)' }"
           un-h-2px
           un-absolute
@@ -314,11 +314,22 @@ onMounted(() => {
               :href="post.url"
               :text="post.frontmatter.title"
               :tooltip="true"
-              :tooltip-addons="[`约${post.readingTime.toString()}分钟`]"
+              :tooltip-text="post.frontmatter.title"
               un-text="neutral-700 dark:neutral-300 hover:neutral-950 dark:hover:neutral-50 2xl"
               un-before="bg-emerald-600 dark:bg-emerald-600/80"
               un-text-align="right"
-            />
+            >
+              <template #tooltipAddons>
+                <div
+                  un-flex="~ row"
+                  un-text="sm neutral-600 dark:neutral-400"
+                  un-justify-end
+                  un-gap-5
+                >
+                  {{ `约${post.readingTime.toString()}分钟` }}
+                </div>
+              </template>
+            </LinkUnderline>
           </div>
 
           <p
