@@ -7,8 +7,7 @@ import LinkUnderline from './LinkUnderline.vue'
 function metaStrings(post: Data) {
   return [
     post.created.formattedString,
-    `约 ${post.readingInfo.words} 字`,
-    `${post.readingInfo.minutes} 分钟`,
+    `${post.readingTime} 分钟`,
   ]
 }
 
@@ -266,6 +265,7 @@ onMounted(() => {
         un-flex="~ col"
         un-gap-2
         un-items-end
+        un-max-w-full
       >
         <LinkUnderline
           :href="post.url"

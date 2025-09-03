@@ -7,8 +7,7 @@ const randomPosts = posts.sort(() => Math.random() - 0.5).slice(0, 3)
 function metaStrings(post: Data) {
   return [
     post.created.formattedString,
-    `约 ${post.readingInfo.words} 字`,
-    `${post.readingInfo.minutes} 分钟`,
+    `${post.readingTime} 分钟`,
   ]
 }
 </script>

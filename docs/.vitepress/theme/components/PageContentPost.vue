@@ -8,8 +8,7 @@ const post = posts.filter(post => post.frontmatter.title === frontmatter.value.t
 
 const metaStrings = [
   post.created.formattedString,
-  `约 ${post.readingInfo.words} 字`,
-  `${post.readingInfo.minutes} 分钟`,
+  `${post.readingTime} 分钟`,
 ]
 </script>
 

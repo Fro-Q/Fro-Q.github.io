@@ -5,18 +5,13 @@ interface FormattedDate {
   formattedString: string
 }
 
-interface ReadingTimeInfo {
-  minutes: number
-  words: number
-}
-
 export interface Data {
   url: string
   frontmatter: Record<string, any>
   excerpt?: string
   created: FormattedDate
   lastModified: FormattedDate
-  readingInfo: ReadingTimeInfo
+  readingTime: number
 }
 
 declare const data: Data[]
@@ -34,9 +29,9 @@ function formatDate(raw: string): FormattedDate {
   }
 }
 
-function calculateReadingTime(text?: string): ReadingTimeInfo {
+function calculateReadingTime(text?: string): number {
   if (!text) {
-    return { minutes: 0, words: 0 }
+    return 0
   }
 
   const WORDS_PER_MINUTE_ZH = 400
@@ -57,12 +52,7 @@ function calculateReadingTime(text?: string): ReadingTimeInfo {
     + countCodeBlocks * BLOCKS_PER_MINUTE_CODE,
   )
 
-  const words = Math.ceil((countZh + countEn) / 100) * 100
-
-  return {
-    minutes,
-    words,
-  }
+  return minutes
 }
 
 export default createContentLoader('posts/*.md', {
@@ -75,7 +65,7 @@ export default createContentLoader('posts/*.md', {
       excerpt,
       created: formatDate(frontmatter.created),
       lastModified: formatDate(frontmatter.last_modified),
-      readingInfo: calculateReadingTime(src),
+      readingTime: calculateReadingTime(src),
     }))
       .sort((a, b) => b.created.raw.getTime() - a.created.raw.getTime())
   },

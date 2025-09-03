@@ -26,6 +26,10 @@ defineProps<{
   >
     <a
       un-inline-block
+      un-max-w-full
+      un-whitespace-nowrap
+      un-text-ellipsis
+      un-overflow-hidden
       :href="href"
     >
       {{ text }}
