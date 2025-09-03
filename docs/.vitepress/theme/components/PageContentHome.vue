@@ -1,19 +1,31 @@
 <script setup lang="ts">
 import type { Data } from '../src/posts.data'
+import { meta } from '@babel/eslint-parser'
 import { onMounted, ref, watch } from 'vue'
 import { data as posts } from '../src/posts.data'
 import LinkUnderline from './LinkUnderline.vue'
 
-function metaStrings(post: Data) {
-  return [
-    post.created.formattedString,
-    `${post.readingTime} 分钟`,
-  ]
+function formatDate(post: Data) {
+  return new Date(post.created.raw).toLocaleDateString('zh-CN', {
+    month: 'long',
+    day: 'numeric',
+  })
 }
 
 const categories: string[] = ['全', ...new Set(posts.map(post => post.frontmatter.category))]
-const excerptVisible = ref(Object.fromEntries(categories.map(category => [category, false])),
-)
+const excerptVisible = ref(Object.fromEntries(categories.map(category => [category, false])))
+
+const chinese = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '○']
+const digits = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+
+function getAllYears(posts: Data[]) {
+  return Array.from(
+    new Set(posts.map(post =>
+      new Date(post.created.raw)
+        .getFullYear(),
+    )),
+  )
+}
 
 onMounted(() => {
   const handleScroll = (el: HTMLElement) => {
@@ -253,44 +265,73 @@ onMounted(() => {
       </div>
     </div>
     <div
-      un-py-10
       un-flex="~ col"
-      un-gap-4
       un-items-end
+      un-w-full
     >
       <div
-        v-for="post in posts.filter(post => category === '全' ? posts : post.frontmatter.category === category)"
-        :key="post.url"
-        un-p-2
+        v-for="year in getAllYears(posts.filter(post => category === '全' ? posts : post.frontmatter.category === category))"
+        :key="year"
+        un-py-10
         un-flex="~ col"
-        un-gap-2
-        un-items-end
-        un-max-w-full
+        un-gap-4
+        un-w-full
       >
-        <LinkUnderline
-          :href="post.url"
-          :text="post.frontmatter.title"
-          un-text="neutral-700 dark:neutral-300 hover:neutral-950 dark:hover:neutral-50 2xl"
-          un-before="bg-emerald-600 dark:bg-emerald-600/80"
-          un-text-align="right"
-        />
-        <p
-          v-show="excerptVisible[category]"
-          un-text-neutral-500
-          v-html="post.excerpt"
-        />
         <div
-          un-text-neutral-500
-          un-flex
-          un-gap-5
-          un-text-sm
+          un-text-3xl
+          un-text="neutral-600 dark:neutral-400 2xl"
+          un-sticky
+          un-top-50
+          style="writing-mode: vertical-lr;"
+          un-z-2
+          un-w-max
+        >
+          {{ year.toString().replace(/\d/g, match => chinese[digits.indexOf(match)]) }}
+        </div>
+        <div
+          v-for="post in posts.filter(post => new Date(post.created.raw).getFullYear() === year).filter(post => category === '全' ? posts : post.frontmatter.category === category)"
+          :key="post.url"
+          un-p-2
+          un-ml-10
+          un-flex="~ col"
+          un-gap-2
+          un-items-end
+          un-relative
         >
           <div
-            v-for="metaString in metaStrings(post)"
-            :key="metaString"
+            un-flex="~ row"
+            un-items-center
+            un-max-w-full
           >
-            {{ metaString }}
+            <div
+              un-text="neutral-500 dark:neutral-400 base"
+              un-mr-2
+              un-whitespace-nowrap
+            >
+              {{ formatDate(post) }}
+            </div>
+            <LinkUnderline
+              :href="post.url"
+              :text="post.frontmatter.title"
+              :tooltip="true"
+              :tooltip-addons="[`约${post.readingTime.toString()}分钟`]"
+              un-text="neutral-700 dark:neutral-300 hover:neutral-950 dark:hover:neutral-50 2xl"
+              un-before="bg-emerald-600 dark:bg-emerald-600/80"
+              un-text-align="right"
+            />
           </div>
+
+          <p
+            v-show="excerptVisible[category]"
+            un-text-neutral-500
+            v-html="post.excerpt"
+          />
+          <div
+            un-text-neutral-500
+            un-flex
+            un-gap-5
+            un-text-sm
+          />
         </div>
       </div>
     </div>
