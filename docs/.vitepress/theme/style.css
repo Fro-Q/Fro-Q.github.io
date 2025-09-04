@@ -481,6 +481,7 @@ html {
 
     & img {
       --uno: 'border border-neutral-300 dark:border-neutral-700';
+      --uno: 'mx-auto';
     }
 
     & figcaption {
