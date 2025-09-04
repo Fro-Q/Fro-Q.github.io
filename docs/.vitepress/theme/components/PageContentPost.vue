@@ -54,6 +54,7 @@ const prevPost = computed(() => {
       un-flex
       un-gap-5
       un-justify-end
+      un-items-center
     >
       <div
         v-for="metaString in metaStrings"
@@ -69,7 +70,7 @@ const prevPost = computed(() => {
           un-inline-block
           un-text="neutral-500 dark:neutral-400"
         />
-        <span id="vercount_value_page_pv">Loading</span>
+        <span id="vercount_value_page_pv">_</span>
       </div>
     </div>
     <Content
