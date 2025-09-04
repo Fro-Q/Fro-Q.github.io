@@ -98,6 +98,7 @@ onMounted(() => {
       un-text-ellipsis
       un-overflow-hidden
       :href="href"
+      class="markdown-rendered"
       v-html="renderMdInline(text)"
     />
     <div
@@ -121,7 +122,8 @@ onMounted(() => {
         un-flex="~ col"
       >
         <div
-          v-html="tooltipText"
+          class="markdown-rendered"
+          v-html="renderMdInline(tooltipText)"
         />
         <slot
           name="tooltipAddons"

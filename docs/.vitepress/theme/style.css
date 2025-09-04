@@ -38,6 +38,11 @@ html {
   /* font size and line height */
   --uno: 'text-base/10';
   --uno: 'py-10';
+}
+
+#content,
+.markdown-rendered {
+
 
   & p {
     /* vertical margin for paragraphs */
@@ -103,7 +108,8 @@ html {
   }
 
   /* inline code */
-  & :not(pre)>code {
+  & :not(pre)>code,
+  &>code {
     --uno: 'px-1';
     --uno: 'bg-neutral-200/50 dark:bg-neutral-800/50';
     --uno: 'text-neutral-500';

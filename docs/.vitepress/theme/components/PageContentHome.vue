@@ -42,12 +42,7 @@ onMounted(() => {
         return
       }
 
-      console.warn('wrapper width', fullWidth)
-
       const percentage = Math.min(1, Math.max(0, (scrollY - wrapperOffsetY) / Math.max(0, categoryWrapper.offsetHeight - windowHeight)))
-
-      console.warn('percentage', percentage)
-      console.warn('bar width', `${percentage * fullWidth}px`)
       el.style.setProperty('--progress-bar-width', `${percentage * fullWidth}px`)
     }
   }
@@ -147,8 +142,8 @@ onMounted(() => {
           un-w-full
           un-h-2px
           un-absolute
-          un-bottom-0
           un-z-0
+          un-bottom-0
         />
       </div>
       <h2
@@ -292,8 +287,7 @@ onMounted(() => {
           style="writing-mode: vertical-lr;"
           un-z-2
           un-w-fit
-          un-p-0
-          un-m-0
+          un-px-2
         >
           {{ year.toString().replace(/\d/g, match => chinese[digits.indexOf(match)]) }}
         </div>
@@ -301,7 +295,7 @@ onMounted(() => {
           v-for="post in posts.filter(post => new Date(post.created.raw).getFullYear() === year).filter(post => category === '全' ? posts : post.frontmatter.category === category)"
           :key="post.url"
           un-p-2
-          un-ml-10
+          un-ml-12
           un-flex="~ col"
           un-gap-2
           un-items-end
@@ -340,10 +334,10 @@ onMounted(() => {
               </template>
             </LinkUnderline>
           </div>
-
           <div
             v-show="excerptVisible[category]"
             un-text-neutral-500
+            class="markdown-rendered"
             v-html="post.excerpt?.replace(/<p>|<\/p>/g, '')"
           />
           <div

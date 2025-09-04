@@ -58,6 +58,7 @@ const prevPost = computed(() => {
       un-my-10
       un-text="5xl/relaxed"
       un-max-w-full
+      class="markdown-rendered"
       v-html="renderMdInline(post.frontmatter.title)"
     />
     <div
