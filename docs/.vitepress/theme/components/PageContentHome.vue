@@ -286,8 +286,7 @@ onMounted(() => {
           un-top-50
           style="writing-mode: vertical-lr;"
           un-z-2
-          un-w-fit
-          un-px-4
+          un-w-10
         >
           {{ year.toString().replace(/\d/g, match => chinese[digits.indexOf(match)]) }}
         </div>
