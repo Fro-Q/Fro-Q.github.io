@@ -111,9 +111,9 @@ html {
   & :not(pre)>code,
   &>code {
     --uno: 'px-1';
-    --uno: 'bg-neutral-200/50 dark:bg-neutral-800/50';
-    --uno: 'text-neutral-500';
-    --uno: 'border border-neutral-300 dark:border-neutral-700';
+    --uno: 'bg-teal-200/20 dark:bg-teal-800/20';
+    --uno: 'text-teal-600 dark:text-teal-400';
+    --uno: 'text-0.8em';
     --uno: 'rounded-sm';
   }
 
