@@ -2,6 +2,7 @@
 import mediumZoom from 'medium-zoom'
 import { useRoute } from 'vitepress'
 import { nextTick, onMounted, watch } from 'vue'
+import ButtonVerticalNavigation from './components/ButtonVerticalNavigation.vue'
 import PageContent from './components/PageContent.vue'
 import PageFooter from './components/PageFooter.vue'
 import PageLogo from './components/PageLogo.vue'
@@ -37,5 +38,9 @@ watch(
     <PageNav />
     <PageContent />
     <PageFooter />
+    <ButtonVerticalNavigation
+      un-hidden
+      un-md:flex
+    />
   </div>
 </template>

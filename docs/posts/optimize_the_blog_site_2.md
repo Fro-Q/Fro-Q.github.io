@@ -42,3 +42,7 @@ last_modified: 2025-09-03 15:28
 简单地在页脚加上署名：
 
 ![署名](optimize_the_blog_site_2_assets/ATTCH_1756946549074.png)
+
+## 回到顶部 / 去到底部
+
+也是很简单的东西，不过多解释：
