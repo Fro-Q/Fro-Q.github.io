@@ -1,8 +1,19 @@
 <script setup lang="ts">
+import MarkdownIt from 'markdown-it'
+import MarkdownItMathjax3 from 'markdown-it-mathjax3'
 import { useData } from 'vitepress'
 import { computed } from 'vue'
 import { data as posts } from '../src/posts.data'
 import LinkUnderline from './LinkUnderline.vue'
+
+function renderMdInline(text: string | undefined) {
+  if (!text) {
+    return ''
+  }
+  const md = new MarkdownIt()
+    .use(MarkdownItMathjax3)
+  return md.renderInline(text)
+}
 
 const { frontmatter } = useData()
 
@@ -47,9 +58,8 @@ const prevPost = computed(() => {
       un-my-10
       un-text="5xl/relaxed"
       un-max-w-full
-    >
-      {{ frontmatter.title }}
-    </div>
+      v-html="renderMdInline(post.frontmatter.title)"
+    />
     <div
       un-flex
       un-gap-5

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import MarkdownIt from 'markdown-it'
+import MarkdownItMathjax3 from 'markdown-it-mathjax3'
 import { nextTick, onMounted, reactive, ref } from 'vue'
 
 const props = defineProps<{
@@ -17,6 +19,15 @@ const tooltipStyle = reactive({
   left: '0px',
   top: '0px',
 })
+
+function renderMdInline(text: string | undefined) {
+  if (!text) {
+    return ''
+  }
+  const md = new MarkdownIt()
+    .use(MarkdownItMathjax3)
+  return md.renderInline(text)
+}
 
 async function updateTooltipPosition(e: MouseEvent) {
   if (!props.tooltip) {
@@ -87,9 +98,8 @@ onMounted(() => {
       un-text-ellipsis
       un-overflow-hidden
       :href="href"
-    >
-      {{ text }}
-    </a>
+      v-html="renderMdInline(text)"
+    />
     <div
       v-if="showTooltip && tooltip"
       ref="tooltipRef"
@@ -110,9 +120,9 @@ onMounted(() => {
       <div
         un-flex="~ col"
       >
-        <div>
-          {{ tooltipText }}
-        </div>
+        <div
+          v-html="tooltipText"
+        />
         <slot
           name="tooltipAddons"
         />

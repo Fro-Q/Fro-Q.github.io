@@ -6,8 +6,10 @@
     "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
+    "@types/markdown-it": "^14.1.2",
     "@unocss/reset": "66.1.0-beta.3",
     "eslint": "^9.33.0",
+    "markdown-it": "^14.1.0",
     "medium-zoom": "^1.1.0",
     "vue": "^3.5.19",
     "vue-i18n": "^11.1.11"

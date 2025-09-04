@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { Data } from '../src/posts.data'
-import { meta } from '@babel/eslint-parser'
 import { onMounted, ref, watch } from 'vue'
 import { data as posts } from '../src/posts.data'
 import LinkUnderline from './LinkUnderline.vue'
@@ -292,7 +291,9 @@ onMounted(() => {
           un-top-50
           style="writing-mode: vertical-lr;"
           un-z-2
-          un-w-max
+          un-w-fit
+          un-p-0
+          un-m-0
         >
           {{ year.toString().replace(/\d/g, match => chinese[digits.indexOf(match)]) }}
         </div>
@@ -340,10 +341,10 @@ onMounted(() => {
             </LinkUnderline>
           </div>
 
-          <p
+          <div
             v-show="excerptVisible[category]"
             un-text-neutral-500
-            v-html="post.excerpt"
+            v-html="post.excerpt?.replace(/<p>|<\/p>/g, '')"
           />
           <div
             un-text-neutral-500

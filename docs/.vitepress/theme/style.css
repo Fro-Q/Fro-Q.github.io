@@ -169,6 +169,7 @@ html {
       /* diff */
       &.diff {
         --uno: 'before:(absolute -translate-x-5)';
+        --uno: 'h-max';
 
         &.add {
           --uno: 'bg-green-500/10 dark:bg-green-500/10';
