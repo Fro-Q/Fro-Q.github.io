@@ -7,6 +7,7 @@ import markdownItFootnote from 'markdown-it-footnote'
 import markdownItHashtag from 'markdown-it-hashtag'
 import markdownItFigures from 'markdown-it-implicit-figures'
 import markdownItMark from 'markdown-it-mark'
+import markdownRuby from 'markdown-it-ruby'
 import UnoCSS from 'unocss/vite'
 import { defineConfig } from 'vitepress'
 // https://vitepress.dev/reference/site-config
@@ -53,6 +54,7 @@ export default defineConfig({
         .use(markdownItFigures, {
           figcaption: true,
         })
+        .use(markdownRuby)
     },
   },
 })
