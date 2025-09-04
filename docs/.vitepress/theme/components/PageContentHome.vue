@@ -33,18 +33,23 @@ onMounted(() => {
     if (categoryWrapper) {
       const scrollY = window.scrollY
       const wrapperOffsetY = categoryWrapper.offsetTop
-      const wrapperWidth = categoryWrapper.offsetWidth
+      const fullWidth = el.offsetWidth
       const windowHeight = window.innerHeight
 
       // if the height of the category wrapper is less than the height of the window,
       // then the progress bar should be 100%
       if (categoryWrapper.offsetHeight <= windowHeight) {
-        el.style.setProperty('--progress-bar-width', `${wrapperWidth}px`)
+        el.style.setProperty('--progress-bar-width', `${fullWidth}px`)
         return
       }
 
+      console.warn('wrapper width', fullWidth)
+
       const percentage = Math.min(1, Math.max(0, (scrollY - wrapperOffsetY) / Math.max(0, categoryWrapper.offsetHeight - windowHeight)))
-      el.style.setProperty('--progress-bar-width', `${percentage * wrapperWidth}px`)
+
+      console.warn('percentage', percentage)
+      console.warn('bar width', `${percentage * fullWidth}px`)
+      el.style.setProperty('--progress-bar-width', `${percentage * fullWidth}px`)
     }
   }
 
@@ -54,10 +59,12 @@ onMounted(() => {
       if (entry.isIntersecting) {
         // add scroll event listener when the element enters the viewport
         document.addEventListener('scroll', () => handleScroll(el))
+        window.addEventListener('resize', () => handleScroll(el))
       }
       else {
         // remove scroll event listener when the element leaves the viewport
         document.removeEventListener('scroll', () => handleScroll(el))
+        window.removeEventListener('resize', () => handleScroll(el))
       }
       handleScroll(el)
     })
@@ -95,11 +102,12 @@ onMounted(() => {
             un-appearance-none
             un-rounded-none
             un-bg-transparent
-            un-shadow="emerald-500 [0px_2px_0px_0px]"
+            un-border-b="2px emerald-600 dark:emerald-400"
             un-outline-none
             un-text-center
             un-font-thin
-            un-inline
+            un-inline-block
+            un-max-w-full
             un-relative
             autocomplete="off"
             maxlength="10"

@@ -4,8 +4,11 @@ import SvgFroqLogo from './SvgFroqLogo.vue'
 
 <template>
   <div
-    un-fixed
+    un-absolute
     un-m-4
+    un-top-0
+    un-z-100
+    un-md-fixed
   >
     <a
       class="group"

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { onMounted, ref, triggerRef } from 'vue'
-import SvgFroqLogo from './SvgFroqLogo.vue'
 
 const htmlEl: HTMLElement = document.querySelector('html')!
 

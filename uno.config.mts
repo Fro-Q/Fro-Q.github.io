@@ -14,6 +14,12 @@ const safeIcons = contacts.map(c => c.iconUno)
 const safeColors = contacts.map(c => c.colorUno)
 
 export default defineConfig({
+  theme: {
+    breakpoints: {
+      sm: '600px',
+      md: '900px',
+    },
+  },
   safelist: [
     ...safeIcons,
     ...safeColors.map(c => `border-${c}-500`),
@@ -28,7 +34,7 @@ export default defineConfig({
     },
   },
   shortcuts: {
-    'page-content': 'mx-auto max-w-[700px] block',
+    'page-content': 'mx-auto max-w-[800px] block px-10 min-w-0',
   },
   presets: [
     presetMini(),

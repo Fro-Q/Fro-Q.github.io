@@ -25,13 +25,6 @@ watch(
   () => route.path,
   () => nextTick(() => initZoom()),
 )
-
-onMounted(() => {
-  const script = document.createElement('script')
-  script.defer = true
-  script.src = 'https://events.vercount.one/js'
-  document.body.appendChild(script)
-})
 </script>
 
 <template>

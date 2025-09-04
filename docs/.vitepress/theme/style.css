@@ -20,8 +20,9 @@
 
 html {
   font-family: 'YshiPenShutiTC', 'QiushuiShotaiTC', 'FusionKai J', 'Lxgw WenKai Mono';
-  font-size: 20px;
-  scroll-behavior: smooth;
+  /* font-size: 20px; */
+  --uno: 'text-12px sm:text-16px md:text-20px';
+  /* scroll-behavior: smooth; */
   /* smooth */
   --uno: 'antialiased';
 
