@@ -61,6 +61,16 @@ const prevPost = computed(() => {
       >
         {{ metaString }}
       </div>
+      <div
+        un-flex="~ row"
+        un-items-center
+      >
+        <un-i-ph-eye-duotone
+          un-inline-block
+          un-text="neutral-500 dark:neutral-400"
+        />
+        <span id="vercount_value_page_pv">Loading</span>
+      </div>
     </div>
     <Content
       id="content"
