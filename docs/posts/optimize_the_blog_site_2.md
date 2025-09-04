@@ -34,3 +34,11 @@ last_modified: 2025-09-03 15:28
 中加入可选的属性来记录这篇文章所属的系列，
 并优先通过这个属性来确定同系列的上一篇和下一篇文章。
 这里我用了 `series` 这个属性来做。
+
+![上/下一篇](optimize_the_blog_site_2_assets/ATTCH_1756890393034.png)
+
+## 页脚
+
+简单地在页脚加上署名：
+
+![署名](optimize_the_blog_site_2_assets/ATTCH_1756946549074.png)
