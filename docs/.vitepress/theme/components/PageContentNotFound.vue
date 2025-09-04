@@ -1,21 +1,22 @@
 <script setup lang="ts">
 import type { Data } from '../src/posts.data'
 import { data as posts } from '../src/posts.data'
+import LinkUnderline from './LinkUnderline.vue'
 
 const randomPosts = posts.sort(() => Math.random() - 0.5).slice(0, 3)
 
-function metaStrings(post: Data) {
-  return [
-    post.created.formattedString,
-    `${post.readingTime} 分钟`,
-  ]
+function formatDate(post: Data) {
+  return new Date(post.created.raw).toLocaleDateString('zh-CN', {
+    month: 'long',
+    day: 'numeric',
+  })
 }
 </script>
 
 <template>
   <h1
     un-text="align-right 400px rose-500/10"
-    un-font="serif 900"
+    un-font="900"
     un-absolute
     un-right-0
     un-bottom-0
@@ -28,73 +29,92 @@ function metaStrings(post: Data) {
     un-relative
     un-z-1
   >
-    <p
+    <div
       un-text="2xl neutral-800 dark:neutral-200"
-      un-font="serif"
       un-my-10
+      un-flex="~ row"
     >
-      How the hell did you get <span
+      您其实不应该出现在<span
         un-text-rose-500
-      >here</span>?
-    </p>
-    <p
+      >这里</span> /
+    </div>
+    <div
       un-text="2xl neutral-700 dark:neutral-300"
-      un-font="serif"
-      un-mb-10
+      un-my-10
+      un-flex="~ row"
     >
-      <a
+      如果您通过任何内部链接到达这里,请
+      <LinkUnderline
+        un-align-base
         href="/posts/get_along/"
-        un-text-emerald-500
-        un-underline="~ dotted"
-        un-hover="rotate-3 scale-105"
-        un-duration-200
-        un-inline-block
-      >Contact me</a> if you got here by an internal link.
-    </p>
-    <p
+        text="联系我"
+        un-text="emerald-500"
+        un-before="bg-emerald-600 dark:bg-emerald-400"
+      />
+    </div>
+    <div
       un-text="2xl neutral-600 dark:neutral-400"
-      un-font="serif"
-      un-mb-10
+      un-my-10
+      un-flex="~ row"
     >
-      or here are some <a
+      或者这里有一些
+      <LinkUnderline
+        un-align-base
         href="/#%E5%85%A8"
-        un-text-cyan-500
-        un-underline="~ wavy"
-        un-hover="-rotate-3 scale-115"
-        un-duration-200
-        un-inline-block
-      >posts</a> that might interest you:
-    </p>
+        text="文章"
+        un-text="cyan-500"
+        un-before="bg-cyan-600 dark:bg-cyan-600/80"
+      />
+      您可能会感兴趣:
+    </div>
     <div
       v-for="post in randomPosts"
       :key="post.url"
-      un-font-serif
-      un-py-2
+      un-p-2
+      un-ml-15
+      un-flex="~ col"
+      un-gap-2
+      un-items-end
+      un-relative
     >
-      <a
-        un-text-2xl
-        un-text="neutral-600 dark:neutral-400 hover:neutral-900 dark:hover:neutral-100"
-        un-transition-colors
-        un-duration-200
-        :href="post.url"
-      >{{ post.frontmatter.title }}</a>
-      <p
-        un-text-neutral-500
-        v-html="post.excerpt"
-      />
       <div
-        un-text-neutral-500
-        un-flex
-        un-gap-5
-        un-text-sm
+        un-flex="~ row"
+        un-items-center
+        un-max-w-full
       >
         <div
-          v-for="metaString in metaStrings(post)"
-          :key="metaString"
+          un-text="neutral-500 dark:neutral-400 base"
+          un-mr-2
+          un-whitespace-nowrap
         >
-          {{ metaString }}
+          {{ formatDate(post) }}
         </div>
+        <LinkUnderline
+          :href="post.url"
+          :text="post.frontmatter.title"
+          :tooltip="true"
+          :tooltip-text="post.frontmatter.title"
+          un-text="neutral-700 dark:neutral-300 hover:neutral-950 dark:hover:neutral-50 2xl"
+          un-before="bg-emerald-600 dark:bg-emerald-600/80"
+          un-text-align="right"
+        >
+          <template #tooltipAddons>
+            <div
+              un-flex="~ row"
+              un-text="sm neutral-600 dark:neutral-400"
+              un-justify-end
+              un-gap-5
+            >
+              {{ `约${post.readingTime.toString()}分钟` }}
+            </div>
+          </template>
+        </LinkUnderline>
       </div>
+      <div
+        un-text-neutral-500
+        class="markdown-rendered"
+        v-html="post.excerpt?.replace(/<p>|<\/p>/g, '')"
+      />
     </div>
   </un-page-content>
 </template>

@@ -1,17 +1,13 @@
 <script setup lang="ts">
 import contacts from '../src/contacts.json' with { type: 'json' }
+import LinkUnderline from './LinkUnderline.vue'
 </script>
 
 <template>
-  <un-page-content>
-    <div
-      un-my-10
-      un-text="5xl/relaxed"
-      un-font-serif
-      un-max-w-full
-    >
-      Contact Moi
-    </div>
+  <div
+    un-pt-10
+    un-text-sm
+  >
     <div
       v-for="contact in contacts"
       :key="contact.title"
@@ -61,5 +57,5 @@ import contacts from '../src/contacts.json' with { type: 'json' }
         </div>
       </div>
     </div>
-  </un-page-content>
+  </div>
 </template>

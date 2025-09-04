@@ -76,6 +76,7 @@ const prevPost = computed(() => {
     </div>
     <Content
       id="content"
+      :class="frontmatter.unstyled ? 'unstyled' : ''"
     />
     <div
       un-py-20

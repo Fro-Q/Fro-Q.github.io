@@ -340,12 +340,6 @@ onMounted(() => {
             class="markdown-rendered"
             v-html="post.excerpt?.replace(/<p>|<\/p>/g, '')"
           />
-          <div
-            un-text-neutral-500
-            un-flex
-            un-gap-5
-            un-text-sm
-          />
         </div>
       </div>
     </div>

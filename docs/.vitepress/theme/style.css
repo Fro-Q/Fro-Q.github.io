@@ -34,13 +34,13 @@ html {
   }
 }
 
-#content {
+#content:not(.unstyled) {
   /* font size and line height */
   --uno: 'text-base/10';
   --uno: 'py-10';
 }
 
-#content,
+#content:not(.unstyled),
 .markdown-rendered {
 
 
