@@ -287,7 +287,7 @@ onMounted(() => {
           style="writing-mode: vertical-lr;"
           un-z-2
           un-w-fit
-          un-px-2
+          un-px-4
         >
           {{ year.toString().replace(/\d/g, match => chinese[digits.indexOf(match)]) }}
         </div>
@@ -295,7 +295,7 @@ onMounted(() => {
           v-for="post in posts.filter(post => new Date(post.created.raw).getFullYear() === year).filter(post => category === '全' ? posts : post.frontmatter.category === category)"
           :key="post.url"
           un-p-2
-          un-ml-12
+          un-ml-15
           un-flex="~ col"
           un-gap-2
           un-items-end
