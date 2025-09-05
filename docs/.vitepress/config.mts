@@ -1,10 +1,10 @@
+import markdownItHashtag from '@fedify/markdown-it-hashtag'
 import { transformerColorizedBrackets } from '@shikijs/colorized-brackets'
 import { transformerMetaWordHighlight, transformerNotationWordHighlight } from '@shikijs/transformers'
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import { createFileSystemTypesCache } from '@shikijs/vitepress-twoslash/cache-fs'
 import anchor from 'markdown-it-anchor'
 import markdownItFootnote from 'markdown-it-footnote'
-import markdownItHashtag from 'markdown-it-hashtag'
 import markdownItFigures from 'markdown-it-implicit-figures'
 import markdownItMark from 'markdown-it-mark'
 import markdownRuby from 'markdown-it-ruby'
@@ -50,7 +50,9 @@ export default defineConfig({
       md
         .use(markdownItFootnote)
         .use(markdownItMark)
-        .use(markdownItHashtag)
+        .use(markdownItHashtag, {
+          link: (tag: string) => `/tags/${tag.substring(1)}`,
+        })
         .use(markdownItFigures, {
           figcaption: true,
         })

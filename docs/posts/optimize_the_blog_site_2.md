@@ -63,4 +63,12 @@ VitePress 通过 markdown-it 渲染 markdown 文件，
 它们并不会被渲染。
 
 这里的处理方式是通过 markdown-it 手动渲染这部分内容,
-并通过 `v-html` 将渲染好的 HTML 显示在页面上。
+并通过 `v-html` 将渲染好的 HTML 显示在页面上。 #ok #shit
+
+## 一些 markdown 样式的改进
+
+### 脚注
+
+简单做一下脚注，主要是小字体和 backref icon。
+
+![脚注](optimize_the_blog_site_2_assets/ATTCH_1757031560316.png)
