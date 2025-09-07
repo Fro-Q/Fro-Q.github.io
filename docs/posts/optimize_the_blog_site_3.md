@@ -145,7 +145,7 @@ export default createContentLoader('posts/**/*.md', {
       // ...
       tags: getTags(html, frontmatter),
     }))
-      .sort((a, b) => b.created.raw.getTime() - a.created.raw.getTime())
+    // ...
   },
 })
 ```

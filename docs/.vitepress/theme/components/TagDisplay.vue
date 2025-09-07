@@ -17,7 +17,7 @@ onClickOutside(extendedTagsRef as any, () => {
 <template>
   <div
     un-my-10
-    un-text="2xl/relaxed"
+    un-text="2xl"
     un-max-w-full
     un-flex="~ row"
     un-items-center
@@ -37,12 +37,10 @@ onClickOutside(extendedTagsRef as any, () => {
       <LinkUnderline
         :href="`/tags/${tag}`"
         :text="tag.split('/').pop()"
-        :tooltip="true"
-        :tooltip-text="tag"
         :un-text="index === currentTagHierarchy.length - 1
           ? `neutral-700 dark:neutral-300 hover:neutral-950 dark:hover:neutral-50`
           : `neutral-500 hover:neutral-950 dark:hover:neutral-50`"
-        un-before="bg-emerald-600 dark:bg-emerald-600/80"
+        un-before="bg-sky-400 dark:bg-sky-600"
       />
       <span
         v-if="index < currentTagHierarchy.length - 1"
@@ -51,18 +49,20 @@ onClickOutside(extendedTagsRef as any, () => {
         /
       </span>
     </template>
-    <span
-      un-inline-block
-      un-relative
-    >
-      /
-    </span>
+
     <div
       v-if="extendedTagsForCurrentTag.length > 0"
       un-relative
       un-inline-block
       un-ml-2
     >
+      <span
+        un-inline-block
+        un-relative
+        un-text="neutral-500"
+      >
+        /
+      </span>
       <span
         un-cursor-pointer
         un-text="neutral-500 hover:neutral-950 dark:hover:neutral-50"
@@ -74,14 +74,12 @@ onClickOutside(extendedTagsRef as any, () => {
         v-if="showExtendedTags"
         ref="extendedTagsRef"
         un-absolute
-        un-z-10
-        un-bg="white dark:neutral-800"
-        un-shadow-lg
-        un-rounded
-        un-p-4
-        un-top-full
-        un-left-0
-        un-mt-2
+        un-z-20
+        un-bg="neutral-100 dark:neutral-900"
+        un-border="~ neutral-300 dark:neutral-700"
+        un-rounded-sm
+        un-text-base
+        un-p-2
         un-min-w-max
       >
         <div
@@ -89,12 +87,21 @@ onClickOutside(extendedTagsRef as any, () => {
           :key="tag"
           un-py-1
         >
-          <LinkUnderline
+          <!-- <LinkUnderline
             :href="`/tags/${tag}`"
-            :text="tag"
+            :text="`.../${tag.replace(`${currentTagHierarchy.map(tag => tag.split('/').pop()).join('/')}/`, '')}`"
             un-text="neutral-700 dark:neutral-300 hover:neutral-950 dark:hover:neutral-50"
             un-before="bg-emerald-600 dark:bg-emerald-600/80"
-          />
+          /> -->
+          ./<a
+            :href="`/tags/${tag}`"
+            un-transition
+            un-duration-200
+            un-text="neutral-500 hover:neutral-950 dark:hover:neutral-50"
+            un-underline="~ px neutral-500 hover:neutral-950 dark:hover:neutral-50"
+          >
+            {{ `${tag.replace(`${currentTagHierarchy.map(tag => tag.split('/').pop()).join('/')}/`, '')}` }}
+          </a>
         </div>
       </div>
     </div>

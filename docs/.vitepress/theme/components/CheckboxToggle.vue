@@ -4,6 +4,7 @@ import { computed } from 'vue'
 const props = defineProps<{
   id: string
   modelValue: boolean
+  modelText?: string
 }>()
 
 const emit = defineEmits(['update:modelValue'])
@@ -66,7 +67,7 @@ const isChecked = computed({
           显示
         </span>
       </div>
-      摘要
+      {{ modelText }}
     </label>
   </div>
 </template>

@@ -14,7 +14,6 @@ export interface Data {
   readingTime: number
   tagsExtended: string[]
   tags: string[]
-  html?: string
 }
 
 declare const data: Data[]

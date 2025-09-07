@@ -20,6 +20,7 @@ const postsToShow = {
 }
 
 // Reactive state to control the visibility of post excerpts for each category.
+// Reactive state to control the visibility of post excerpts for each category.
 const excerptVisible = ref({
   在此: false,
   更深处: false,
