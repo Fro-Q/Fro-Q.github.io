@@ -18,6 +18,8 @@ last_modified: 2024-04-24 03:55
 
 [[toc]]
 
+#quotation/prose #absurdism #camus
+
 ## 2024 / 03 / 08
 
 > 哦，我的灵魂并不向往不朽，而是要穷尽可能之地

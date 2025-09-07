@@ -4,6 +4,8 @@ import LinkUnderline from './LinkUnderline.vue'
 
 <template>
   <un-page-content
+    un-bottom-0
+    un-absolute
     un-py-10
   >
     <p

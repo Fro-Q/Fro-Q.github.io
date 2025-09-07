@@ -1,3 +1,5 @@
+import extractorMdc from '@unocss/extractor-mdc'
+
 import {
   defineConfig,
   presetAttributify,
@@ -12,7 +14,6 @@ import contacts from './docs/.vitepress/theme/src/contacts.json' with { type: 'j
 
 const safeIcons = contacts.map(c => c.iconUno)
 const safeColors = contacts.map(c => c.colorUno)
-
 export default defineConfig({
   theme: {
     breakpoints: {
@@ -29,7 +30,7 @@ export default defineConfig({
   content: {
     pipeline: {
       include: [
-        /\.(vue|svelte|[jt]sx|mdx?|astro|elm|php|phtml|html|css)($|\?)/,
+        /\.(vue|svelte|[jt]sx|mdx?|astro|elm|php|phtml|html|css|)($|\?)/,
       ],
     },
   },
@@ -62,4 +63,7 @@ export default defineConfig({
     components: 1,
     utilities: 2,
   },
+  extractors: [
+    extractorMdc(),
+  ],
 })

@@ -341,6 +341,134 @@ onMounted(() => {
             v-html="post.excerpt?.replace(/<p>|<\/p>/g, '')"
           />
         </div>
+        <-center
+        >
+        <input
+          :id="`${category}-excerpt`"
+          v-model="excerptVisible[category]"
+          type="checkbox"
+          un-appearance-none
+          un-w-4
+          un-h-4
+          un-rounded-sm
+          un-relative
+          un-transition
+          un-border="px neutral-600"
+          un-before="transition content-empty bg-neutral-800 dark:bg-neutral-200 w-2 h-2 scale-0 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-none"
+          un-checked="border-neutral-600 dark:border-neutral-400 before:scale-100"
+          un-hover="border-neutral-800 dark:border-neutral-200 before:scale-20 checked:before:scale-100"
+        >
+        <label
+          :for="`${category}-excerpt`"
+          un-ml-2
+          un-text="neutral-600 dark:neutral-400 base"
+          un-block
+          un-flex="~ row"
+          un-items-center
+        >
+          已
+          <div>
+            <span
+              un-inline-block
+              un-transition-all
+              un-duration-400
+              un-text="rose-600 dark:rose-400"
+              :un-translate-y="excerptVisible[category] ? '100%' : '0'"
+              :un-opacity="excerptVisible[category] ? '0' : '100'"
+              un-absolute
+            >
+              隐藏
+            </span>
+            <span
+              un-inline-block
+              un-transition-all
+              un-duration-400
+              un-text="emerald-600 dark:emerald-400"
+              :un-translate-y="excerptVisible[category] ? '0' : '-100%'"
+              :un-opacity="excerptVisible[category] ? '100' : '0'"
+            >
+              显示
+            </span>
+          </div>
+          摘要
+        </label>
+      </div>
+    </div>
+    <div
+      un-flex="~ col"
+      un-items-end
+      un-w-full
+    >
+      <div
+        v-for="year in getAllYears(posts.filter(post => category === '全' ? posts : post.frontmatter.category === category))"
+        :key="year"
+        un-py-10
+        un-flex="~ col"
+        un-gap-4
+        un-w-full
+      >
+        <div
+          un-text-3xl
+          un-text="neutral-600 dark:neutral-400 2xl"
+          un-sticky
+          un-top-50
+          style="writing-mode: vertical-lr;"
+          un-z-2
+          un-w-fit
+          un-px-4
+        >
+          {{ year.toString().replace(/\d/g, match => chinese[digits.indexOf(match)]) }}
+        </div>
+        <div
+          v-for="post in posts.filter(post => new Date(post.created.raw).getFullYear() === year).filter(post => category === '全' ? posts : post.frontmatter.category === category)"
+          :key="post.url"
+          un-p-2
+          un-ml-15
+          un-flex="~ col"
+          un-gap-2
+          un-items-end
+          un-relative
+        >
+          <div
+            un-flex="~ row"
+            un-items-center
+            un-max-w-full
+          >
+            <div
+              un-text="neutral-500 dark:neutral-400 base"
+              un-mr-2
+              un-whitespace-nowrap
+            >
+              {{ formatDate(post) }}
+            </div>
+            <LinkUnderline
+              :href="post.url"
+              :text="post.frontmatter.title"
+              :tooltip="true"
+              :tooltip-text="post.frontmatter.title"
+              un-text="neutral-700 dark:neutral-300 hover:neutral-950 dark:hover:neutral-50 2xl"
+              un-before="bg-emerald-600 dark:bg-emerald-600/80"
+              un-text-align="right"
+            >
+              <template #tooltipAddons>
+                <div
+                  un-flex="~ row"
+                  un-text="sm neutral-600 dark:neutral-400"
+                  un-justify-end
+                  un-gap-5
+                >
+                  {{ `约${post.readingTime.toString()}分钟` }}
+                </div>
+              </template>
+            </LinkUnderline>
+          </div>
+          <div
+            v-show="excerptVisible[category]"
+            un-text-neutral-500
+            class="markdown-rendered"
+            v-html="post.excerpt?.replace(/<p>|<\/p>/g, '')"
+          />
+        </div>
       </div>
     </div>
   </un-page-content>

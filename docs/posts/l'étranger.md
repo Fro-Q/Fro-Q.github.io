@@ -18,6 +18,8 @@ last_modified: 2023-12-30 13:44
 
 [[toc]]
 
+#quotation/novel #absurdism #camus
+
 ## 2022 / 04 / 06
 
 > 其实说这个毫无意义，反正，人总得有点什么错。

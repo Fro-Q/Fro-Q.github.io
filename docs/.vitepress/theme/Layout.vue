@@ -33,14 +33,15 @@ watch(
     un-min-h-100vh
     un-bg="neutral-50 dark:neutral-950"
     un-text="neutral-700 dark:neutral-300"
+    un-relative
   >
     <PageLogo />
     <PageNav />
-    <PageContent />
-    <PageFooter />
+    <PageContent :key="route.path" />
     <ButtonVerticalNavigation
       un-hidden
       un-md:flex
     />
+    <PageFooter />
   </div>
 </template>

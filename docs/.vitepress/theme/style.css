@@ -150,7 +150,7 @@ html {
 
     /* line notation style */
     & .line {
-      --uno: 'inline-block w-[calc(100%+4rem)] h-4';
+      --uno: 'inline-block w-[calc(100%+4rem)] h-max';
       --uno: '-mx-8 px-8';
 
       /* highlighted line */
@@ -254,7 +254,7 @@ html {
 
         & .line-number {
           --uno: 'inline-block';
-          --uno: 'h-20px';
+          --uno: 'h-4';
         }
       }
     }
@@ -475,10 +475,6 @@ html {
     --uno: "z-1";
   }
 
-  & a .hash {
-    --uno: "hidden";
-  }
-
   & a .tag {
     --uno: "relative";
     --uno: "px-1";
@@ -609,4 +605,14 @@ mjx-container.MathJax svg {
     --uno: 'border border-neutral-300 dark:border-neutral-700';
     --uno: 'rounded-sm';
   }
+}
+
+.hover-backdrop-blur {
+  &:hover {
+    backdrop-filter: blur(10px);
+  }
+}
+
+.backdrop-blur {
+  backdrop-filter: blur(10px);
 }

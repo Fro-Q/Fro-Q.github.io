@@ -1,54 +1,44 @@
 <script setup lang="ts">
-import MarkdownIt from 'markdown-it'
-import MarkdownItMathjax3 from 'markdown-it-mathjax3'
 import { useData } from 'vitepress'
 import { computed } from 'vue'
+import { renderMdInline } from '../../utils/renderMdInline'
 import { data as posts } from '../src/posts.data'
 import LinkUnderline from './LinkUnderline.vue'
 
-function renderMdInline(text: string | undefined) {
-  if (!text) {
-    return ''
-  }
-  const md = new MarkdownIt()
-    .use(MarkdownItMathjax3)
-  return md.renderInline(text)
-}
-
 const { frontmatter } = useData()
 
-const post = posts.filter(post => post.frontmatter.title === frontmatter.value.title)[0]
+const post = computed(() => posts.filter(post => post.frontmatter.title === frontmatter.value.title)[0])
 
 const metaStrings = [
-  new Date(post.created.raw).toLocaleDateString('zh-CN', {
+  new Date(post.value.created.raw).toLocaleDateString('zh-CN', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   }),
-  `约${post.readingTime}分钟`,
+  `约${post.value.readingTime}分钟`,
 ]
 
 const pool = computed(() => {
-  let _ = posts.filter(p => p.frontmatter.category === post.frontmatter.category)
-  if (post.frontmatter.series) {
-    _ = _.filter(p => p.frontmatter.series === post.frontmatter.series)
+  let _ = posts.filter(p => p.frontmatter.category === post.value.frontmatter.category)
+  if (post.value.frontmatter.series) {
+    _ = _.filter(p => p.frontmatter.series === post.value.frontmatter.series)
   }
 
   return _
 })
 
 const nextPost = computed(() => {
-  if (pool.value.indexOf(post) === 0) {
+  if (pool.value.indexOf(post.value) === 0) {
     return null
   }
-  return pool.value[pool.value.indexOf(post) - 1]
+  return pool.value[pool.value.indexOf(post.value) - 1]
 })
 
 const prevPost = computed(() => {
-  if (pool.value.indexOf(post) === pool.value.length - 1) {
+  if (pool.value.indexOf(post.value) === pool.value.length - 1) {
     return null
   }
-  return pool.value[pool.value.indexOf(post) + 1]
+  return pool.value[pool.value.indexOf(post.value) + 1]
 })
 </script>
 
