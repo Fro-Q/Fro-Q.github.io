@@ -1,148 +1,92 @@
 <script setup lang="ts">
 import { useData } from 'vitepress'
 import { computed } from 'vue'
+import { formatDate } from '../../utils/formatDate'
 import { renderMdInline } from '../../utils/renderMdInline'
-import { data as posts } from '../src/posts.data'
-import LinkUnderline from './LinkUnderline.vue'
+import { usePostFilters } from '../../utils/usePostFilters'
+
+import PostMetaInfo from './PostMetaInfo.vue'
+import PostNavigation from './PostNavigation.vue'
 
 const { frontmatter } = useData()
+const { findPostByTitle, getNextPost, getPrevPost, filterPostsByCategory } = usePostFilters()
 
-const post = computed(() => posts.filter(post => post.frontmatter.title === frontmatter.value.title)[0])
+/**
+ * Computed property to find the current post based on its title from frontmatter.
+ * @returns The current post object or null if not found.
+ */
+const post = computed(() => findPostByTitle(frontmatter.value.title))
 
-const metaStrings = [
-  new Date(post.value.created.raw).toLocaleDateString('zh-CN', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  }),
-  `约${post.value.readingTime}分钟`,
-]
+/**
+ * Computed property to generate meta strings for display, such as creation date and reading time.
+ * @returns An array of strings containing post metadata.
+ */
+const metaStrings = computed(() => {
+  if (!post.value)
+    return []
+  return [
+    formatDate(post.value.created.raw),
+    `约${post.value.readingTime}分钟`,
+  ]
+})
 
-const pool = computed(() => {
-  let _ = posts.filter(p => p.frontmatter.category === post.value.frontmatter.category)
+/**
+ * Computed property to create a pool of related posts for navigation.
+ * Posts are filtered by the same category and optionally by the same series.
+ * @returns An array of related post objects.
+ */
+const postPool = computed(() => {
+  if (!post.value)
+    return []
+  let filteredPosts = filterPostsByCategory(post.value.frontmatter.category)
   if (post.value.frontmatter.series) {
-    _ = _.filter(p => p.frontmatter.series === post.value.frontmatter.series)
+    filteredPosts = filteredPosts.filter(p => p.frontmatter.series === post.value!.frontmatter.series)
   }
-
-  return _
+  return filteredPosts
 })
 
+/**
+ * Computed property to determine the next post in the navigation pool.
+ * @returns The next post object or null if there is no next post.
+ */
 const nextPost = computed(() => {
-  if (pool.value.indexOf(post.value) === 0) {
+  if (!post.value)
     return null
-  }
-  return pool.value[pool.value.indexOf(post.value) - 1]
+  return getNextPost(post.value, postPool.value)
 })
 
+/**
+ * Computed property to determine the previous post in the navigation pool.
+ * @returns The previous post object or null if there is no previous post.
+ */
 const prevPost = computed(() => {
-  if (pool.value.indexOf(post.value) === pool.value.length - 1) {
+  if (!post.value)
     return null
-  }
-  return pool.value[pool.value.indexOf(post.value) + 1]
+  return getPrevPost(post.value, postPool.value)
 })
 </script>
 
 <template>
   <un-page-content>
+    <!-- Display the post title, rendered as inline markdown -->
     <div
       un-my-10
       un-text="5xl/relaxed"
       un-max-w-full
       class="markdown-rendered"
-      v-html="renderMdInline(post.frontmatter.title)"
+      v-html="post?.frontmatter.title ? renderMdInline(post.frontmatter.title) : ''"
     />
-    <div
-      un-flex
-      un-gap-5
-      un-justify-end
-      un-items-center
-    >
-      <div
-        v-for="metaString in metaStrings"
-        :key="metaString"
-      >
-        {{ metaString }}
-      </div>
-    </div>
+    <!-- Display post meta information (e.g., date, reading time) -->
+    <PostMetaInfo :meta-strings="metaStrings" />
+    <!-- Main content slot for the post -->
     <Content
       id="content"
       :class="frontmatter.unstyled ? 'unstyled' : ''"
     />
-    <div
-      un-py-20
-    >
-      <div
-        un-flex="~ row"
-      >
-        <div
-          un-text="neutral-500 dark:neutral-400 base"
-          un-mr-2
-          un-whitespace-nowrap
-        >
-          前文
-        </div>
-        <LinkUnderline
-          v-if="prevPost"
-          :href="prevPost.url"
-          :text="prevPost.frontmatter.title"
-          :tooltip="true"
-          :tooltip-text="prevPost.frontmatter.title"
-          un-text="neutral-700 dark:neutral-300 hover:neutral-950 dark:hover:neutral-50"
-          un-before="bg-emerald-600 dark:bg-emerald-600/80"
-        >
-          <template #tooltipAddons>
-            <div
-              un-flex="~ row"
-              un-text="sm neutral-600 dark:neutral-400"
-              un-justify-end
-              un-gap-5
-            >
-              {{ `约${prevPost.readingTime.toString()}分钟` }}
-            </div>
-          </template>
-        </LinkUnderline>
-        <div
-          v-else
-        >
-          没了
-        </div>
-      </div>
-      <div
-        un-flex="~ row"
-      >
-        <div
-          un-text="neutral-500 dark:neutral-400 base"
-          un-mr-2
-          un-whitespace-nowrap
-        >
-          后文
-        </div>
-        <LinkUnderline
-          v-if="nextPost"
-          :href="nextPost.url"
-          :text="nextPost.frontmatter.title"
-          :tooltip="true"
-          :tooltip-text="nextPost.frontmatter.title"
-          un-text="neutral-700 dark:neutral-300 hover:neutral-950 dark:hover:neutral-50"
-          un-before="bg-emerald-600 dark:bg-emerald-600/80"
-        >
-          <template #tooltipAddons>
-            <div
-              un-flex="~ row"
-              un-text="sm neutral-600 dark:neutral-400"
-              un-justify-end
-              un-gap-5
-            >
-              {{ `约${nextPost.readingTime.toString()}分钟` }}
-            </div>
-          </template>
-        </LinkUnderline>
-        <div
-          v-else
-        >
-          没了
-        </div>
-      </div>
-    </div>
+    <!-- Post navigation links (previous and next post) -->
+    <PostNavigation
+      :prev-post="prevPost"
+      :next-post="nextPost"
+    />
   </un-page-content>
 </template>

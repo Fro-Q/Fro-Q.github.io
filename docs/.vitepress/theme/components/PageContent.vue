@@ -6,7 +6,6 @@ import PageContentPost from './PageContentPost.vue'
 import PageContentTag from './PageContentTag.vue'
 
 const { page, frontmatter } = useData()
-const { path } = useRoute()
 </script>
 
 <template>
