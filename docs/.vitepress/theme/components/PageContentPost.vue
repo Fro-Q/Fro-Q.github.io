@@ -1,33 +1,42 @@
 <script setup lang="ts">
-import { useData } from 'vitepress'
-import { computed } from 'vue'
+import { useData, useRoute } from 'vitepress'
+import { computed, createHydrationRenderer, nextTick, onMounted, ref, render } from 'vue'
+import { data as posts } from '../../theme/src/posts.data'
 import { formatDate } from '../../utils/formatDate'
 import { renderMdInline } from '../../utils/renderMdInline'
+
 import { usePostFilters } from '../../utils/usePostFilters'
 
 import PostMetaInfo from './PostMetaInfo.vue'
 import PostNavigation from './PostNavigation.vue'
 
 const { frontmatter } = useData()
-const { findPostByTitle, getNextPost, getPrevPost, filterPostsByCategory } = usePostFilters()
+const { path } = useRoute()
+const { findPostByUrl, getNextPost, getPrevPost, filterPostsByCategory } = usePostFilters()
 
 /**
  * Computed property to find the current post based on its title from frontmatter.
  * @returns The current post object or null if not found.
  */
-const post = computed(() => findPostByTitle(frontmatter.value.title))
+const post = computed(() => {
+  // const foundPost = findPostByTitle(frontmatter.value.title)
+  const foundPost = findPostByUrl(path)
+  return foundPost
+})
 
 /**
  * Computed property to generate meta strings for display, such as creation date and reading time.
  * @returns An array of strings containing post metadata.
  */
 const metaStrings = computed(() => {
-  if (!post.value)
+  if (!post.value) {
     return []
-  return [
+  }
+  const strings = [
     formatDate(post.value.created.raw),
     `约${post.value.readingTime}分钟`,
   ]
+  return strings
 })
 
 /**
@@ -68,7 +77,6 @@ const prevPost = computed(() => {
 
 <template>
   <un-page-content>
-    <!-- Display the post title, rendered as inline markdown -->
     <div
       un-my-10
       un-text="5xl/relaxed"

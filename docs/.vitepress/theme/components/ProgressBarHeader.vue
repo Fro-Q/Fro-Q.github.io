@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { defaultDocument, useEventListener } from '@vueuse/core'
 import { onMounted, onUnmounted } from 'vue'
 
 const props = defineProps<{
@@ -32,30 +33,21 @@ onMounted(() => {
       const el = entry.target as HTMLElement
       if (entry.isIntersecting) {
         // add scroll event listener when the element enters the viewport
-        document.addEventListener('scroll', () => handleScroll(el))
-        window.addEventListener('resize', () => handleScroll(el))
+        useEventListener(window, 'scroll', () => handleScroll(el))
+        useEventListener(window, 'resize', () => handleScroll(el))
       }
       else {
         // remove scroll event listener when the element leaves the viewport
-        document.removeEventListener('scroll', () => handleScroll(el))
+        window.removeEventListener('scroll', () => handleScroll(el))
         window.removeEventListener('resize', () => handleScroll(el))
       }
       handleScroll(el)
     })
   }, { threshold: 0 }) // trigger when the element enters the viewport
 
-  const titleWrapper = document.getElementById(props.id || 'title-wrapper')
+  const titleWrapper = defaultDocument!.getElementById(props.id || 'title-wrapper')
   if (titleWrapper) {
     observer.observe(titleWrapper)
-  }
-})
-
-onUnmounted(() => {
-  // Clean up event listeners if component is unmounted
-  const titleWrapper = document.getElementById(props.id || 'title-wrapper')
-  if (titleWrapper) {
-    document.removeEventListener('scroll', () => handleScroll(titleWrapper))
-    window.removeEventListener('resize', () => handleScroll(titleWrapper))
   }
 })
 </script>

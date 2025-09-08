@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useEventListener } from '@vueuse/core'
 import { nextTick, onMounted, reactive, ref } from 'vue'
 import { renderMdInline } from '../../utils/renderMdInline'
 
@@ -55,7 +56,8 @@ async function updateTooltipPosition(e: MouseEvent) {
 }
 
 onMounted(() => {
-  document.addEventListener('scroll', () => showTooltip.value = false)
+  useEventListener(window, 'scroll', () => showTooltip.value = false)
+  useEventListener(window, 'resize', () => showTooltip.value = false)
 })
 </script>
 

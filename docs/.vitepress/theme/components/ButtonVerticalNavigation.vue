@@ -1,13 +1,14 @@
 <script setup lang="ts">
+import { defaultDocument } from '@vueuse/core'
 import { onMounted, onUnmounted, ref } from 'vue'
 
 const showBackToTop = ref(false)
 const showScrollToBottom = ref(true)
 
 function handleScroll() {
-  const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
-  const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
-  const clientHeight = document.documentElement.clientHeight || document.body.clientHeight
+  const scrollTop = defaultDocument!.documentElement.scrollTop || defaultDocument!.body.scrollTop
+  const scrollHeight = defaultDocument!.documentElement.scrollHeight || defaultDocument!.body.scrollHeight
+  const clientHeight = defaultDocument!.documentElement.clientHeight || defaultDocument!.body.clientHeight
 
   showBackToTop.value = scrollTop > 0
   showScrollToBottom.value = scrollTop + clientHeight < scrollHeight
@@ -18,7 +19,7 @@ function scrollToTop() {
 }
 
 function scrollToBottom() {
-  window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' })
+  window.scrollTo({ top: defaultDocument!.documentElement.scrollHeight, behavior: 'smooth' })
 }
 
 onMounted(() => {

@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import { defaultDocument } from '@vueuse/core'
 import mediumZoom from 'medium-zoom'
 import { useRoute } from 'vitepress'
-import { nextTick, onMounted, watch } from 'vue'
+import { nextTick, onMounted, onUpdated, ref, watch } from 'vue'
 import ButtonVerticalNavigation from './components/ButtonVerticalNavigation.vue'
 import PageContent from './components/PageContent.vue'
 import PageFooter from './components/PageFooter.vue'
 import PageLogo from './components/PageLogo.vue'
+
 import PageNav from './components/PageNav.vue'
 
 const route = useRoute()
@@ -14,7 +16,7 @@ function initZoom() {
   mediumZoom('#content figure img', {
     margin: 24,
     background: 'var(--image-mask-bg)',
-    container: document.body,
+    container: defaultDocument!.body,
   })
 }
 

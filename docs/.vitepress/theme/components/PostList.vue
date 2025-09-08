@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import type { Data } from '../src/posts.data'
+import { onMounted, ref } from 'vue'
 import { formatMonthDay } from '../../utils/formatDate'
 import { renderMdInline } from '../../utils/renderMdInline'
+
 import LinkUnderline from './LinkUnderline.vue'
 
 defineProps<{
@@ -16,9 +18,23 @@ defineProps<{
     un-items-end
     un-w-full
   >
+    <!-- Debugging Information -->
+    <div style="background-color: #f0f0f0; padding: 10px; margin-bottom: 10px; width: 100%; text-align: left;">
+      <h3>Debug: Posts Order</h3>
+      <ul style="list-style-type: none; padding: 0;">
+        <li
+          v-for="(post, index) in posts"
+          :key="index"
+        >
+          {{ index + 1 }}. {{ post.frontmatter.title }} ({{ formatMonthDay(post.created.raw) }})
+        </li>
+      </ul>
+    </div>
+    <!-- End Debugging Information -->
+
     <div
       v-for="post in posts"
-      :key="post.url"
+      :key="post.frontmatter.title"
       un-p-2
       un-ml-15
       un-flex="~ col"

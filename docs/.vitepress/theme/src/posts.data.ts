@@ -14,6 +14,7 @@ export interface Data {
   readingTime: number
   tagsExtended: string[]
   tags: string[]
+  html?: string
 }
 
 declare const data: Data[]
@@ -112,6 +113,7 @@ export default createContentLoader('posts/**/*.md', {
   render: true,
   transform(raw) {
     return raw.map(({ html, url, frontmatter, excerpt, src }) => ({
+      html,
       url,
       frontmatter,
       excerpt,

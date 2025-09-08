@@ -1,28 +1,9 @@
 <script setup lang="ts">
+import { useDark, useEventListener, useToggle } from '@vueuse/core'
 import { onMounted, ref, triggerRef } from 'vue'
 
-const htmlEl: HTMLElement = document.querySelector('html')!
-
-const darkMode = ref({
-  get state(): boolean {
-    return htmlEl.classList.contains('dark')
-  },
-
-  set state(value: boolean) {
-    if (value) {
-      htmlEl.classList.add('dark')
-    }
-    else {
-      htmlEl.classList.remove('dark')
-    }
-  },
-})
-
-onMounted(() => {
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-    triggerRef(darkMode)
-  })
-})
+const isDark = useDark()
+const toggleDark = useToggle(isDark)
 </script>
 
 <template>
@@ -61,10 +42,12 @@ onMounted(() => {
         un-text="neutral-500 hover:neutral-700 dark:hover:neutral-300"
         un-transition-colors
         un-duration-200
-        @click="darkMode.state = htmlEl.classList.contains('dark') ? false : true"
+        @click="toggleDark()"
       >
-        <un-i-ph-moon-duotone v-if="darkMode.state" />
-        <un-i-ph-sun-duotone v-else />
+        <ClientOnly>
+          <un-i-ph-moon-duotone v-if="isDark" />
+          <un-i-ph-sun-duotone v-else />
+        </ClientOnly>
       </div>
     </div>
   </nav>

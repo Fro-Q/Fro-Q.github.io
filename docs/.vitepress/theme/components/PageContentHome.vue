@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { usePostFilters } from '../../utils/usePostFilters'
-
 import LinkUnderline from './LinkUnderline.vue' // Keep LinkUnderline for category navigation
 import PostListSection from './PostListSection.vue' // Import the new PostListSection component
 

@@ -44,7 +44,7 @@ const isChecked = computed({
       un-items-center
     >
       已
-      <div>
+      <span>
         <span
           un-inline-block
           un-transition-all
@@ -66,7 +66,7 @@ const isChecked = computed({
         >
           显示
         </span>
-      </div>
+      </span>
       {{ modelText }}
     </label>
   </div>

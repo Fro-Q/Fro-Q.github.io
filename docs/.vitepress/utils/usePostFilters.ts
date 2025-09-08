@@ -74,6 +74,15 @@ export function usePostFilters() {
   }
 
   /**
+   * Finds a single post by its url from the global posts data.
+   * @param url The url of the post to find.
+   * @returns The found post or undefined if not found.
+   */
+  const findPostByUrl = (url: string): Data | undefined => {
+    return posts.find(post => post.url === url)
+  }
+
+  /**
    * Computes the next post in a given pool of posts.
    * @param currentPost The current post.
    * @param postPool The pool of posts to search within.
@@ -116,6 +125,7 @@ export function usePostFilters() {
     filterPostsByYear,
     getAllYears,
     findPostByTitle,
+    findPostByUrl,
     getNextPost,
     getPrevPost,
     allUniqueCategories,

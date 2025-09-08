@@ -19,6 +19,9 @@ export default defineConfig({
     plugins: [
       UnoCSS(),
     ],
+    define: {
+      __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'true',
+    },
   },
   vue: {
     template: {
@@ -41,7 +44,7 @@ export default defineConfig({
       dark: 'vitesse-black',
     },
     toc: {
-      level: [2, 3, 4, 5],
+      level: [2, 3, 4],
     },
     anchor: {
       permalink: anchor.permalink.headerLink(),
