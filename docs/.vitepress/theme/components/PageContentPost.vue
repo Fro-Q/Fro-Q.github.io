@@ -87,10 +87,13 @@ const prevPost = computed(() => {
     <!-- Display post meta information (e.g., date, reading time) -->
     <PostMetaInfo :meta-strings="metaStrings" />
     <!-- Main content slot for the post -->
+
     <Content
       id="content"
+      data-allow-mismatch
       :class="frontmatter.unstyled ? 'unstyled' : ''"
     />
+
     <!-- Post navigation links (previous and next post) -->
     <PostNavigation
       :prev-post="prevPost"

@@ -9,7 +9,9 @@ const { page, frontmatter } = useData()
 </script>
 
 <template>
-  <PageContentHome v-if="frontmatter.home" />
+  <ClientOnly v-if="frontmatter.home">
+    <PageContentHome />
+  </ClientOnly>
   <PageContentNotFound v-else-if="page.isNotFound" />
   <PageContentTag
     v-else-if="frontmatter.tag"
