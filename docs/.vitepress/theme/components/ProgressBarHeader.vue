@@ -32,6 +32,7 @@ onMounted(() => {
     entries.forEach((entry) => {
       const el = entry.target as HTMLElement
       if (entry.isIntersecting) {
+        console.warn('ij')
         // add scroll event listener when the element enters the viewport
         useEventListener(window, 'scroll', () => handleScroll(el))
         useEventListener(window, 'resize', () => handleScroll(el))

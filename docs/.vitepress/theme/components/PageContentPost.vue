@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useData, useRoute } from 'vitepress'
-import { computed, createHydrationRenderer, nextTick, onMounted, ref, render } from 'vue'
-import { data as posts } from '../../theme/src/posts.data'
+import { computed, nextTick, onMounted, ref, render } from 'vue'
 import { formatDate } from '../../utils/formatDate'
 import { renderMdInline } from '../../utils/renderMdInline'
 
@@ -11,8 +10,7 @@ import PostMetaInfo from './PostMetaInfo.vue'
 import PostNavigation from './PostNavigation.vue'
 
 const { frontmatter } = useData()
-const { path } = useRoute()
-const { findPostByUrl, getNextPost, getPrevPost, filterPostsByCategory } = usePostFilters()
+const { findPostByTitle, getNextPost, getPrevPost, filterPostsByCategory } = usePostFilters()
 
 /**
  * Computed property to find the current post based on its title from frontmatter.
@@ -20,7 +18,7 @@ const { findPostByUrl, getNextPost, getPrevPost, filterPostsByCategory } = usePo
  */
 const post = computed(() => {
   // const foundPost = findPostByTitle(frontmatter.value.title)
-  const foundPost = findPostByUrl(path)
+  const foundPost = findPostByTitle(frontmatter.value.title)
   return foundPost
 })
 
@@ -95,9 +93,11 @@ const prevPost = computed(() => {
     />
 
     <!-- Post navigation links (previous and next post) -->
-    <PostNavigation
-      :prev-post="prevPost"
-      :next-post="nextPost"
-    />
+    <ClientOnly>
+      <PostNavigation
+        :prev-post="prevPost"
+        :next-post="nextPost"
+      />
+    </ClientOnly>
   </un-page-content>
 </template>

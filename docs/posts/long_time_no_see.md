@@ -18,6 +18,8 @@ last_modified: 2025-01-08 07:49
 
 [[toc]]
 
+#log/dev
+
 ## 最近
 
 [上一次公众号](https://mp.weixin.qq.com/s?__biz=Mzg3Mjc2MDE2OA==&mid=2247483963&idx=1&sn=bf3d40c677e588cd9c1fdf1a23ba7144&chksm=ceeb143cf99c9d2a2746ab153396f3053c6e2f15eb42c5fc03d025eedcedf5453b209f42d21b&token=1755124329&lang=zh_CN#rd) 更新是在 4 月 5 日，关于一个辩论题略有所思。

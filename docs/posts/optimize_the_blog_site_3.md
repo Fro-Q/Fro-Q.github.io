@@ -19,6 +19,8 @@ last_modified: 2025-09-05 08:58
 
 [[toc]]
 
+#log/dev #roadmap/blog_site
+
 ## 按标签分类
 
 ### 改点东西
@@ -66,7 +68,7 @@ export default defineConfig({
 })
 ```
 
-好了，现在点击一个标签，比如 #blog/test ,
+好了，现在点击一个标签，比如 `#blog/test`,
 就会跳转到 `/tags/blog/test`。
 
 然后你就会发现你其实去了 `404`。
@@ -83,77 +85,114 @@ export default defineConfig({
 我们将在这个 `[tag].paths.ts` 文件中配置所有 `/tags/[tag]` 的路由，
 其中 `[tag]` 就是动态路由的参数，我们可以用它来筛选文章。
 
-所以我们怎么提取到各篇文章中所有的标签呢？
-我们之前在[生成文章列表](build_a_blog_site_5.md)时，
-使用构建时数据加载来对每一篇文章进行处理。
-同理，我们可以在这个过程中提取到文章中的所有标签。
+这里会出现一些问题。
+首先，我们当然需要在这个文件中写入所有存在的标签,
+我第一时间想到的是用 `posts.data.ts` 文件中的数据来做,
+因为它正好在对文章进行处理，
+应该可以比较方便地获得所有标签，
+否则还需要再对所有 markdown 文件进行一次处理。
 
-在 `posts.data.ts` 文件中，我们可以用正则来做：
+但是问题在于，`[tag].paths.ts` 是在构建时执行的。
+事实上，在经过尝试之后，
+我发现它甚至是在 VitePress 开始构建之前——或者说是独立于 VitePress 进程——
+执行的。
+[官网文档](https://vitepress.dev/guide/routing#dynamically-generating-paths)
+中也提到了，路径加载器是在 Node.js 环境中运行的。
+这导致了无法在 `[tag].paths.ts` 中获取到 `posts.data.ts` 中导出的数据，
+因为后者是一个「正宗」的构建时导出。
 
-```ts twoslash {7,13-21,23-45,49,53}
+所以这里如果不想用 hacky 的枚举法，
+可能就需要用一些 Node.js 的方法来处理文件了，
+比如 `fs` 之后正则。
+不过我还没有找到一个很优雅的方法去避免正则匹配到代码块中的 `#123`，
+所以这里还是先用枚举法了。
+
+现在再点开刚刚的链接，
+一片黑，但至少不是 404。
+
+### 获取文章的标签
+
+不过实际上，`post.data.ts` 中也需要提取标签，
+因为要根据标签对文章进行筛选。
+用正则来做：
+
+```ts
 import { createContentLoader } from 'vitepress'
 
-// ...
+// ..
 
 export interface Data {
-  // ...
+  // ..
+  tagsExtended: string[]
   tags: string[]
 }
 
-declare const data: Data[]
-export { data }
+// ...
 
-function dealTagHierarchy(tag: string): string[] {
+function dealTagHierarchy(tag: string): Set<string> {
   const tags = new Set<string>()
   const levels = tag.split('/')
   levels.forEach((_: string, i: number) => {
     tags.add(levels.slice(0, i + 1).join('/'))
   })
 
-  return Array.from(tags)
+  return tags
 }
 
-function getTags(html: string | undefined, frontmatter: Record<string, any>): string[] {
+function getTags(
+  html: string | undefined,
+  frontmatter: Record<string, any>,
+): {
+  tags: Set<string>
+  tagsExtended: Set<string>
+} {
+  let tagsExtended: Set<string> = new Set()
+  const tags: Set<string> = new Set()
+
   if (!html) {
-    return []
+    return {
+      tags,
+      tagsExtended,
+    }
   }
 
-  const tags: Set<string> = new Set()
   const tagReg = /<a href="\/tags\/[^"]*">\s*<span class="tag">(.*?)<\/span>\s*<\/a>/g
   let match: RegExpExecArray | null = tagReg.exec(html)
 
   while (match) {
     tags.add(match[1])
-    dealTagHierarchy(match[1]).forEach(tag => tags.add(tag))
+    tagsExtended = new Set([...tagsExtended, ...dealTagHierarchy(match[1])])
     match = tagReg.exec(html)
   }
 
   if (frontmatter.tags) {
-    for (const tag of frontmatter.tags) {
-      dealTagHierarchy(tag).forEach(tag => tags.add(tag))
-    }
+    frontmatter.tags.forEach((tag: string) => {
+      tags.add(tag)
+      tagsExtended = new Set([...tagsExtended, ...dealTagHierarchy(tag)])
+    })
   }
 
-  return Array.from(tags)
+  return {
+    tags,
+    tagsExtended,
+  }
 }
 
 export default createContentLoader('posts/**/*.md', {
   // ...
-  render: true,
   transform(raw) {
     return raw.map(({ html, url, frontmatter, excerpt, src }) => ({
       // ...
-      tags: getTags(html, frontmatter),
+      tags: [...getTags(html, frontmatter).tags],
+      tagsExtended: [...getTags(html, frontmatter).tagsExtended],
     }))
-    // ...
+      .sort((a, b) => b.created.raw.getTime() - a.created.raw.getTime())
   },
 })
 ```
 
-讲一下。
-首先，这里其实可以用 `src` 去匹配，它内容更少，理论上更快，
-但是我试了一下，会匹配到代码块、行内代码以及链接的锚点中的 `#`，
-我没有深入研究正则，所以这里直接用了比较 hacky 的方式。
+首先，这里用 `html` 去提取，就可以很好地避免刚刚说的问题，
+就是其实不够美丽。
 
 其次，我们需要考虑标签的层级,
 即对于 `#a/b/c` 这样的标签，需要提取出 `#a`, `#a/b`, `#a/b/c` 这三个标签。
@@ -162,28 +201,6 @@ export default createContentLoader('posts/**/*.md', {
 
 最后，我们可能会在文章的 frontmatter 中定义标签,
 这里用了相同的逻辑处理，然后加入到 `tags` 中。
-
-现在，我们可以在 `[tag].paths.ts` 文件中配置路由了：
-
-```ts
-import posts from '../.vitepress/theme/src/posts.data'
-
-export default {
-  async paths() {
-    const loadedPosts = await posts.load()
-
-    return loadedPosts
-      .map(post => post.tags)
-      .flat()
-      .map((tag) => {
-        return { params: { tag } }
-      })
-  },
-}
-```
-
-现在再点开刚刚的链接，
-一片黑，但至少不是 404。
 
 ### 页面渲染
 
@@ -235,22 +252,14 @@ const { path } = useRoute()
 <template>
   <PageContentHome v-if="frontmatter.home" />
   <PageContentNotFound v-else-if="page.isNotFound" />
-  <div
+  <PageContentTag
+    v-else-if="frontmatter.tag"
+  />
+  <PageContentPost
     v-else
-    :key="path"
-  >
-    <PageContentTag
-      v-if="frontmatter.tag"
-    />
-    <PageContentPost
-      v-else
-    />
-  </div>
+  />
 </template>
 ```
-
-这里把他们放在同一个 `<div>` 中是为了可以用 `path` 作为 `key`
-去控制[组件更新](https://vuejs.org/api/built-in-special-attributes.html#key)。
 
 简单先写一下 `PageContentTag.vue`:
 
@@ -278,6 +287,19 @@ const { params } = useData()
 
 也就是说现在来做一下 `PageContentTag.vue` 中的逻辑。
 
-先明确一下，对于一个标签，我们应该在页面上显示属于这个标签以及其子标签的文章。
-比如对于标签 `blog`，我们不仅要显示标签为 `blog` 的文章,
-同时还要显示标签为 `blog/test` 的文章。
+直接看效果：
+
+![做好的效果](optimize_the_blog_site_3_assets/ATTCH_1757314819932.gif)
+
+这里我重构了很多文件，所以就先不放代码了。
+简单说一下。
+
+首先是最上面，
+做了一个层级式的标签展示，点击上层就可以去。
+如果当前标签有下层标签，则点一下那三个点就可以展开一个下层标签列表。
+
+然后是下面的文章列表。
+展示了两部分的文章：在此处的和更深处的。
+
+这里的具体逻辑就不展开讲了。
+如果有问题可以[问我](get_along.md)。

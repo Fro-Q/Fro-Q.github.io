@@ -4,6 +4,7 @@ import { formatMonthDay } from '../../utils/formatDate'
 import { toChineseNumber } from '../../utils/toChineseNumber'
 import CheckboxToggle from './CheckboxToggle.vue'
 import LinkUnderline from './LinkUnderline.vue'
+import ProgressBarHeader from './ProgressBarHeader.vue'
 
 const props = defineProps<{
   /**
@@ -54,7 +55,7 @@ function handleExcerptToggle(value: boolean) {
 <template>
   <un-page-content un-min-h-100vh>
     <!-- Section title and progress bar -->
-    <div
+    <!-- <div
       class="title-wrapper"
       un-sticky
       un-top-0
@@ -89,26 +90,34 @@ function handleExcerptToggle(value: boolean) {
       >
         {{ title }}
       </h2>
-      <div
-        un-flex="~ row"
-        un-items-center
-        un-gap-4
-      >
-        <!-- Excerpt toggle checkbox and label -->
+
+    </div> -->
+
+    <ProgressBarHeader
+      :id="title"
+      :title="title"
+    >
+      <template #default>
         <div
-          v-if="showExcerptToggle"
           un-flex="~ row"
           un-items-center
+          un-gap-4
         >
-          <CheckboxToggle
-            :id="`${category}-excerpt`"
-            :model-value="excerptVisible"
-            model-text="摘要"
-            @update:model-value="handleExcerptToggle"
-          />
+          <div
+            v-if="showExcerptToggle"
+            un-flex="~ row"
+            un-items-center
+          >
+            <CheckboxToggle
+              :id="`${category}-excerpt`"
+              :model-value="excerptVisible"
+              model-text="摘要"
+              @update:model-value="handleExcerptToggle"
+            />
+          </div>
         </div>
-      </div>
-    </div>
+      </template>
+    </ProgressBarHeader>
 
     <!-- Posts grouped by year -->
     <div
@@ -237,13 +246,16 @@ function handleExcerptToggle(value: boolean) {
 
     <!-- Message when no posts are found -->
     <div
-      v-if="posts.length === 0 && emptyMessage"
+      v-if="props.posts.length === 0 && emptyMessage"
       un-text="2xl neutral-800 dark:neutral-200"
       un-my-10
       un-flex="~ row"
     >
       {{ emptyMessage }}
     </div>
-    <slot name="empty-message-addons" />
+    <slot
+      v-if="props.posts.length === 0"
+      name="empty-message-addons"
+    />
   </un-page-content>
 </template>

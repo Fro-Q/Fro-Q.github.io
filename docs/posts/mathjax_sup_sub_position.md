@@ -19,6 +19,8 @@ last_modified: 2025-01-01 21:42
 
 [[toc]]
 
+#explore/mathjax #language/mathjax
+
 ## style 影响 MathJax 中的上下标
 
 在 MathJax 中输入极限上下标时，通常会出现两种状态：极限上下标显示在符号的上方和下方，如 $\displaystyle \sum_{i=1}^{\infty} A_i$；以及，显示在符号右侧，如 $\sum_{i=1}^{\infty} A_i$。

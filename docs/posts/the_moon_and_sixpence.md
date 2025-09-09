@@ -18,7 +18,7 @@ last_modified: 2023-10-30 06:17
 
 [[toc]]
 
-#quotation/novel/shot #modernism
+#quotation/novel #modernism
 
 ## 2022 / 03 / 23
 

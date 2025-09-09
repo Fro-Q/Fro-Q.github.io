@@ -18,20 +18,6 @@ defineProps<{
     un-items-end
     un-w-full
   >
-    <!-- Debugging Information -->
-    <div style="background-color: #f0f0f0; padding: 10px; margin-bottom: 10px; width: 100%; text-align: left;">
-      <h3>Debug: Posts Order</h3>
-      <ul style="list-style-type: none; padding: 0;">
-        <li
-          v-for="(post, index) in posts"
-          :key="index"
-        >
-          {{ index + 1 }}. {{ post.frontmatter.title }} ({{ formatMonthDay(post.created.raw) }})
-        </li>
-      </ul>
-    </div>
-    <!-- End Debugging Information -->
-
     <div
       v-for="post in posts"
       :key="post.frontmatter.title"

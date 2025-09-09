@@ -18,6 +18,8 @@ last_modified: 2025-01-01 20:37
 
 [[toc]]
 
+#lookup/mathjax
+
 ## 二元运算符｜Binary Operators
 
 | 渲染                                                        | 输入                                                        |

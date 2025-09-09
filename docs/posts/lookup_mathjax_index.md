@@ -19,6 +19,8 @@ last_modified: 2024-10-01 19:25
 
 [[toc]]
 
+#lookup/mathjax #index/mathjax
+
 ## 在 Markdown 中输入数学公式
 
 Markdown / HTML 中的数学公式需要依靠一些 JavaScript 引擎进行渲染。常见的引擎有 [MathJax](https://www.mathjax.org/)、[KaTeX](https://katex.org/) 等。

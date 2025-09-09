@@ -19,6 +19,8 @@ last_modified: 2025-09-03 15:28
 
 [[toc]]
 
+#log/dev #roadmap/blog_site
+
 ## 统一口径
 
 先把头部的日期统一掉。
@@ -75,6 +77,6 @@ VitePress 通过 markdown-it 渲染 markdown 文件，
 
 ### 标签
 
-统一一下 #hashstag 的样式：
+统一一下 `#hashstag` 的样式：
 
 ![标签](optimize_the_blog_site_2_assets/ATTCH_1757033803860.png)

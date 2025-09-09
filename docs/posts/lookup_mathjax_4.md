@@ -19,6 +19,8 @@ last_modified: 2025-05-27 21:23
 
 [[toc]]
 
+#lookup/mathjax
+
 ## `log` 类｜Log-like
 
 | 渲染                                             | 输入                                             |

@@ -19,6 +19,8 @@ last_modified: 2025-01-01 21:47
 
 [[toc]]
 
+#explore/mathjax #symbol/greek
+
 ## 小写希腊字母的 `\var-` 变体
 
 部分小写希腊字母具有 `\var-` 变体，如：

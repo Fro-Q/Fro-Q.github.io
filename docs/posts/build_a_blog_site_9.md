@@ -19,6 +19,8 @@ last_modified: 2025-05-09 04:31
 
 [[toc]]
 
+#log/dev #roadmap/blog_site
+
 ## 文章的信息
 
 我们在 [之前的文章](build_a_blog_site_6.md#改一点结构) 中

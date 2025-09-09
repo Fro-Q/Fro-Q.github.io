@@ -19,6 +19,8 @@ last_modified: 2025-01-09 08:29
 
 [[toc]]
 
+#lookup/mathjax
+
 ## 希腊字母｜Greek Letters
 
 | 渲染                                                                                  | 输入                                                                                  |

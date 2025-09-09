@@ -19,6 +19,8 @@ last_modified: 2025-08-25 14:37
 
 [[toc]]
 
+#log/dev #roadmap/blog_site
+
 ## 部署
 
 其实之前也可以部署。

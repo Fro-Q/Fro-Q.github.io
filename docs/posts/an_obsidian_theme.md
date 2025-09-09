@@ -18,6 +18,8 @@ last_modified: 2024-09-09 21:35
 
 [[toc]]
 
+#log/dev
+
 为什么突然想到自己做一个主题呢？
 
 ## metion——初识 Markdown

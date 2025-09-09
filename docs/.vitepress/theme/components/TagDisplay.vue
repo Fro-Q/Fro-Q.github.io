@@ -45,6 +45,7 @@ onClickOutside(extendedTagsRef as any, () => {
       <span
         v-if="index < currentTagHierarchy.length - 1"
         un-inline-block
+        un-text="neutral-500"
       >
         /
       </span>
@@ -54,7 +55,6 @@ onClickOutside(extendedTagsRef as any, () => {
       v-if="extendedTagsForCurrentTag.length > 0"
       un-relative
       un-inline-block
-      un-ml-2
     >
       <span
         un-inline-block

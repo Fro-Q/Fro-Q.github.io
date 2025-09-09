@@ -1,18 +1,74 @@
-// import { data as postsData } from '../.vitepress/theme/src/posts.data'
-
 export default {
-  async paths() {
-    // const loadedPosts = postsData
+  paths: () => {
+    const tags: string[] = [
+      'meta',
+      'diary',
+      'consciousness',
 
-    // const allTags = [...new Set(loadedPosts
-    //   .map(post => post.tagsExtended)
-    //   .flat())]
-    //   .map((tag) => {
-    //     return { params: { tag } }
-    //   })
+      'quotation/prose+novel+theory',
+      'log/dev+life',
+      'roadmap/blog_site',
+      'lookup/mathjax',
+      'index/mathjax',
 
-    // console.warn(allTags)
-    // return allTags
-    return []
+      'explore/mathjax',
+      'language/mathjax',
+
+      'symbol/greek',
+
+      'absurdism',
+      'modernism',
+      'psychoanalysis',
+      'feminism',
+
+      'cioran',
+      'camus',
+    ]
+
+    let paths: Set<string> = new Set()
+
+    tags.forEach((tag) => {
+      // tag: 'quotation/prose+novel+theory'
+      const thisPaths: Set<string> = new Set()
+      tag.split('/').forEach((h, i, t) => {
+        // h: 'quotation', 'prose+novel+theory'
+        // i: 0, 1
+        // t: ['quotation', 'prose+novel+theory']
+        h.split('+').forEach((t2) => {
+          thisPaths.add(`${t.slice(0, i).join('/')}/${t2}`)
+        })
+      })
+
+      paths = new Set([...paths, ...thisPaths])
+    })
+
+    console.warn(paths)
+
+    return Array.from(paths).map(path => ({ params: { tag: path } }))
   },
+  // paths: () => [
+  //   { params: { tag: 'meta' } },
+
+  //   { params: { tag: 'quotation' } },
+  //   { params: { tag: 'quotation/prose' } },
+  //   { params: { tag: 'quotation/novel' } },
+  //   { params: { tag: 'quotation/theory' } },
+
+  //   { params: { tag: 'modernism' } },
+  //   { params: { tag: 'absurdism' } },
+  //   { params: { tag: 'psychoanalysis' } },
+
+  //   { params: { tag: 'camus' } },
+  //   { params: { tag: 'cioran' } },
+
+  //   { params: { tag: 'diary' } },
+  //   { params: { tag: 'consciousness' } },
+
+  //   { params: { tag: 'dev' } },
+
+  //   { params: { tag: 'log' } },
+
+  //   { params: { tag: 'roadmap' } },
+  //   { params: { tag: 'roadmap/blog_site' } },
+  // ],
 }

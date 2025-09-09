@@ -18,6 +18,8 @@ last_modified: 2025-01-02 09:05
 
 [[toc]]
 
+#lookup/mathjax
+
 ## 二元关系符｜Binary Relations
 
 | 渲染                                                                       | 输入                                                                       |

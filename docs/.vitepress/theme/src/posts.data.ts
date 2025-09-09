@@ -113,7 +113,6 @@ export default createContentLoader('posts/**/*.md', {
   render: true,
   transform(raw) {
     return raw.map(({ html, url, frontmatter, excerpt, src }) => ({
-      html,
       url,
       frontmatter,
       excerpt,

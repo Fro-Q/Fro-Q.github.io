@@ -19,6 +19,8 @@ last_modified: 2025-04-24 21:32
 
 [[toc]]
 
+#log/dev #roadmap/blog_site
+
 ## 数学公式
 
 发现了的人可能已经发现了，

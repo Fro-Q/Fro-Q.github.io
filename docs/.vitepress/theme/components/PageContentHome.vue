@@ -3,8 +3,11 @@ import { onMounted, ref } from 'vue'
 import { usePostFilters } from '../../utils/usePostFilters'
 import LinkUnderline from './LinkUnderline.vue' // Keep LinkUnderline for category navigation
 import PostListSection from './PostListSection.vue' // Import the new PostListSection component
+import ProgressBarHeader from './ProgressBarHeader.vue'
 
 const { getAllYears, allPosts } = usePostFilters()
+
+console.warn('allPosts', allPosts.value[1].frontmatter.title)
 
 // Define categories for post filtering, including a 'All' category.
 const categories: string[] = ['全', ...usePostFilters().allUniqueCategories.value]
@@ -16,6 +19,10 @@ const excerptVisible = ref(Object.fromEntries(categories.map(category => [catego
 function getPostsForCategory(category: string) {
   return category === '全' ? allPosts.value : allPosts.value.filter(post => post.frontmatter.category === category)
 }
+
+onMounted(() => {
+  console.warn('allPosts', allPosts.value[1].frontmatter.title)
+})
 </script>
 
 <template>
@@ -64,43 +71,10 @@ function getPostsForCategory(category: string) {
     </div>
   </un-page-content>
   <un-page-content un-min-h-100vh>
-    <div
-      class="title-wrapper"
-      un-sticky
-      un-top-0
-      un-py-10
-      un-z-10
-      un-bg="neutral-50 dark:neutral-950"
-    >
-      <div
-        class="progress-bar"
-      >
-        <div
-          class="progress-bar-inner"
-          un-bg="neutral-600 dark:neutral-400"
-          :style="{ width: 'var(--progress-bar-width, 0)' }"
-          un-h-2px
-          un-absolute
-          un-bottom-0
-          un-z-1
-        />
-        <div
-          class="progress-bar-bg"
-          un-bg="neutral-200 dark:neutral-800"
-          un-w-full
-          un-h-2px
-          un-absolute
-          un-z-0
-          un-bottom-0
-        />
-      </div>
-      <h2
-        un-my-4
-        un-text-4xl
-      >
-        目录
-      </h2>
-    </div>
+    <ProgressBarHeader
+      id="目录"
+      title="目录"
+    />
     <div
       v-for="category in categories"
       :key="category"
@@ -118,15 +92,17 @@ function getPostsForCategory(category: string) {
     </div>
   </un-page-content>
 
-  <PostListSection
-    v-for="category in categories"
-    :key="category"
-    :category="category"
-    :posts="getPostsForCategory(category)"
-    :excerpt-visible="excerptVisible[category]"
-    :get-all-years="getAllYears"
-    :title="category"
-    :show-excerpt-toggle="true"
-    @update:excerpt-visible="value => excerptVisible[category] = value"
-  />
+  <ClientOnly>
+    <PostListSection
+      v-for="category in categories"
+      :key="category"
+      :category="category"
+      :posts="getPostsForCategory(category)"
+      :excerpt-visible="excerptVisible[category]"
+      :get-all-years="getAllYears"
+      :title="category"
+      :show-excerpt-toggle="true"
+      @update:excerpt-visible="value => excerptVisible[category] = value"
+    />
+  </ClientOnly>
 </template>

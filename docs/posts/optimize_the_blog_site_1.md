@@ -19,6 +19,8 @@ last_modified: 2025-08-26 09:37
 
 [[toc]]
 
+#log/dev #roadmap/blog_site
+
 <script setup lang="ts">
 import SvgFroqLogo from '@theme/components/SvgFroqLogo.vue'
 </script>
