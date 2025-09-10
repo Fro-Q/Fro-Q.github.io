@@ -28,14 +28,10 @@ export default {
     let paths: Set<string> = new Set()
 
     tags.forEach((tag) => {
-      // tag: 'quotation/prose+novel+theory'
       const thisPaths: Set<string> = new Set()
       tag.split('/').forEach((h, i, t) => {
-        // h: 'quotation', 'prose+novel+theory'
-        // i: 0, 1
-        // t: ['quotation', 'prose+novel+theory']
         h.split('+').forEach((t2) => {
-          thisPaths.add(`${t.slice(0, i).join('/')}/${t2}`)
+          thisPaths.add([...t.slice(0, i), t2].join('/'))
         })
       })
 
