@@ -1,35 +1,9 @@
 <script setup lang="ts">
-import { defaultDocument } from '@vueuse/core'
-import { onMounted, onUnmounted, ref } from 'vue'
+import { defaultDocument, useScroll } from '@vueuse/core'
+import { toRefs } from 'vue'
 
-const showBackToTop = ref(false)
-const showScrollToBottom = ref(true)
-
-function handleScroll() {
-  const scrollTop = defaultDocument!.documentElement.scrollTop || defaultDocument!.body.scrollTop
-  const scrollHeight = defaultDocument!.documentElement.scrollHeight || defaultDocument!.body.scrollHeight
-  const clientHeight = defaultDocument!.documentElement.clientHeight || defaultDocument!.body.clientHeight
-
-  showBackToTop.value = scrollTop > 0
-  showScrollToBottom.value = scrollTop + clientHeight < scrollHeight
-}
-
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-}
-
-function scrollToBottom() {
-  window.scrollTo({ top: defaultDocument!.documentElement.scrollHeight, behavior: 'smooth' })
-}
-
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-  handleScroll() // Initial check
-})
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-})
+const { y, arrivedState } = useScroll(window)
+const { top, bottom } = toRefs(arrivedState)
 </script>
 
 <template>
@@ -42,7 +16,7 @@ onUnmounted(() => {
     un-z-1000
   >
     <button
-      :un-opacity="showBackToTop ? 100 : 0"
+      :un-opacity="top ? 0 : 100"
       un-bg-vp-c-brand-1
       un-text-white
       un-border-none
@@ -55,12 +29,12 @@ onUnmounted(() => {
       un-cursor-pointer
       un-transition
       un-duration-300
-      @click="scrollToTop"
+      @click="y = 0"
     >
       <un-i-ph-arrow-up-duotone />
     </button>
     <button
-      :un-opacity="showScrollToBottom ? 100 : 0"
+      :un-opacity="bottom ? 0 : 100"
       un-bg-vp-c-brand-1
       un-text-white
       un-border-none
@@ -73,7 +47,7 @@ onUnmounted(() => {
       un-cursor-pointer
       un-transition
       un-duration-300
-      @click="scrollToBottom"
+      @click="y = defaultDocument!.documentElement.scrollHeight"
     >
       <un-i-ph-arrow-down-duotone />
     </button>
