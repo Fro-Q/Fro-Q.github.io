@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { usePostFilters } from '../../utils/usePostFilters'
-import { data as posts } from '../src/posts.data'
 import LinkUnderline from './LinkUnderline.vue'
 import PostListSection from './PostListSection.vue'
 

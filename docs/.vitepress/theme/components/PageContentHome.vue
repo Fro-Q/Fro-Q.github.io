@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
 import { usePostFilters } from '../../utils/usePostFilters'
-import postsData from '../src/posts.data'
 import LinkUnderline from './LinkUnderline.vue'
 import PostListSection from './PostListSection.vue'
 import ProgressBarHeader from './ProgressBarHeader.vue'

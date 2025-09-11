@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useData, useRoute } from 'vitepress'
-import { computed, nextTick, onMounted, ref, render } from 'vue'
+import { useData } from 'vitepress'
+import { computed } from 'vue'
 import { formatDate } from '../../utils/formatDate'
 import { renderMdInline } from '../../utils/renderMdInline'
 
@@ -10,7 +10,7 @@ import PostMetaInfo from './PostMetaInfo.vue'
 import PostNavigation from './PostNavigation.vue'
 
 const { frontmatter } = useData()
-const { findPostByTitle, getNextPost, getPrevPost, filterPostsByCategory } = usePostFilters()
+const { findPostByTitle, getNextPost, getPrevPost, filterPostsByFrontmatter } = usePostFilters()
 
 /**
  * Computed property to find the current post based on its title from frontmatter.
@@ -31,7 +31,7 @@ const metaStrings = computed(() => {
     return []
   }
   const strings = [
-    formatDate(post.value.created.raw),
+    formatDate(post.value.created),
     `约${post.value.readingTime}分钟`,
   ]
   return strings
@@ -45,7 +45,7 @@ const metaStrings = computed(() => {
 const postPool = computed(() => {
   if (!post.value)
     return []
-  let filteredPosts = filterPostsByCategory(post.value.frontmatter.category)
+  let filteredPosts = filterPostsByFrontmatter('category', post.value.frontmatter.category)
   if (post.value.frontmatter.series) {
     filteredPosts = filteredPosts.filter(p => p.frontmatter.series === post.value!.frontmatter.series)
   }

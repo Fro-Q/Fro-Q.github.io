@@ -1,4 +1,3 @@
-import type { ComputedRef } from 'vue'
 import type { Data } from '../theme/src/posts.data'
 import { useData } from 'vitepress'
 import { computed } from 'vue'
@@ -10,10 +9,17 @@ import { data as posts } from '../theme/src/posts.data'
 export function usePostFilters() {
   const { params } = useData()
 
+  /**
+   * A computed property containing all posts.
+   */
   const allPosts = computed(() => posts)
 
-  // type postList = Record<string, Record<string, Data[]>>
-
+  /**
+   * Returns an array of unique values for a given key in all posts.
+   * @param key The key to get unique values for.
+   * @param _posts Optional posts to filter, defaults to all posts.
+   * @returns An array of unique values.
+   */
   const getUniqueGroupProperty = (
     key: string,
     _posts: Data[] = allPosts.value,
@@ -25,6 +31,12 @@ export function usePostFilters() {
     ]
   }
 
+  /**
+   * Returns a new object with the posts grouped by a given key.
+   * @param key The key to group by.
+   * @param _posts Optional posts to group, defaults to all posts.
+   * @returns A new object with the grouped posts.
+   */
   const groupByProperty = (
     key: string,
     _posts: Data[] = allPosts.value,
@@ -38,6 +50,12 @@ export function usePostFilters() {
     }, {} as Record<string, Data[]>)
   }
 
+  /**
+   * Computes a post list grouped by a given key.
+   * @param groupKey The key to group by.
+   * @param subGroupKey The sub-group key.
+   * @returns A computed property containing the post list.
+   */
   const generatePostList = (
     groupKey: string,
     subGroupKey: string,
@@ -153,6 +171,26 @@ export function usePostFilters() {
     return [...new Set(posts.map(post => post.frontmatter.category))].sort()
   })
 
+  /**
+   * Filters posts by a given key-value pair in the frontmatter.
+   * @param key The key to filter by.
+   * @param value The value to filter by.
+   * @returns An array of posts that match the filter.
+   */
+  const filterPostsByFrontmatter = (key: string, value: string) => {
+    return posts.filter(post => post.frontmatter[key] === value)
+  }
+
+  /**
+   * Filters posts by a given key-value pair in the post object.
+   * @param key The key to filter by.
+   * @param value The value to filter by.
+   * @returns An array of posts that match the filter.
+   */
+  const filterPostsByPostProperty = (key: string, value: string) => {
+    return posts.filter(post => post[key] === value)
+  }
+
   return {
     allPosts,
     getUniqueGroupProperty,
@@ -165,5 +203,7 @@ export function usePostFilters() {
     getNextPost,
     getPrevPost,
     allUniqueCategories,
+    filterPostsByFrontmatter,
+    filterPostsByPostProperty,
   }
 }

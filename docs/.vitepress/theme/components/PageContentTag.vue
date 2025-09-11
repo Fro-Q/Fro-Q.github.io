@@ -15,7 +15,6 @@ const postsToShow = {
   在此: groupByProperty('chineseYear', postsInCurrentTag.value),
   更深处: groupByProperty('chineseYear', postsInExtendedTags.value),
 }
-console.warn('postsToShow', postsToShow)
 
 const metaStrings = computed(() => [
   `${postsInCurrentTag.value.length} 篇在此`,
