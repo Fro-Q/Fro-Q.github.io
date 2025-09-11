@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useData } from 'vitepress'
 import { computed } from 'vue'
-import { formatDate } from '../../utils/formatDate'
 import { renderMdInline } from '../../utils/renderMdInline'
 
 import { usePostFilters } from '../../utils/usePostFilters'
@@ -31,7 +30,11 @@ const metaStrings = computed(() => {
     return []
   }
   const strings = [
-    formatDate(post.value.created),
+    new Date(post.value.created).toLocaleDateString('zh-CN', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }),
     `约${post.value.readingTime}分钟`,
   ]
   return strings

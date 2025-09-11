@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import type { Data } from '../src/posts.data'
-import { formatDate } from '@vueuse/core'
 import { computed, ref } from 'vue'
-import { formatMonthDay } from '../../utils/formatDate'
-import { toChineseNumber } from '../../utils/toChineseNumber'
 import CheckboxToggle from './CheckboxToggle.vue'
 import LinkUnderline from './LinkUnderline.vue'
 import ProgressBarHeader from './ProgressBarHeader.vue'

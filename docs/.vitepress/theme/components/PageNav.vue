@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { useDark, useEventListener, useToggle } from '@vueuse/core'
-import { onMounted, ref, triggerRef } from 'vue'
+import { useDark, useToggle } from '@vueuse/core'
 
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
