@@ -33,7 +33,7 @@ randomPosts['-']['-'] = randomPosts['-']['-'].sort(() => Math.random() - 0.5).sl
       un-my-10
       un-flex="~ row"
     >
-      您其实不应该出现在<span
+      您其实不应该出现在 <span
         un-text-rose-500
       >这里</span> /
     </div>
@@ -49,7 +49,7 @@ randomPosts['-']['-'] = randomPosts['-']['-'].sort(() => Math.random() - 0.5).sl
         text="联系我"
         un-text="emerald-500"
         un-before="bg-emerald-600 dark:bg-emerald-400"
-      />
+      /> /
     </div>
     <div
       un-text="2xl neutral-600 dark:neutral-400"

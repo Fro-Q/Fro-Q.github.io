@@ -34,6 +34,12 @@ const metaStrings = computed(() => [
       :posts="postsToShow"
       :show-excerpt-toggle="true"
       :show-title="true"
+      :date-formatter="(date: Date) => {
+        return new Date(date).toLocaleDateString('zh-CN', {
+          month: 'long',
+          day: 'numeric',
+        })
+      }"
     >
       <template
         v-if="Object.keys(postsToShow['在此']).length === 0"
