@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import contacts from '../src/contacts.json' with { type: 'json' }
-import LinkUnderline from './LinkUnderline.vue'
 </script>
 
 <template>

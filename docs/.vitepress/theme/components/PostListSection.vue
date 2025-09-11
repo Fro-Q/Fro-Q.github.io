@@ -1,101 +1,70 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import type { Data } from '../src/posts.data'
+import { formatDate } from '@vueuse/core'
+import { computed, ref } from 'vue'
 import { formatMonthDay } from '../../utils/formatDate'
 import { toChineseNumber } from '../../utils/toChineseNumber'
 import CheckboxToggle from './CheckboxToggle.vue'
 import LinkUnderline from './LinkUnderline.vue'
 import ProgressBarHeader from './ProgressBarHeader.vue'
 
+// TODO: Abstract this component
+
 const props = defineProps<{
   /**
-   * The category string, used for section ID and excerpt visibility toggle.
+   * Posts to be displayed.
    */
-  category: string
+  posts: Record<string, Record<string, Data[]>>
   /**
-   * Array of posts to be displayed in this section.
+   * Titles mapping for each group.
    */
-  posts: any[] // TODO: Define a more specific type for post
+  groupTitleMapping?: Record<string, string>
   /**
-   * Boolean to control the visibility of excerpts for the current category.
+   * Titles mapping for each subgroup.
    */
-  excerptVisible: boolean
-  /**
-   * Function to get all unique years from a given list of posts.
-   */
-  getAllYears: (posts: any[]) => number[]
-  /**
-   * The title of the section.
-   */
-  title: string
-  /**
-   * Custom message to display when there are no posts in the current category.
-   */
-  emptyMessage?: string
+  subGroupTitleMapping?: Record<string, string>
   /**
    * Boolean to control the visibility of the excerpt toggle.
    */
   showExcerptToggle?: boolean
+  /**
+   * Boolean to control the visibility of the title.
+   */
+  showTitle?: boolean
+  /**
+   * Function to format the date.
+   */
+  dateFormatter?: (date: Date) => string
 }>()
 
-const emit = defineEmits(['update:excerptVisible'])
-
-// Computed property to filter posts by the current category and year
-const filteredPostsByYear = computed(() => (year: number) => {
-  return props.posts.filter(post => new Date(post.created.raw).getFullYear() === year)
+const posts = computed(() => {
+  // Map group titles and subgroup titles if provided
+  return Object.fromEntries(
+    Object.entries(props.posts).map(([group, posts]) => [
+      props.groupTitleMapping?.[group] || group,
+      Object.fromEntries(
+        Object.entries(posts).map(([subgroup, posts]) => [
+          props.subGroupTitleMapping?.[subgroup] || subgroup,
+          posts,
+        ]),
+      ),
+    ]),
+  )
 })
 
-// Handle excerpt toggle change
-function handleExcerptToggle(value: boolean) {
-  emit('update:excerptVisible', value)
-}
-
-// Handle tags toggle change
+const excerptVisible = ref(Object.fromEntries(Object.keys(posts).map(group => [group, false])))
 </script>
 
 <template>
-  <un-page-content un-min-h-100vh>
-    <!-- Section title and progress bar -->
-    <!-- <div
-      class="title-wrapper"
-      un-sticky
-      un-top-0
-      un-py-10
-      un-z-10
-      un-bg="neutral-50 dark:neutral-950"
-    >
-      <div class="progress-bar">
-        <div
-          class="progress-bar-inner"
-          un-bg="neutral-600 dark:neutral-400"
-          :style="{ width: 'var(--progress-bar-width, 0)' }"
-          un-h-2px
-          un-absolute
-          un-bottom-0
-          un-z-1
-        />
-        <div
-          class="progress-bar-bg"
-          un-bg="neutral-200 dark:neutral-800"
-          un-w-full
-          un-h-2px
-          un-absolute
-          un-bottom-0
-          un-z-0
-        />
-      </div>
-      <h2
-        :id="category"
-        un-text-4xl
-        un-py-2
-      >
-        {{ title }}
-      </h2>
-
-    </div> -->
-
+  <un-page-content
+    v-for="[group, groupedPosts] in Object.entries(posts)"
+    :key="group"
+    un-min-h-100vh
+  >
     <ProgressBarHeader
-      :id="title"
-      :title="title"
+      v-if="showTitle"
+      :id="group"
+      :title="group"
     >
       <template #default>
         <div
@@ -109,31 +78,29 @@ function handleExcerptToggle(value: boolean) {
             un-items-center
           >
             <CheckboxToggle
-              :id="`${category}-excerpt`"
-              :model-value="excerptVisible"
+              :id="`${group}-excerpt`"
+              :model-value="excerptVisible[group]"
               model-text="摘要"
-              @update:model-value="handleExcerptToggle"
+              @update:model-value="excerptVisible[group] = $event"
             />
           </div>
         </div>
       </template>
     </ProgressBarHeader>
 
-    <!-- Posts grouped by year -->
     <div
       un-flex="~ col"
       un-items-end
       un-w-full
     >
       <div
-        v-for="year in getAllYears(posts)"
-        :key="year"
+        v-for="[subGroup, subGroupedPosts] in Object.entries(groupedPosts)"
+        :key="subGroup"
         un-py-10
         un-flex="~ col"
         un-gap-4
         un-w-full
       >
-        <!-- Year display -->
         <div
           un-text-3xl
           un-text="neutral-600 dark:neutral-400 2xl"
@@ -144,11 +111,10 @@ function handleExcerptToggle(value: boolean) {
           un-w-fit
           un-px-4
         >
-          {{ toChineseNumber(year.toString()) }}
+          {{ subGroup !== '-' ? subGroup : '' }}
         </div>
-        <!-- Individual post entry -->
         <div
-          v-for="post in filteredPostsByYear(year)"
+          v-for="post in subGroupedPosts"
           :key="post.url"
           un-p-2
           un-ml-15
@@ -162,15 +128,18 @@ function handleExcerptToggle(value: boolean) {
             un-items-center
             un-max-w-full
           >
-            <!-- Post creation date -->
             <div
               un-text="neutral-500 dark:neutral-400 base"
               un-mr-2
               un-whitespace-nowrap
             >
-              {{ formatMonthDay(post.created.raw) }}
+              {{ dateFormatter
+                ? dateFormatter(post.created) : new Date(post.created).toLocaleDateString('zh-CN', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                }) }}
             </div>
-            <!-- Post title with underline link and tooltip -->
             <LinkUnderline
               :href="post.url"
               :text="post.frontmatter.title"
@@ -235,7 +204,7 @@ function handleExcerptToggle(value: boolean) {
           </div>
           <!-- Post excerpt -->
           <div
-            v-show="excerptVisible"
+            v-show="excerptVisible[group] && post.excerpt"
             un-text-neutral-500
             class="markdown-rendered"
             v-html="post.excerpt?.replace(/<p>|<\/p>/g, '')"
@@ -244,18 +213,8 @@ function handleExcerptToggle(value: boolean) {
       </div>
     </div>
 
-    <!-- Message when no posts are found -->
-    <div
-      v-if="props.posts.length === 0 && emptyMessage"
-      un-text="2xl neutral-800 dark:neutral-200"
-      un-my-10
-      un-flex="~ row"
-    >
-      {{ emptyMessage }}
-    </div>
     <slot
-      v-if="props.posts.length === 0"
-      name="empty-message-addons"
+      :name="`empty-message-addons-${group}`"
     />
   </un-page-content>
 </template>

@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import type { Data } from '../src/posts.data'
+import { usePostFilters } from '../../utils/usePostFilters'
 import { data as posts } from '../src/posts.data'
 import LinkUnderline from './LinkUnderline.vue'
+import PostListSection from './PostListSection.vue'
 
-const randomPosts = posts.sort(() => Math.random() - 0.5).slice(0, 3)
+const { generatePostList } = usePostFilters()
 
-function formatDate(post: Data) {
-  return new Date(post.created.raw).toLocaleDateString('zh-CN', {
-    month: 'long',
-    day: 'numeric',
-  })
-}
+const allPostsList = generatePostList('-', '-')
+
+const randomPosts = allPostsList.value
+randomPosts['-']['-'] = randomPosts['-']['-'].sort(() => Math.random() - 0.5).slice(0, 5)
 </script>
 
 <template>
@@ -67,54 +66,12 @@ function formatDate(post: Data) {
       />
       您可能会感兴趣:
     </div>
-    <div
-      v-for="post in randomPosts"
-      :key="post.url"
-      un-p-2
-      un-ml-15
-      un-flex="~ col"
-      un-gap-2
-      un-items-end
-      un-relative
-    >
-      <div
-        un-flex="~ row"
-        un-items-center
-        un-max-w-full
-      >
-        <div
-          un-text="neutral-500 dark:neutral-400 base"
-          un-mr-2
-          un-whitespace-nowrap
-        >
-          {{ formatDate(post) }}
-        </div>
-        <LinkUnderline
-          :href="post.url"
-          :text="post.frontmatter.title"
-          :tooltip="true"
-          :tooltip-text="post.frontmatter.title"
-          un-text="neutral-700 dark:neutral-300 hover:neutral-950 dark:hover:neutral-50 2xl"
-          un-before="bg-emerald-600 dark:bg-emerald-600/80"
-          un-text-align="right"
-        >
-          <template #tooltipAddons>
-            <div
-              un-flex="~ row"
-              un-text="sm neutral-600 dark:neutral-400"
-              un-justify-end
-              un-gap-5
-            >
-              {{ `约${post.readingTime.toString()}分钟` }}
-            </div>
-          </template>
-        </LinkUnderline>
-      </div>
-      <div
-        un-text-neutral-500
-        class="markdown-rendered"
-        v-html="post.excerpt?.replace(/<p>|<\/p>/g, '')"
-      />
-    </div>
+
+    <PostListSection
+      :posts="randomPosts"
+      :excerpt-visible="false"
+      :show-excerpt-toggle="false"
+      :show-title="false"
+    />
   </un-page-content>
 </template>

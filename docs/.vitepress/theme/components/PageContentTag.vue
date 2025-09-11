@@ -2,29 +2,20 @@
 import { useData } from 'vitepress'
 import { computed, ref } from 'vue'
 import { usePostFilters } from '../../utils/usePostFilters'
-// import { useTagUtils } from '../../utils/useTagUtils' // Removed as currentTagHierarchy and extendedTagsForCurrentTag are not used
-
 import LinkUnderline from './LinkUnderline.vue'
-import PostListSection from './PostListSection.vue' // Import the new PostListSection component
+import PostListSection from './PostListSection.vue'
 import PostMetaInfo from './PostMetaInfo.vue'
 import TagDisplay from './TagDisplay.vue'
 
 const { params } = useData()
 
-const { postsInCurrentTag, postsInExtendedTags, getAllYears } = usePostFilters()
-// const { currentTagHierarchy, extendedTagsForCurrentTag } = useTagUtils() // Removed unused variables
+const { postsInCurrentTag, postsInExtendedTags, groupByProperty } = usePostFilters()
 
 const postsToShow = {
-  在此: postsInCurrentTag.value,
-  更深处: postsInExtendedTags.value,
+  在此: groupByProperty('chineseYear', postsInCurrentTag.value),
+  更深处: groupByProperty('chineseYear', postsInExtendedTags.value),
 }
-
-// Reactive state to control the visibility of post excerpts for each category.
-// Reactive state to control the visibility of post excerpts for each category.
-const excerptVisible = ref({
-  在此: false,
-  更深处: false,
-})
+console.warn('postsToShow', postsToShow)
 
 const metaStrings = computed(() => [
   `${postsInCurrentTag.value.length} 篇在此`,
@@ -40,15 +31,14 @@ const metaStrings = computed(() => [
 
   <ClientOnly>
     <PostListSection
-      category="在此"
-      :posts="postsToShow['在此']"
-      :excerpt-visible="excerptVisible['在此']"
-      :get-all-years="getAllYears"
-      title="在此"
+      :posts="postsToShow"
       :show-excerpt-toggle="true"
-      @update:excerpt-visible="value => excerptVisible['在此'] = value"
+      :show-title="true"
     >
-      <template #empty-message-addons>
+      <template
+        v-if="Object.keys(postsToShow['在此']).length === 0"
+        #empty-message-addons-在此
+      >
         <div
           un-text="2xl neutral-800 dark:neutral-200"
           un-my-10
@@ -81,33 +71,19 @@ const metaStrings = computed(() => [
           />
         </div>
       </template>
+      <template
+        v-if="Object.keys(postsToShow['更深处']).length === 0"
+        #empty-message-addons-更深处
+      >
+        <div
+          un-text="2xl neutral-800 dark:neutral-200"
+          un-my-10
+          un-flex="~ row"
+          un-justify-center
+        >
+          更深处没有任何文章
+        </div>
+      </template>
     </PostListSection>
   </ClientOnly>
-
-  <PostListSection
-    category="更深处"
-    :posts="postsToShow['更深处']"
-    :excerpt-visible="excerptVisible['更深处']"
-    :get-all-years="getAllYears"
-    title="更深处"
-    :show-excerpt-toggle="true"
-    @update:excerpt-visible="value => excerptVisible['更深处'] = value"
-  >
-    <template #empty-message-addons>
-      <div
-        un-text="2xl neutral-800 dark:neutral-200"
-        un-my-10
-        un-flex="~ row"
-        un-justify-center
-      >
-        没有文章在更深处
-      </div>
-      <div
-        un-text="2xl neutral-700 dark:neutral-300"
-        un-my-10
-        un-flex="~ row"
-        un-justify-center
-      />
-    </template>
-  </PostListSection>
 </template>

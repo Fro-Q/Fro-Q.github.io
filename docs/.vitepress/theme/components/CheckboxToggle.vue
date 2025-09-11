@@ -3,7 +3,7 @@ import { computed } from 'vue'
 
 const props = defineProps<{
   id: string
-  modelValue: boolean
+  modelValue: boolean | undefined
   modelText?: string
 }>()
 

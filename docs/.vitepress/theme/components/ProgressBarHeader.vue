@@ -1,54 +1,43 @@
 <script setup lang="ts">
-import { defaultDocument, useEventListener } from '@vueuse/core'
-import { onMounted, onUnmounted } from 'vue'
+import { useCssVar, useElementVisibility, useEventListener } from '@vueuse/core'
+import { useTemplateRef, watchEffect } from 'vue'
 
-const props = defineProps<{
+defineProps<{
   title: string
   id?: string
 }>()
 
-function handleScroll(el: HTMLElement) {
-  const categoryWrapper = el.parentElement
+const titleWrapper = useTemplateRef('titleWrapper')
+const titleWrapperVisible = useElementVisibility(titleWrapper)
+
+const progressBarWidth = useCssVar('--progress-bar-width', titleWrapper)
+
+function handleScroll() {
+  const categoryWrapper = titleWrapper.value!.parentElement
   if (categoryWrapper) {
     const scrollY = window.scrollY
     const wrapperOffsetY = categoryWrapper.offsetTop
-    const fullWidth = el.offsetWidth
+    const fullWidth = titleWrapper.value!.offsetWidth
     const windowHeight = window.innerHeight
 
     // if the height of the category wrapper is less than the height of the window,
     // then the progress bar should be 100%
     if (categoryWrapper.offsetHeight <= windowHeight) {
-      el.style.setProperty('--progress-bar-width', `${fullWidth}px`)
+      progressBarWidth.value = `${fullWidth}px`
       return
     }
 
     const percentage = Math.min(1, Math.max(0, (scrollY - wrapperOffsetY) / Math.max(0, categoryWrapper.offsetHeight - windowHeight)))
-    el.style.setProperty('--progress-bar-width', `${percentage * fullWidth}px`)
+    progressBarWidth.value = `${percentage * fullWidth}px`
   }
 }
-
-onMounted(() => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      const el = entry.target as HTMLElement
-      if (entry.isIntersecting) {
-        console.warn('ij')
-        // add scroll event listener when the element enters the viewport
-        useEventListener(window, 'scroll', () => handleScroll(el))
-        useEventListener(window, 'resize', () => handleScroll(el))
-      }
-      else {
-        // remove scroll event listener when the element leaves the viewport
-        window.removeEventListener('scroll', () => handleScroll(el))
-        window.removeEventListener('resize', () => handleScroll(el))
-      }
-      handleScroll(el)
-    })
-  }, { threshold: 0 }) // trigger when the element enters the viewport
-
-  const titleWrapper = defaultDocument!.getElementById(props.id || 'title-wrapper')
-  if (titleWrapper) {
-    observer.observe(titleWrapper)
+watchEffect(() => {
+  if (titleWrapperVisible.value) {
+    useEventListener(window, ['scroll', 'resize'], handleScroll)
+  }
+  else {
+    const clean = useEventListener(window, ['scroll', 'resize'], handleScroll)
+    clean()
   }
 })
 </script>
@@ -56,6 +45,7 @@ onMounted(() => {
 <template>
   <div
     :id="id || 'title-wrapper'"
+    ref="titleWrapper"
     un-sticky
     un-top-0
     un-py-10
@@ -87,7 +77,7 @@ onMounted(() => {
       un-my-4
       un-text-4xl
     >
-      {{ title }}
+      {{ title !== '-' ? title : '' }}
     </h2>
     <slot />
   </div>

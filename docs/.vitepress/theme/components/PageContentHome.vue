@@ -1,28 +1,18 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { usePostFilters } from '../../utils/usePostFilters'
-import LinkUnderline from './LinkUnderline.vue' // Keep LinkUnderline for category navigation
-import PostListSection from './PostListSection.vue' // Import the new PostListSection component
+import postsData from '../src/posts.data'
+import LinkUnderline from './LinkUnderline.vue'
+import PostListSection from './PostListSection.vue'
 import ProgressBarHeader from './ProgressBarHeader.vue'
 
-const { getAllYears, allPosts } = usePostFilters()
+const { generatePostList } = usePostFilters()
 
-console.warn('allPosts', allPosts.value[1].frontmatter.title)
+const categoriesPostList = generatePostList('category', 'chineseYear')
+const allPostsList = generatePostList('-', 'chineseYear')
 
 // Define categories for post filtering, including a 'All' category.
 const categories: string[] = ['全', ...usePostFilters().allUniqueCategories.value]
-
-// Reactive state to control the visibility of post excerpts for each category.
-const excerptVisible = ref(Object.fromEntries(categories.map(category => [category, false])))
-
-// Helper function to filter posts by category for PostListSection
-function getPostsForCategory(category: string) {
-  return category === '全' ? allPosts.value : allPosts.value.filter(post => post.frontmatter.category === category)
-}
-
-onMounted(() => {
-  console.warn('allPosts', allPosts.value[1].frontmatter.title)
-})
 </script>
 
 <template>
@@ -94,15 +84,22 @@ onMounted(() => {
 
   <ClientOnly>
     <PostListSection
-      v-for="category in categories"
-      :key="category"
-      :category="category"
-      :posts="getPostsForCategory(category)"
-      :excerpt-visible="excerptVisible[category]"
-      :get-all-years="getAllYears"
-      :title="category"
+      :show-title="true"
+      :posts="allPostsList"
       :show-excerpt-toggle="true"
-      @update:excerpt-visible="value => excerptVisible[category] = value"
+      :date-formatter="(date: Date) => {
+        return new Date(date).toLocaleDateString('zh-CN', {
+          month: 'long',
+          day: 'numeric',
+        })
+      }"
+      :group-title-mapping="{
+        '-': '全',
+      }"
+    />
+    <PostListSection
+      :posts="categoriesPostList"
+      :show-excerpt-toggle="true"
     />
   </ClientOnly>
 </template>

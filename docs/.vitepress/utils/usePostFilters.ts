@@ -1,3 +1,4 @@
+import type { ComputedRef } from 'vue'
 import type { Data } from '../theme/src/posts.data'
 import { useData } from 'vitepress'
 import { computed } from 'vue'
@@ -10,6 +11,71 @@ export function usePostFilters() {
   const { params } = useData()
 
   const allPosts = computed(() => posts)
+
+  // type postList = Record<string, Record<string, Data[]>>
+
+  const getUniqueGroupProperty = (
+    key: string,
+    _posts: Data[] = allPosts.value,
+  ) => {
+    return [
+      ...new Set(_posts.map((post) => {
+        return post.groupProperty[key as keyof Data]
+      })),
+    ]
+  }
+
+  const groupByProperty = (
+    key: string,
+    _posts: Data[] = allPosts.value,
+  ) => {
+    return _posts.reduce((acc, post) => {
+      const group = post.groupProperty[key as keyof Data]
+      if (!acc[group])
+        acc[group] = []
+      acc[group].push(post)
+      return acc
+    }, {} as Record<string, Data[]>)
+  }
+
+  const generatePostList = (
+    groupKey: string,
+    subGroupKey: string,
+  ) => {
+    return computed(() => {
+      const uniqueGroups = groupKey === '-'
+        ? ['-']
+        : getUniqueGroupProperty(groupKey)
+
+      const uniqueSubGroups = subGroupKey === '-'
+        ? ['-']
+        : getUniqueGroupProperty(subGroupKey)
+
+      const postList: Record<string, Record<string, Data[]>> = {}
+      uniqueGroups.forEach((group) => {
+        postList[group] = {}
+        uniqueSubGroups.forEach((subGroup) => {
+          postList[group][subGroup] = []
+        })
+      })
+
+      posts.forEach((post) => {
+        const thisGroup = post.groupProperty[groupKey as keyof Data] || '-'
+        const thisSubGroup = post.groupProperty[subGroupKey as keyof Data] || '-'
+
+        postList[thisGroup][thisSubGroup].push(post)
+      })
+
+      Object.keys(postList).forEach((group) => {
+        Object.keys(postList[group]).forEach((subGroup) => {
+          if (postList[group][subGroup].length === 0)
+            delete postList[group][subGroup]
+        })
+      })
+
+      return postList
+    })
+  }
 
   /**
    * Filters posts based on the current tag in the route parameters.
@@ -33,36 +99,6 @@ export function usePostFilters() {
       && !postsInCurrentTag.value.includes(post),
     )
   })
-
-  /**
-   * Filters posts by category.
-   * @param category The category to filter by. If '全', all posts are returned.
-   * @returns A filtered array of posts.
-   */
-  const filterPostsByCategory = (category: string): Data[] => {
-    return category === '全' ? posts : posts.filter(post => post.frontmatter.category === category)
-  }
-
-  /**
-   * Filters posts by year.
-   * @param year The year to filter by.
-   * @param postsToFilter The array of posts to apply the year filter to.
-   * @returns A filtered array of posts.
-   */
-  const filterPostsByYear = (year: number, postsToFilter: Data[]): Data[] => {
-    return postsToFilter.filter(post => new Date(post.created.raw).getFullYear() === year)
-  }
-
-  /**
-   * Gets all unique years from a given array of posts.
-   * @param postsToProcess The array of posts to extract years from.
-   * @returns An array of unique years.
-   */
-  const getAllYears = (postsToProcess: Data[]): number[] => {
-    return Array.from(
-      new Set(postsToProcess.map(post => new Date(post.created.raw).getFullYear())),
-    )
-  }
 
   /**
    * Finds a single post by its title from the global posts data.
@@ -119,11 +155,11 @@ export function usePostFilters() {
 
   return {
     allPosts,
+    getUniqueGroupProperty,
+    groupByProperty,
+    generatePostList,
     postsInCurrentTag,
     postsInExtendedTags,
-    filterPostsByCategory,
-    filterPostsByYear,
-    getAllYears,
     findPostByTitle,
     findPostByUrl,
     getNextPost,

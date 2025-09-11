@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useData, useRoute } from 'vitepress'
+import { useData } from 'vitepress'
 import PageContentHome from './PageContentHome.vue'
 import PageContentNotFound from './PageContentNotFound.vue'
 import PageContentPost from './PageContentPost.vue'

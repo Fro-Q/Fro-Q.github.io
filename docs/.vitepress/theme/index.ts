@@ -1,5 +1,7 @@
 import type { Theme } from 'vitepress'
 import TwoslashFloatingVue from '@shikijs/vitepress-twoslash/client'
+import { GesturePlugin } from '@vueuse/gesture'
+import { MotionPlugin } from '@vueuse/motion'
 // https://vitepress.dev/guide/custom-theme
 import Layout from './Layout.vue'
 import '@unocss/reset/tailwind.css'
@@ -12,6 +14,9 @@ export default {
   Layout,
   enhanceApp({ app }) {
     // ...
-    app.use(TwoslashFloatingVue)
+    app
+      .use(TwoslashFloatingVue)
+      .use(GesturePlugin)
+      .use(MotionPlugin)
   },
 } satisfies Theme

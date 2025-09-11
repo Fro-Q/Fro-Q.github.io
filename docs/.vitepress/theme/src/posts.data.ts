@@ -1,36 +1,26 @@
+import { formatDate } from '@vueuse/core'
 import { createContentLoader } from 'vitepress'
-
-interface FormattedDate {
-  raw: Date
-  formattedString: string
-}
+import { toChineseNumber } from '../../utils/toChineseNumber'
 
 export interface Data {
   url: string
   frontmatter: Record<string, any>
   excerpt?: string
-  created: FormattedDate
-  lastModified: FormattedDate
+  created: Date
+  lastModified: Date
   readingTime: number
   tagsExtended: string[]
   tags: string[]
+  title: string
+  groupProperty: {
+    category: string
+    chineseYear: string
+  }
   html?: string
 }
 
 declare const data: Data[]
 export { data }
-
-function formatDate(raw: string): FormattedDate {
-  const date = new Date(raw)
-  return {
-    raw: date,
-    formattedString: date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'numeric',
-      day: 'numeric',
-    }),
-  }
-}
 
 function calculateReadingTime(text?: string): number {
   if (!text) {
@@ -116,12 +106,17 @@ export default createContentLoader('posts/**/*.md', {
       url,
       frontmatter,
       excerpt,
-      created: formatDate(frontmatter.created),
-      lastModified: formatDate(frontmatter.last_modified),
+      created: new Date(frontmatter.created),
+      lastModified: new Date(frontmatter.last_modified),
       readingTime: calculateReadingTime(src),
       tags: [...getTags(html, frontmatter).tags],
       tagsExtended: [...getTags(html, frontmatter).tagsExtended],
+      title: frontmatter.title,
+      groupProperty: {
+        category: frontmatter.category,
+        chineseYear: toChineseNumber(String(new Date(frontmatter.created).getFullYear())),
+      },
     }))
-      .sort((a, b) => b.created.raw.getTime() - a.created.raw.getTime())
+      .sort((a, b) => b.created.getTime() - a.created.getTime())
   },
 })

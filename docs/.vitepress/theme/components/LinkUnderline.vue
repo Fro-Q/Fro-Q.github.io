@@ -56,8 +56,7 @@ async function updateTooltipPosition(e: MouseEvent) {
 }
 
 onMounted(() => {
-  useEventListener(window, 'scroll', () => showTooltip.value = false)
-  useEventListener(window, 'resize', () => showTooltip.value = false)
+  useEventListener(window, ['resize', 'scroll'], () => showTooltip.value = false)
 })
 </script>
 
@@ -103,7 +102,7 @@ onMounted(() => {
       un-fixed
       un-z-50
       un-bg="neutral-200 dark:neutral-800"
-      un-text-white
+      un-text="neutral-800 dark:neutral-200"
       un-py-2
       un-px-4
       un-rounded-sm
