@@ -96,8 +96,15 @@ const categories: string[] = ['全', ...usePostFilters().allUniqueCategories.val
       }"
     />
     <PostListSection
+      :show-title="true"
       :posts="categoriesPostList"
       :show-excerpt-toggle="true"
+      :date-formatter="(date: Date) => {
+        return new Date(date).toLocaleDateString('zh-CN', {
+          month: 'long',
+          day: 'numeric',
+        })
+      }"
     />
   </ClientOnly>
 </template>
