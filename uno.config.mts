@@ -1,5 +1,3 @@
-import extractorMdc from '@unocss/extractor-mdc'
-
 import {
   defineConfig,
   presetAttributify,
@@ -63,7 +61,4 @@ export default defineConfig({
     components: 1,
     utilities: 2,
   },
-  extractors: [
-    extractorMdc(),
-  ],
 })

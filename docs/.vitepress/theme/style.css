@@ -42,8 +42,6 @@ html {
 
 #content:not(.unstyled),
 .markdown-rendered {
-
-
   & p {
     /* vertical margin for paragraphs */
     --uno: 'my-8';
@@ -108,8 +106,8 @@ html {
   }
 
   /* inline code */
-  & :not(pre)>code,
-  &>code {
+  & :not(pre) > code,
+  & > code {
     --uno: 'px-1';
     --uno: 'bg-teal-200/20 dark:bg-teal-800/20';
     --uno: 'text-teal-600 dark:text-teal-400';
@@ -135,6 +133,10 @@ html {
     & pre {
       --uno: 'py-6';
       --uno: 'overflow-x-auto';
+
+      &::-webkit-scrollbar {
+        height: 1px;
+      }
 
       /* code wrapper */
       & code {
@@ -285,7 +287,7 @@ html {
       & input {
         --uno: 'opacity-0';
 
-        &:checked+label {
+        &:checked + label {
           --uno: 'text-neutral-900';
           --uno: 'border-neutral-700';
           --uno: 'dark:(text-neutral-100 border-neutral-300)';
@@ -294,7 +296,7 @@ html {
     }
 
     & .blocks {
-      &>* {
+      & > * {
         --uno: 'my-0';
         --uno: 'border-t-none';
         --uno: 'rounded-t-none';
@@ -471,17 +473,17 @@ html {
 
   /* hashtag */
   & a[href^='/tags/']:not([id^='fnref'], .header-anchor) {
-    --uno: "before:(content-empty i-ph-tag-duotone text-sky-400 dark:text-sky-600 w-4 h-4 relative inline-block align-middle)";
-    --uno: "z-1";
+    --uno: 'before:(content-empty i-ph-tag-duotone text-sky-400 dark:text-sky-600 w-4 h-4 relative inline-block align-middle)';
+    --uno: 'z-1';
   }
 
   & a .tag {
-    --uno: "relative";
-    --uno: "px-1";
-    --uno: "after:(content-empty bg-neutral-200 dark:bg-neutral-800 w-full h-2px absolute bottom-0 left-0 z-0)";
-    --uno: "before:(content-empty bg-sky-400 dark:bg-sky-600 w-0 h-2px absolute bottom-0 left-0 z-1 transition-width)";
-    --uno: "hover:(before:w-full)";
-    --uno: "z-0";
+    --uno: 'relative';
+    --uno: 'px-1';
+    --uno: 'after:(content-empty bg-neutral-200 dark:bg-neutral-800 w-full h-2px absolute bottom-0 left-0 z-0)';
+    --uno: 'before:(content-empty bg-sky-400 dark:bg-sky-600 w-0 h-2px absolute bottom-0 left-0 z-1 transition-width)';
+    --uno: 'hover:(before:w-full)';
+    --uno: 'z-0';
   }
 
   /* img */
@@ -542,7 +544,6 @@ html {
     --uno: 'text-sm';
 
     & ol {
-
       & li {
         --uno: 'my-2';
 
@@ -556,9 +557,9 @@ html {
           & a.footnote-backref {
             --uno: 'i-ph-arrow-bend-right-up-duotone';
 
-            --uno: "transition";
-            --uno: "text-neutral-600 dark:text-neutral-400";
-            --uno: "hover:(text-sky-600 dark:text-sky-400)";
+            --uno: 'transition';
+            --uno: 'text-neutral-600 dark:text-neutral-400';
+            --uno: 'hover:(text-sky-600 dark:text-sky-400)';
           }
         }
       }
