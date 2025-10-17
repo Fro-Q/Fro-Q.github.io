@@ -62,12 +62,14 @@ onMounted(() => {
 
 <template>
   <div
-    un-min-w-0
+
+    un-after="content-empty bg-neutral-200 dark:bg-neutral-800 w-full h-2px absolute bottom-0 left-0 z-0"
+
     un-inline-block
     un-duration-400
     un-relative
+    un-min-w-0
     un-px-2
-    un-after="content-empty bg-neutral-200 dark:bg-neutral-800 w-full h-2px absolute bottom-0 left-0 z-0"
     un-before-w-0
     un-before-h-3px
     un-before-left-0
@@ -97,17 +99,19 @@ onMounted(() => {
       ref="tooltipRef"
       class="tooltip"
       :style="tooltipStyle"
-      un-text-align-start
-      un-text-base
-      un-fixed
-      un-z-50
+
       un-bg="neutral-200 dark:neutral-800"
       un-text="neutral-800 dark:neutral-200"
+
+      un-fixed
+      un-rounded-sm
+      un-whitespace-nowrap
+      un-text-align-start
+      un-text-base
+      un-z-50
       un-py-2
       un-px-4
-      un-rounded-sm
       un-shadow-lg
-      un-whitespace-nowrap
     >
       <div
         un-flex="~ col"

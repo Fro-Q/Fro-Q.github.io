@@ -16,11 +16,12 @@ const categories: string[] = ['全', ...usePostFilters().allUniqueCategories.val
 <template>
   <un-page-content un-min-h-100vh>
     <div
-      un-select-none
+
       un-text="neutral-700 dark:neutral-300 3xl"
       un-h="[calc(100vh-100px)]"
       un-flex="~ col grow-1"
       un-justify-center
+      un-select-none
     >
       <div
         un-mb-10
@@ -35,17 +36,19 @@ const categories: string[] = ['全', ...usePostFilters().allUniqueCategories.val
           <input
             id="self-description"
             type="text"
-            un-z-20
-            un-appearance-none
-            un-rounded-none
-            un-bg-transparent
+
             un-border-b="2px emerald-600 dark:emerald-400"
-            un-outline-none
-            un-text-center
-            un-font-thin
+
+            un-appearance-none
             un-inline-block
             un-max-w-full
             un-relative
+            un-z-20
+            un-rounded-none
+            un-bg-transparent
+            un-outline-none
+            un-text-center
+            un-font-thin
             autocomplete="off"
             maxlength="10"
           >

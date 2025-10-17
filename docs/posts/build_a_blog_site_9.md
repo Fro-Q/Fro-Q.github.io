@@ -265,12 +265,13 @@ const metaStrings = [
 <template>
   <!-- ... -->
   <div
-    un-mb-5
-    un-page-content
+
     un-flex
     un-gap-5
     un-justify-end
     un-font-serif
+    un-mb-5
+    un-page-content
   >
     <div
       v-for="metaString in metaStrings"

@@ -89,11 +89,13 @@ function metaStrings(post: Data) {
     >
       <a
         href="/contact/"
-        un-text-emerald-500
+
         un-underline="~ dotted"
         un-hover="rotate-3 scale-105"
+
         un-duration-200
         un-inline-block
+        un-text-emerald-500
       >Contact me</a> if you got here by an internal link.
     </p>
     <p
@@ -103,24 +105,29 @@ function metaStrings(post: Data) {
     >
       or here are some <a
         href="/#%E5%85%A8"
-        un-text-cyan-500
+
         un-underline="~ wavy"
         un-hover="-rotate-3 scale-115"
+
         un-duration-200
         un-inline-block
+        un-text-cyan-500
       >posts</a> that might interest you:
     </p>
     <div
       v-for="post in randomPosts"
       :key="post.url"
-      un-font-serif
+
       un-py-2
+      un-font-serif
     >
       <a
-        un-text-2xl
+
         un-text="neutral-600 dark:neutral-400 hover:neutral-900 dark:hover:neutral-100"
+
         un-transition-colors
         un-duration-200
+        un-text-2xl
         :href="post.url"
       >{{ post.frontmatter.title }}</a>
       <p

@@ -14,10 +14,11 @@ const hasMetaStrings = computed(() => props.metaStrings && props.metaStrings.len
 <template>
   <div
     v-if="hasMetaStrings"
+
     un-flex
+    un-items-center
     un-gap-5
     un-justify-end
-    un-items-center
   >
     <div
       v-for="metaString in metaStrings"

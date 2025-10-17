@@ -1,4 +1,3 @@
-import { formatDate } from '@vueuse/core'
 import { createContentLoader } from 'vitepress'
 import { toChineseNumber } from '../../utils/toChineseNumber'
 

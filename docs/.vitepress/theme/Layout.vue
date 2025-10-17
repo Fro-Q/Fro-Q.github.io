@@ -1,33 +1,33 @@
 <script setup lang="ts">
-import { defaultDocument } from "@vueuse/core";
-import mediumZoom from "medium-zoom";
-import { useRoute } from "vitepress";
-import { nextTick, onMounted, watch } from "vue";
-import ButtonVerticalNavigation from "./components/ButtonVerticalNavigation.vue";
-import PageContent from "./components/PageContent.vue";
-import PageFooter from "./components/PageFooter.vue";
-import PageLogo from "./components/PageLogo.vue";
+import { defaultDocument } from '@vueuse/core'
+import mediumZoom from 'medium-zoom'
+import { useRoute } from 'vitepress'
+import { nextTick, onMounted, watch } from 'vue'
+import ButtonVerticalNavigation from './components/ButtonVerticalNavigation.vue'
+import PageContent from './components/PageContent.vue'
+import PageFooter from './components/PageFooter.vue'
+import PageLogo from './components/PageLogo.vue'
 
-import PageNav from "./components/PageNav.vue";
+import PageNav from './components/PageNav.vue'
 
-const route = useRoute();
+const route = useRoute()
 
 function initZoom() {
-  mediumZoom("#content figure img", {
+  mediumZoom('#content figure img', {
     margin: 24,
-    background: "var(--image-mask-bg)",
+    background: 'var(--image-mask-bg)',
     container: defaultDocument!.body,
-  });
+  })
 }
 
 onMounted(() => {
-  initZoom();
-});
+  initZoom()
+})
 
 watch(
   () => route.path,
   () => nextTick(() => initZoom()),
-);
+)
 </script>
 
 <template>
@@ -40,7 +40,10 @@ watch(
     <PageLogo />
     <PageNav />
     <PageContent :key="route.path" />
-    <ButtonVerticalNavigation un-hidden un-md:flex />
+    <ButtonVerticalNavigation
+      un-hidden
+      un-md:flex
+    />
     <PageFooter />
   </div>
 </template>

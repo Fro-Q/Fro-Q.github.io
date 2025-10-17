@@ -3,8 +3,8 @@ import antfu from '@antfu/eslint-config'
 export default antfu(
   {
     unocss: true,
-    typescript: true,
     vue: true,
+    typescript: true,
     rules: {
       'vue/max-attributes-per-line': ['error', {
         singleline: { max: 1 },
@@ -15,7 +15,6 @@ export default antfu(
     formatters: {
       css: true,
       html: true,
-      markdown: 'prettier',
     },
   },
 )

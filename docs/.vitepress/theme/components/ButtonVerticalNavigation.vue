@@ -17,6 +17,8 @@ const { top, bottom } = toRefs(arrivedState)
   >
     <button
       :un-opacity="top ? 0 : 100"
+      un-items-center
+      un-transition
       un-bg-vp-c-brand-1
       un-text-white
       un-border-none
@@ -24,10 +26,8 @@ const { top, bottom } = toRefs(arrivedState)
       un-w-10
       un-h-10
       un-flex
-      un-items-center
       un-justify-center
       un-cursor-pointer
-      un-transition
       un-duration-300
       @click="y = 0"
     >

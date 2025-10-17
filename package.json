@@ -8,29 +8,29 @@
   "dependencies": {
     "@types/markdown-it": "^14.1.2",
     "@unocss/reset": "66.1.0-beta.3",
-    "@vue/devtools-api": "^8.0.1",
+    "@vue/devtools-api": "^8.0.2",
     "@vueuse/core": "^13.9.0",
     "@vueuse/gesture": "^2.0.0",
     "@vueuse/motion": "^3.0.3",
-    "eslint": "^9.33.0",
+    "eslint": "^9.37.0",
     "markdown-it": "^14.1.0",
     "medium-zoom": "^1.1.0",
-    "vue": "^3.5.19",
-    "vue-i18n": "^11.1.11"
+    "vue": "^3.5.22",
+    "vue-i18n": "^11.1.12"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.19.0",
-    "@babel/eslint-parser": "^7.28.0",
-    "@iconify-json/carbon": "^1.2.13",
+    "@babel/eslint-parser": "^7.28.4",
+    "@iconify-json/carbon": "^1.2.14",
     "@iconify-json/ph": "^1.2.2",
-    "@shikijs/colorized-brackets": "^3.11.0",
-    "@shikijs/transformers": "^3.11.0",
-    "@shikijs/vitepress-twoslash": "^3.11.0",
+    "@shikijs/colorized-brackets": "^3.13.0",
+    "@shikijs/transformers": "^3.13.0",
+    "@shikijs/vitepress-twoslash": "^3.13.0",
     "@types/markdown-it-footnote": "^3.0.4",
     "@unocss/eslint-plugin": "66.1.0-beta.11",
-    "@unocss/extractor-mdc": "^66.5.0",
+    "@unocss/extractor-mdc": "^66.5.4",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint-plugin-format": "^1.0.1",
+    "eslint-plugin-format": "^1.0.2",
     "markdown-it-anchor": "^9.2.0",
     "markdown-it-attrs": "^4.3.1",
     "markdown-it-footnote": "^4.0.0",
@@ -39,7 +39,7 @@
     "markdown-it-mark": "^4.0.0",
     "markdown-it-mathjax3": "^4.3.2",
     "markdown-it-ruby": "^1.1.2",
-    "sass-embedded": "^1.90.0",
+    "sass-embedded": "^1.93.2",
     "unocss": "66.1.0-beta.3",
     "vitepress": "2.0.0-alpha.5"
   },
@@ -47,5 +47,6 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  }
+  },
+  "packageManager": "pnpm@10.13.1+sha512.37ebf1a5c7a30d5fabe0c5df44ee8da4c965ca0c5af3dbab28c3a1681b70a256218d05c81c9c0dcf767ef6b8551eb5b960042b9ed4300c59242336377e01cfad"
 }

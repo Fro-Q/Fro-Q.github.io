@@ -79,10 +79,11 @@ const prevPost = computed(() => {
 <template>
   <un-page-content>
     <div
-      un-my-10
+
       un-text="5xl/relaxed"
       un-max-w-full
-      class="markdown-rendered"
+      un-my-10
+      class="markdown-rendered text-2xl"
       v-html="post?.frontmatter.title ? renderMdInline(post.frontmatter.title) : ''"
     />
     <!-- Display post meta information (e.g., date, reading time) -->

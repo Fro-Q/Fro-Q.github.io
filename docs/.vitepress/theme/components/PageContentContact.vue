@@ -41,9 +41,7 @@ import contacts from '../src/contacts.json' with { type: 'json' }
             target="_blank"
             rel="noopener noreferrer"
           >
-            <code
-              :class="`hover:text-${contact.colorUno}-500`"
-            >
+            <code :class="`hover:text-${contact.colorUno}-500`">
               {{ link.text }}
             </code>
           </a>

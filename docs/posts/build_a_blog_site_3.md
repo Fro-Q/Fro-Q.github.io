@@ -130,8 +130,9 @@ function switchDarkMode(): void {
   >
     <nav
       un-flex="~ row"
-      un-justify-between
+
       un-p-4
+      un-justify-between
     >
       <a
         un-text-blue-500

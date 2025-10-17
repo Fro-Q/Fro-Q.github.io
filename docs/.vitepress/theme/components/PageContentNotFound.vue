@@ -15,10 +15,11 @@ randomPosts['-']['-'] = randomPosts['-']['-'].sort(() => Math.random() - 0.5).sl
   <h1
     un-text="align-right 400px rose-500/10"
     un-font="900"
+
     un-absolute
-    un-right-0
     un-bottom-0
     un-select-none
+    un-right-0
     un-z-0
   >
     404

@@ -4,6 +4,7 @@ import { computed, ref } from 'vue'
 import CheckboxToggle from './CheckboxToggle.vue'
 import LinkUnderline from './LinkUnderline.vue'
 import ProgressBarHeader from './ProgressBarHeader.vue'
+import TooltipPostInfo from './TooltipPostInfo.vue'
 
 // TODO: Abstract this component
 
@@ -99,26 +100,31 @@ const excerptVisible = ref(Object.fromEntries(Object.keys(posts).map(group => [g
         un-w-full
       >
         <div
-          un-text-3xl
+
           un-text="neutral-600 dark:neutral-400 2xl"
+
+          style="writing-mode: vertical-lr;"
+
+          un-px-4
+          un-text-3xl
           un-sticky
           un-top-50
-          style="writing-mode: vertical-lr;"
           un-z-2
           un-w-fit
-          un-px-4
         >
           {{ subGroup !== '-' ? subGroup : '' }}
         </div>
         <div
           v-for="post in subGroupedPosts"
           :key="post.url"
-          un-p-2
-          un-ml-15
+
           un-flex="~ col"
+
           un-gap-2
           un-items-end
           un-relative
+          un-p-2
+          un-ml-15
         >
           <div
             un-flex="~ row"
