@@ -12,9 +12,12 @@ import UnoCSS from 'unocss/vite'
 import { defineConfig } from 'vitepress'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  head: [
+    ['link', { rel: 'icon', href: '/logo.svg', type: 'image/svg+xml' }],
+  ],
   cleanUrls: true,
-  title: 'Example Site',
-  description: 'A VitePress Site.',
+  title: 'froQ',
+  description: '于此。',
   vite: {
     plugins: [
       UnoCSS(),
