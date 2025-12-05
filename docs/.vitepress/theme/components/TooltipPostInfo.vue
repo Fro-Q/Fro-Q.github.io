@@ -53,5 +53,23 @@ defineProps<{
         #{{ tag }}
       </div>
     </div>
+    <div
+      v-if="post.excerpt"
+      un-flex="~ row"
+      un-items-center
+      un-gap-2
+    >
+      <un-i-ph-file-text-duotone
+        un-w-4
+        un-h-4
+        un-inline-block
+        un-align-middle
+        un-text="emerald-400 dark:emerald-600"
+      />
+      <div
+        un-text="neutral-800 dark:neutral-200"
+        v-html="post.excerpt"
+      />
+    </div>
   </div>
 </template>
