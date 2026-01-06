@@ -11,6 +11,11 @@ const allPostsList = generatePostList('-', 'chineseYear')
 
 // Define categories for post filtering, including a 'All' category.
 const categories: string[] = ['全', ...usePostFilters().allUniqueCategories.value]
+
+// Use Markdown-it plugin to render ruby annotations
+const froQRaw = '{froQ|フロック}'
+const md = new MarkdownIt().use(MarkdownItRuby)
+const froQRendered = md.renderInline(froQRaw)
 </script>
 
 <template>
