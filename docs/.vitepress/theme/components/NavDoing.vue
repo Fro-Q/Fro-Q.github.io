@@ -37,9 +37,9 @@ async function fetchActivity() {
       sleeping.value = true
       return
     }
-    const updatedAt = new Date(activity.value.updatedAt).getTime()
+    const timestamp = new Date(activity.value.timestamp).getTime()
     const now = Date.now()
-    sleeping.value = now - updatedAt > 5 * 60 * 1000
+    sleeping.value = now - timestamp > 5 * 60 * 1000
     activity.value.active = !sleeping.value
   }
   catch (err) {
