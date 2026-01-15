@@ -11,6 +11,8 @@ import 'uno.css'
 import '@shikijs/vitepress-twoslash/style.css'
 import 'vitepress/dist/client/theme-default/styles/vars.css'
 
+const __VUE_PROD_DEVTOOLS__ = false
+
 const i18n = createI18n({
   legacy: false,
   locale: 'zh',

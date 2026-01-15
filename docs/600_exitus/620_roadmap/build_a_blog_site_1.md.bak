@@ -10,7 +10,7 @@ head:
     - name: keywords
       content: 博客网站 个人网站 博客 vitepress vue vite unocss github_pages typescript
 created: 2025-01-09 10:34
-last_modified: 2025-01-18 18:59
+last_modified: 2026-01-15 15:17:59
 ---
 
 从零开始搭建博客网站（一）：预备知识与安装
@@ -73,14 +73,13 @@ WordPress 几乎是全球最流行的 CMS，有着丰富的插件和主题，
 
 ### 你应该知道的
 
-要达成这个系列的基本目标，你需要对以下技术有一定的了解。
-
-- [Markdown](https://www.markdownguide.org/)
-- [git](https://git-scm.com/) 和 [GitHub](https://www.github.com/)
-- [Vue.js](https://vuejs.org/)
-- [CSS](https://developer.mozilla.org/zh-CN/docs/Web/CSS)
-- [UnoCSS](https://unocss.dev/)
-- [JavaScript](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)
+要达成这个系列的基本目标，你需要对 [Markdown](https://www.markdownguide.org/)、
+[git](https://git-scm.com/) 和 [GitHub](https://www.github.com/)、
+[Vue.js](https://vuejs.org/)、
+[CSS](https://developer.mozilla.org/zh-CN/docs/Web/CSS)、
+[UnoCSS](https://unocss.dev/)、
+[JavaScript](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)
+等技术有一定的了解。
 
 你也会在这个过程中学到关于它们的更多知识。
 

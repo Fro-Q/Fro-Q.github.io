@@ -1,14 +1,11 @@
 <script setup lang="ts">
-import { usePostFilters } from '../../utils/usePostFilters'
+import { data as posts } from '../src/exitus.data.ts'
 import LinkUnderline from './LinkUnderline.vue'
 import PostListSection from './PostListSection.vue'
 
-const { generatePostList } = usePostFilters()
-
-const allPostsList = generatePostList('-', '-')
-
-const randomPosts = allPostsList.value
-randomPosts['-']['-'] = randomPosts['-']['-'].sort(() => Math.random() - 0.5).slice(0, 5)
+const randomPosts = posts
+  .sort(() => 0.5 - Math.random())
+  .slice(0, 5)
 </script>
 
 <template>
@@ -68,10 +65,10 @@ randomPosts['-']['-'] = randomPosts['-']['-'].sort(() => Math.random() - 0.5).sl
     </div>
 
     <PostListSection
+      title=""
       :posts="randomPosts"
       :excerpt-visible="false"
       :show-excerpt-toggle="false"
-      :show-title="false"
     />
   </un-page-content>
 </template>

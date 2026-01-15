@@ -1,3 +1,4 @@
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 import { transformerColorizedBrackets } from '@shikijs/colorized-brackets'
 import { transformerMetaWordHighlight, transformerNotationWordHighlight } from '@shikijs/transformers'
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
@@ -14,6 +15,7 @@ import UnoCSS from 'unocss/vite'
 import { defineConfig } from 'vitepress'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  ignoreDeadLinks: true,
   head: [
     ['link', { rel: 'icon', href: '/logo.svg', type: 'image/svg+xml' }],
   ],
@@ -23,6 +25,9 @@ export default defineConfig({
   vite: {
     plugins: [
       UnoCSS(),
+      VueI18nPlugin({
+        ssr: true,
+      }),
     ],
     define: {
       __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'true',
@@ -69,7 +74,6 @@ export default defineConfig({
     math: true,
     config: (md) => {
       md
-        .use(markdownItMdc)
         .use(markdownItFootnote)
         .use(markdownItMark)
         .use(markdownItHashtag, {
@@ -79,7 +83,8 @@ export default defineConfig({
           figcaption: true,
         })
         .use(markdownItRuby)
-        .use(markdownItAttrs)
+        // .use(markdownItAttrs)
+        .use(markdownItMdc)
 
       md.renderer.rules.hashtag_text = function (tokens, idx) {
         return `${tokens[idx].content}`

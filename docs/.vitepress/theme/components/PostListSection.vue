@@ -109,7 +109,10 @@ const excerptVisible = ref(false)
       un-w-full
     >
       <div
-        v-for="year in props.groupByYear ? Array.from(new Set(props.posts.map(post => new Date(post.created).getFullYear().toString()))).sort((a, b) => parseInt(b) - parseInt(a)) : ['-']"
+        v-for="year in props.groupByYear && props.posts.length
+          ? Array.from(new Set(props.posts.map(post => new Date(post.created).getFullYear().toString())))
+            .sort((a, b) => parseInt(b) - parseInt(a))
+          : ['-']"
         :key="year"
         un-py-10
         un-flex="~ col"
@@ -130,7 +133,7 @@ const excerptVisible = ref(false)
           {{ year !== '-' ? props.yearFormatter ? props.yearFormatter(year) : year : '' }}
         </div>
         <div
-          v-for="post in props.groupByYear
+          v-for="post in props.groupByYear && props.posts.length > 0
             ? props.posts.filter(p => {
               return new Date(p.created).getFullYear().toString() === year
             })

@@ -63,11 +63,11 @@ const categories: string[] = ['log', 'roadmap', 'collection']
   <un-page-content
     :key="$i18n.locale"
   >
-    <ProgressBarHeader
-      :id="t('toc')"
-      :key="$i18n.locale"
-      :title="t('toc')"
-    />
+    <!-- <ProgressBarHeader -->
+    <!--   :id="t('toc')" -->
+    <!--   :key="$i18n.locale" -->
+    <!--   :title="t('toc')" -->
+    <!-- /> -->
     <div
       v-for="category in categories"
       :key="category"
