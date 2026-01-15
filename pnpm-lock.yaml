@@ -39,7 +39,7 @@ importers:
         specifier: ^3.5.22
         version: 3.5.22(typescript@5.8.2)
       vue-i18n:
-        specifier: ^11.1.12
+        specifier: '11'
         version: 11.1.12(vue@3.5.22(typescript@5.8.2))
     devDependencies:
       '@antfu/eslint-config':
@@ -51,9 +51,21 @@ importers:
       '@iconify-json/carbon':
         specifier: ^1.2.14
         version: 1.2.14
+      '@iconify-json/duo-icons':
+        specifier: ^1.2.2
+        version: 1.2.2
       '@iconify-json/ph':
         specifier: ^1.2.2
         version: 1.2.2
+      '@iconify-json/simple-icons':
+        specifier: ^1.2.66
+        version: 1.2.66
+      '@iconify-json/skill-icons':
+        specifier: ^1.2.3
+        version: 1.2.3
+      '@iconify-json/solar':
+        specifier: ^1.2.5
+        version: 1.2.5
       '@shikijs/colorized-brackets':
         specifier: ^3.13.0
         version: 3.13.0
@@ -63,6 +75,9 @@ importers:
       '@shikijs/vitepress-twoslash':
         specifier: ^3.13.0
         version: 3.13.0(@nuxt/kit@3.19.3)(typescript@5.8.2)
+      '@types/markdown-it-attrs':
+        specifier: ^4.1.3
+        version: 4.1.3
       '@types/markdown-it-footnote':
         specifier: ^3.0.4
         version: 3.0.4
@@ -99,6 +114,9 @@ importers:
       markdown-it-mathjax3:
         specifier: ^4.3.2
         version: 4.3.2
+      markdown-it-mdc:
+        specifier: ^0.2.6
+        version: 0.2.6(@types/markdown-it@14.1.2)(markdown-it@14.1.0)
       markdown-it-ruby:
         specifier: ^1.1.2
         version: 1.1.2
@@ -644,11 +662,20 @@ packages:
   '@iconify-json/carbon@1.2.14':
     resolution: {integrity: sha512-33u6uGiYJ79Dfp72peT+PBMcjxzi+NyJLpqYRX8pnw0zchsUW7Us2xecgvkWgD83KYcbe6hufyWlHFU9y7fb/Q==}
 
+  '@iconify-json/duo-icons@1.2.2':
+    resolution: {integrity: sha512-XA2HWgiQE7s5CPpn6P9VFeRx3Y99hnscQsqPiZKdocdTGmYViKoQLhQEQfPgoU2trI1twdwiT/xkq7N9OY1rbg==}
+
   '@iconify-json/ph@1.2.2':
     resolution: {integrity: sha512-PgkEZNtqa8hBGjHXQa4pMwZa93hmfu8FUSjs/nv4oUU6yLsgv+gh9nu28Kqi8Fz9CCVu4hj1MZs9/60J57IzFw==}
 
-  '@iconify-json/simple-icons@1.2.54':
-    resolution: {integrity: sha512-OQQYl8yC5j3QklZOYnK31QYe5h47IhyCoxSLd53f0e0nA4dgi8VOZS30SgSAbsecQ+S0xlGJMjXIHTIqZ+ML3w==}
+  '@iconify-json/simple-icons@1.2.66':
+    resolution: {integrity: sha512-D1OnnXwiQXFkVMw5M+Bt8mPsXeMkQyGmMdrmN7lsQlKMUkfLOp6JWhnUJ92po51WXT046aF/zzqSmkKqg08p4Q==}
+
+  '@iconify-json/skill-icons@1.2.3':
+    resolution: {integrity: sha512-wyoP8uwox80jEi1ABZ3Z+I+ETtIr2brAERPPDzpJ9iALk8hyeg4/kdoC7M8HduhNkSkyq5kwBF8xvbqjNldnBQ==}
+
+  '@iconify-json/solar@1.2.5':
+    resolution: {integrity: sha512-WMAiNwchU8zhfrySww6KQBRIBbsQ6SvgIu2yA+CHGyMima/0KQwT5MXogrZPJGoQF+1Ye3Qj6K+1CiyNn3YkoA==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -967,6 +994,9 @@ packages:
 
   '@types/linkify-it@5.0.0':
     resolution: {integrity: sha512-sVDA58zAw4eWAffKOaQH5/5j3XeayukzDk+ewSsnv3p4yJEZHCCzMDiZM8e0OUrRvmpGZ85jf4yDHkHsgBNr9Q==}
+
+  '@types/markdown-it-attrs@4.1.3':
+    resolution: {integrity: sha512-1JsseFdHD6rQHsPcy4W3xx/whxvZ09Z+CqPpnOtrGtpmkFW07N11q7oM383//LtoKv54yn+HGnk6r4ZHUTHJVg==}
 
   '@types/markdown-it-footnote@3.0.4':
     resolution: {integrity: sha512-XJ6n+v+2u+2gmYLSHcxyoNT/YrgrKvHuDJQlykFjuxCQCr86P2/fx1V6/0lcKxv5cSIlCaJ6sUcNS3zDI7I+LA==}
@@ -2524,6 +2554,12 @@ packages:
 
   markdown-it-mathjax3@4.3.2:
     resolution: {integrity: sha512-TX3GW5NjmupgFtMJGRauioMbbkGsOXAAt1DZ/rzzYmTHqzkO1rNAdiMD4NiruurToPApn2kYy76x02QN26qr2w==}
+
+  markdown-it-mdc@0.2.6:
+    resolution: {integrity: sha512-HxbEZoEmftdm/krWzwI3JcCWoeXTkAufme1gQt8MTN6nY7y2w/I0LI8U9TEERNPjBNtMOLaNaQsM1H+5K15UJQ==}
+    peerDependencies:
+      '@types/markdown-it': '*'
+      markdown-it: ^14.0.0
 
   markdown-it-ruby@1.1.2:
     resolution: {integrity: sha512-tFAuH3HlxiFmx0JtqA02uBKjTZF7ICQu/g3tVf3vwU+ZVPTAMAjWUqcMuj5icO3vwJWSTeST8+D34blL7Q41gA==}
@@ -4246,11 +4282,23 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
+  '@iconify-json/duo-icons@1.2.2':
+    dependencies:
+      '@iconify/types': 2.0.0
+
   '@iconify-json/ph@1.2.2':
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/simple-icons@1.2.54':
+  '@iconify-json/simple-icons@1.2.66':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/skill-icons@1.2.3':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/solar@1.2.5':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -4582,6 +4630,10 @@ snapshots:
   '@types/json-schema@7.0.15': {}
 
   '@types/linkify-it@5.0.0': {}
+
+  '@types/markdown-it-attrs@4.1.3':
+    dependencies:
+      '@types/markdown-it': 14.1.2
 
   '@types/markdown-it-footnote@3.0.4':
     dependencies:
@@ -6389,6 +6441,12 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
+  markdown-it-mdc@0.2.6(@types/markdown-it@14.1.2)(markdown-it@14.1.0):
+    dependencies:
+      '@types/markdown-it': 14.1.2
+      markdown-it: 14.1.0
+      yaml: 2.8.1
+
   markdown-it-ruby@1.1.2: {}
 
   markdown-it@14.1.0:
@@ -7612,7 +7670,7 @@ snapshots:
     dependencies:
       '@docsearch/css': 3.9.0
       '@docsearch/js': 3.9.0(@algolia/client-search@5.40.1)(search-insights@2.17.3)
-      '@iconify-json/simple-icons': 1.2.54
+      '@iconify-json/simple-icons': 1.2.66
       '@shikijs/core': 3.13.0
       '@shikijs/transformers': 3.13.0
       '@shikijs/types': 3.13.0

@@ -3,11 +3,13 @@ import { transformerMetaWordHighlight, transformerNotationWordHighlight } from '
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import { createFileSystemTypesCache } from '@shikijs/vitepress-twoslash/cache-fs'
 import anchor from 'markdown-it-anchor'
+import markdownItAttrs from 'markdown-it-attrs'
 import markdownItFootnote from 'markdown-it-footnote'
 import markdownItHashtag from 'markdown-it-hashtag'
 import markdownItFigures from 'markdown-it-implicit-figures'
 import markdownItMark from 'markdown-it-mark'
-import markdownRuby from 'markdown-it-ruby'
+import markdownItMdc from 'markdown-it-mdc'
+import markdownItRuby from 'markdown-it-ruby'
 import UnoCSS from 'unocss/vite'
 import { defineConfig } from 'vitepress'
 // https://vitepress.dev/reference/site-config
@@ -29,10 +31,22 @@ export default defineConfig({
   vue: {
     template: {
       compilerOptions: {
-        isCustomElement: tag => tag.startsWith('un-'),
+        isCustomElement: tag => tag.startsWith('un-')
+          || ['rb'].includes(tag),
       },
     },
   },
+  // locales: {
+  //   root: {
+  //     label: '中文',
+  //     lang: 'zh',
+  //   },
+  //   en: {
+  //     label: 'English',
+  //     lang: 'en',
+  //     link: '/en/',
+  //   },
+  // },
   markdown: {
     codeTransformers: [
       transformerTwoslash({
@@ -55,6 +69,7 @@ export default defineConfig({
     math: true,
     config: (md) => {
       md
+        .use(markdownItMdc)
         .use(markdownItFootnote)
         .use(markdownItMark)
         .use(markdownItHashtag, {
@@ -63,7 +78,8 @@ export default defineConfig({
         .use(markdownItFigures, {
           figcaption: true,
         })
-        .use(markdownRuby)
+        .use(markdownItRuby)
+        .use(markdownItAttrs)
 
       md.renderer.rules.hashtag_text = function (tokens, idx) {
         return `${tokens[idx].content}`
@@ -71,7 +87,7 @@ export default defineConfig({
 
       md.renderer.rules.hashtag_open = function (tokens, idx) {
         const tagName = tokens[idx].content.toLowerCase()
-        return `<a href="/tags/${tagName}"><span class="tag">`
+        return `<a href="../../tags/${tagName}"><span class="tag">`
       }
 
       md.renderer.rules.hashtag_close = function () {

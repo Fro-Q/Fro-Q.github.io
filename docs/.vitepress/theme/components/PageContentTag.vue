@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useData } from 'vitepress'
 import { computed, ref } from 'vue'
-import { usePostFilters } from '../../utils/usePostFilters'
+import { toChineseNumber } from '../../utils/toChineseNumber'
+import { data as posts } from '../src/exitus.data'
 import LinkUnderline from './LinkUnderline.vue'
 import PostListSection from './PostListSection.vue'
 import PostMetaInfo from './PostMetaInfo.vue'
@@ -9,12 +10,17 @@ import TagDisplay from './TagDisplay.vue'
 
 const { params } = useData()
 
-const { postsInCurrentTag, postsInExtendedTags, groupByProperty } = usePostFilters()
+const postsInCurrentTag = computed(() => {
+  return posts.filter(post =>
+    post.tags.includes(params.value?.tag),
+  )
+})
 
-const postsToShow = {
-  在此: groupByProperty('chineseYear', postsInCurrentTag.value),
-  更深处: groupByProperty('chineseYear', postsInExtendedTags.value),
-}
+const postsInExtendedTags = computed(() => {
+  return posts.filter(post =>
+    post.tagsExtended?.some(tag => tag === params.value?.tag && !post.tags.includes(params.value?.tag)),
+  )
+})
 
 const metaStrings = computed(() => [
   `${postsInCurrentTag.value.length} 篇在此`,
@@ -30,9 +36,12 @@ const metaStrings = computed(() => [
 
   <ClientOnly>
     <PostListSection
-      :posts="postsToShow"
+      :posts="postsInCurrentTag"
       :show-excerpt-toggle="true"
-      :show-title="true"
+      title="在此"
+      :group-by-year="true"
+      :intro="`包含标签「${params?.tag}」的文章`"
+      :year-formatter="$i18n.locale === 'zh' ? toChineseNumber : (year: string) => year"
       :date-formatter="(date: Date) => {
         return new Date(date).toLocaleDateString('zh-CN', {
           month: 'long',
@@ -41,8 +50,8 @@ const metaStrings = computed(() => [
       }"
     >
       <template
-        v-if="Object.keys(postsToShow['在此']).length === 0"
-        #empty-message-addons-在此
+        v-if="Object.keys(postsInCurrentTag).length === 0"
+        #empty-message-addons
       >
         <div
           un-text="2xl neutral-800 dark:neutral-200"
@@ -76,8 +85,23 @@ const metaStrings = computed(() => [
           />
         </div>
       </template>
+    </PostListSection>
+    <PostListSection
+      :posts="postsInExtendedTags"
+      :show-excerpt-toggle="true"
+      title="更深处"
+      :group-by-year="true"
+      :intro="`扩展标签包含「${params?.tag}」的文章`"
+      :year-formatter="$i18n.locale === 'zh' ? toChineseNumber : (year: string) => year"
+      :date-formatter="(date: Date) => {
+        return new Date(date).toLocaleDateString('zh-CN', {
+          month: 'long',
+          day: 'numeric',
+        })
+      }"
+    >
       <template
-        v-if="Object.keys(postsToShow['更深处']).length === 0"
+        v-if="Object.keys(postsInExtendedTags).length === 0"
         #empty-message-addons-更深处
       >
         <div

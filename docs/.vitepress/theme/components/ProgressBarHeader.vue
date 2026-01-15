@@ -5,6 +5,7 @@ import { useTemplateRef, watchEffect } from 'vue'
 defineProps<{
   title: string
   id?: string
+  intro?: string
 }>()
 
 const titleWrapper = useTemplateRef('titleWrapper')
@@ -13,7 +14,10 @@ const titleWrapperVisible = useElementVisibility(titleWrapper)
 const progressBarWidth = useCssVar('--progress-bar-width', titleWrapper)
 
 function handleScroll() {
-  const categoryWrapper = titleWrapper.value!.parentElement
+  // const categoryWrapper = titleWrapper.value!.parentElement
+  if (!titleWrapper.value)
+    return
+  const categoryWrapper = titleWrapper.value.parentElement
   if (categoryWrapper) {
     const scrollY = window.scrollY
     const wrapperOffsetY = categoryWrapper.offsetTop
@@ -48,7 +52,7 @@ watchEffect(() => {
     ref="titleWrapper"
     un-sticky
     un-top-0
-    un-py-10
+    un-py-5
     un-z-10
     un-bg="neutral-50 dark:neutral-950"
     class="title-wrapper"
@@ -79,6 +83,14 @@ watchEffect(() => {
     >
       {{ title !== '-' ? title : '' }}
     </h2>
+    <div
+      v-if="intro"
+      un-text="neutral-600 dark:neutral-400"
+      un-mb-4
+      un-pl-8
+    >
+      {{ intro }}
+    </div>
     <slot />
   </div>
 </template>

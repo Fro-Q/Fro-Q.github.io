@@ -1,6 +1,6 @@
 import { useData } from 'vitepress'
 import { computed } from 'vue'
-import { data as posts } from '../theme/src/posts.data'
+import { data as posts } from '../theme/src/exitus.data'
 
 /**
  * Provides utility functions and computed properties for tag-related logic.

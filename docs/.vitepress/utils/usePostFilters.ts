@@ -1,7 +1,7 @@
-import type { Data } from '../theme/src/posts.data'
+import type { Data } from '../theme/src/exitus.data'
 import { useData } from 'vitepress'
 import { computed } from 'vue'
-import { data as posts } from '../theme/src/posts.data'
+import { data as posts } from '../theme/src/exitus.data'
 
 /**
  * Provides utility functions and computed properties for filtering posts.
@@ -20,13 +20,13 @@ export function usePostFilters() {
    * @param _posts Optional posts to filter, defaults to all posts.
    * @returns An array of unique values.
    */
-  const getUniqueGroupProperty = (
+  const getUniqueProperty = (
     key: string,
     _posts: Data[] = allPosts.value,
   ) => {
     return [
       ...new Set(_posts.map((post) => {
-        return post.groupProperty[key as keyof Data]
+        return post[key as keyof Data]
       })),
     ]
   }
@@ -42,7 +42,7 @@ export function usePostFilters() {
     _posts: Data[] = allPosts.value,
   ) => {
     return _posts.reduce((acc, post) => {
-      const group = post.groupProperty[key as keyof Data]
+      const group = post[key as keyof Data]
       if (!acc[group])
         acc[group] = []
       acc[group].push(post)
@@ -63,11 +63,11 @@ export function usePostFilters() {
     return computed(() => {
       const uniqueGroups = groupKey === '-'
         ? ['-']
-        : getUniqueGroupProperty(groupKey)
+        : getUniqueProperty(groupKey)
 
       const uniqueSubGroups = subGroupKey === '-'
         ? ['-']
-        : getUniqueGroupProperty(subGroupKey)
+        : getUniqueProperty(subGroupKey)
 
       const postList: Record<string, Record<string, Data[]>> = {}
       uniqueGroups.forEach((group) => {
@@ -78,8 +78,8 @@ export function usePostFilters() {
       })
 
       posts.forEach((post) => {
-        const thisGroup = post.groupProperty[groupKey as keyof Data] || '-'
-        const thisSubGroup = post.groupProperty[subGroupKey as keyof Data] || '-'
+        const thisGroup = post[groupKey as keyof Data] || '-'
+        const thisSubGroup = post[subGroupKey as keyof Data] || '-'
 
         postList[thisGroup][thisSubGroup].push(post)
       })
@@ -165,13 +165,6 @@ export function usePostFilters() {
   }
 
   /**
-   * Computes all unique categories from all posts, sorted alphabetically.
-   */
-  const allUniqueCategories = computed(() => {
-    return [...new Set(posts.map(post => post.frontmatter.category))].sort()
-  })
-
-  /**
    * Filters posts by a given key-value pair in the frontmatter.
    * @param key The key to filter by.
    * @param value The value to filter by.
@@ -193,7 +186,7 @@ export function usePostFilters() {
 
   return {
     allPosts,
-    getUniqueGroupProperty,
+    getUniqueProperty,
     groupByProperty,
     generatePostList,
     postsInCurrentTag,
@@ -202,7 +195,7 @@ export function usePostFilters() {
     findPostByUrl,
     getNextPost,
     getPrevPost,
-    allUniqueCategories,
+    // allUniqueCategories,
     filterPostsByFrontmatter,
     filterPostsByPostProperty,
   }

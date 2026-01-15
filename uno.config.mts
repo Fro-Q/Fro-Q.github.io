@@ -1,16 +1,22 @@
+import extractorMdc from '@unocss/extractor-mdc'
+
 import {
   defineConfig,
   presetAttributify,
   presetIcons,
   presetMini,
   presetTagify,
+  presetTypography,
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
-
 import contacts from './docs/.vitepress/theme/src/contacts.json' with { type: 'json' }
+import safeIcon from './docs/.vitepress/theme/src/safeIcon.json' with { type: 'json' }
 
-const safeIcons = contacts.map(c => c.iconUno)
+const safeIcons = [
+  ...contacts.map(c => c.iconUno),
+  ...safeIcon.appIcons,
+]
 const safeColors = contacts.map(c => c.colorUno)
 export default defineConfig({
   theme: {
@@ -19,6 +25,13 @@ export default defineConfig({
       md: '900px',
     },
   },
+  rules: [
+    ['font-sans', { 'font-family': 'LXGW Neo ZhiSong Plus' }],
+    ['font-serif', { 'font-family': 'YshiPen-ShutiTC' }],
+    ['font-mono', { 'font-family': 'LXGW Bright Code TC' }],
+    ['font-stylish', { 'font-family': 'Caveat' }],
+    ['font-script', { 'font-family': 'Ephesis' }],
+  ],
   safelist: [
     ...safeIcons,
     ...safeColors.map(c => `border-${c}-500`),
@@ -28,7 +41,7 @@ export default defineConfig({
   content: {
     pipeline: {
       include: [
-        /\.(vue|svelte|[jt]sx|mdx?|astro|elm|php|phtml|html|css|)($|\?)/,
+        /\.(vue|svelte|[jt]sx|mdx?|astro|elm|php|phtml|html|css)($|\?)/,
       ],
     },
   },
@@ -41,6 +54,10 @@ export default defineConfig({
       collections: {
         carbon: () => import('@iconify-json/carbon/icons.json', { with: { type: 'json' } }).then(i => i.default as any),
         ph: () => import('@iconify-json/ph/icons.json', { with: { type: 'json' } }).then(i => i.default as any),
+        solar: () => import('@iconify-json/solar/icons.json', { with: { type: 'json' } }).then(i => i.default as any),
+        duo: () => import('@iconify-json/duo-icons/icons.json', { with: { type: 'json' } }).then(i => i.default as any),
+        simple: () => import('@iconify-json/simple-icons/icons.json', { with: { type: 'json' } }).then(i => i.default as any),
+        skill: () => import('@iconify-json/skill-icons/icons.json', { with: { type: 'json' } }).then(i => i.default as any),
       },
     }),
     presetAttributify({
@@ -51,10 +68,14 @@ export default defineConfig({
     presetTagify({
       prefix: 'un-',
     }),
+    presetTypography(),
   ],
   transformers: [
     transformerDirectives(),
     transformerVariantGroup(),
+  ],
+  extractors: [
+    extractorMdc(),
   ],
   layers: {
     default: 0,

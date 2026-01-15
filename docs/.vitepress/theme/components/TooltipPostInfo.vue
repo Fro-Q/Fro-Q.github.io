@@ -66,9 +66,12 @@ defineProps<{
         un-align-middle
         un-text="emerald-400 dark:emerald-600"
       />
+      <!-- Truncate excerpt for tooltip display -->
       <div
         un-text="neutral-800 dark:neutral-200"
-        v-html="post.excerpt"
+        v-html="post.excerpt.length > 100
+          ? `${post.excerpt.slice(0, 100)}...`
+          : post.excerpt"
       />
     </div>
   </div>

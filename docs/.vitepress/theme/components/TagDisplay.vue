@@ -100,7 +100,7 @@ onClickOutside(extendedTagsRef as any, () => {
             un-text="neutral-500 hover:neutral-950 dark:hover:neutral-50"
             un-underline="~ px neutral-500 hover:neutral-950 dark:hover:neutral-50"
           >
-            {{ `${tag.replace(`${currentTagHierarchy.map(tag => tag.split('/').pop()).join('/')}/`, '')}` }}
+            {{ `${tag.replace(`${currentTagHierarchy.map(_tag => _tag.split('/').pop()).join('/')}/`, '')}` }}
           </a>
         </div>
       </div>

@@ -1,25 +1,40 @@
-@font-face {
-  font-family: 'Lxgw WenKai Mono';
-  src: url('./fonts/Lxgw\ WenKai\ Mono\ Light.ttf');
-}
+/* @font-face { */
+/*   font-family: 'Lxgw WenKai Mono'; */
+/*   src: url('./fonts/Lxgw\ WenKai\ Mono\ Light.ttf'); */
+/* } */
+/**/
+/* @font-face { */
+/*   font-family: 'FusionKai J'; */
+/*   src: url('./fonts/FusionKaiJ-Regular.ttf'); */
+/* } */
+/**/
+/* @font-face { */
+/*   font-family: 'YshiPenShutiTC'; */
+/*   src: url('./fonts/YshiPenShutiTC-Regular.ttf'); */
+/* } */
+/**/
+/* @font-face { */
+/*   font-family: 'QiushuiShotaiTC'; */
+/*   src: url('./fonts/QiushuiShotai.ttf'); */
+/* } */
+
+@import url('https://fontsapi.zeoseven.com/232/tc/result.css');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=League+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ephesis&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..800,0..1,0..1,0..1&display=swap');
 
 @font-face {
-  font-family: 'FusionKai J';
-  src: url('./fonts/FusionKaiJ-Regular.ttf');
+  font-family: 'LXGW Bright Code TC';
+  src: url('fonts/LXGWBrightCodeTC-ExtraLight.ttf');
 }
-
 @font-face {
-  font-family: 'YshiPenShutiTC';
-  src: url('./fonts/YshiPenShutiTC-Regular.ttf');
-}
-
-@font-face {
-  font-family: 'QiushuiShotaiTC';
-  src: url('./fonts/QiushuiShotai.ttf');
+  font-family: 'LXGW Neo ZhiSong Plus';
+  src: url('fonts/LXGWNeoZhiSongPlus.ttf');
 }
 
 html {
-  font-family: 'YshiPenShutiTC', 'QiushuiShotaiTC', 'FusionKai J', 'Lxgw WenKai Mono';
+  --uno: 'font-serif';
   /* font-size: 20px; */
   --uno: 'text-12px sm:text-16px md:text-20px';
   /* scroll-behavior: smooth; */
@@ -28,9 +43,11 @@ html {
 
   /* background color for medium-zoom */
   --image-mask-bg: #fafafa;
+  --uno: 'bg-neutral-50';
 
   &.dark {
     --image-mask-bg: #0a0a0a;
+    --uno: 'bg-neutral-950';
   }
 }
 
@@ -86,14 +103,14 @@ html {
     --uno: 'text-neutral-950 dark:text-neutral-50';
   }
 
-  & a:not([href^='#'], [href^='/tags/']) {
+  & a:not([href^='#'], [href^='../../tags/']) {
     --uno: 'relative inline-block text-nowrap';
     --uno: 'text-neutral-900 dark:text-neutral-100';
     /* underline implemented by ::before */
     --uno: 'before:(content-[""] absolute bottom-0.5em w-full h-px bg-neutral-500)';
     --uno: 'before:(transition duration-200) after:(transition duration-200)';
     /* link icon */
-    --uno: 'after:(content-[""] i-ph-link-duotone inline-block align-middle ml-1 text-neutral-950 dark:text-neutral-50)';
+    --uno: 'after:(content-[""] i-ph-link-simple-horizontal-duotone inline-block align-middle ml-1 text-sky-400 dark:text-sky-600)';
     --uno: 'hover:(before:(bg-sky-400 dark:bg-sky-600))';
   }
 
@@ -472,7 +489,7 @@ html {
   }
 
   /* hashtag */
-  & a[href^='/tags/']:not([id^='fnref'], .header-anchor) {
+  & a[href^='../../tags/']:not([id^='fnref'], .header-anchor) {
     --uno: 'before:(content-empty i-ph-tag-duotone text-sky-400 dark:text-sky-600 w-4 h-4 relative inline-block align-middle)';
     --uno: 'z-1';
   }

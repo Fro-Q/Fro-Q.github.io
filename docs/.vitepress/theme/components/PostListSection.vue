@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import type { Data } from '../src/posts.data'
 import { computed, ref } from 'vue'
-import CheckboxToggle from './CheckboxToggle.vue'
+import { useI18n } from 'vue-i18n'
+import { renderMdInline } from '../../utils/renderMdInline'
 import LinkUnderline from './LinkUnderline.vue'
 import ProgressBarHeader from './ProgressBarHeader.vue'
+import QCheckbox from './QCheckbox.vue'
 import TooltipPostInfo from './TooltipPostInfo.vue'
 
 // TODO: Abstract this component
@@ -12,57 +13,71 @@ const props = defineProps<{
   /**
    * Posts to be displayed.
    */
-  posts: Record<string, Record<string, Data[]>>
+  posts: Record<string, any>[]
   /**
-   * Titles mapping for each group.
+   * Boolean to control grouping by year.
    */
-  groupTitleMapping?: Record<string, string>
+  groupByYear?: boolean
   /**
-   * Titles mapping for each subgroup.
+   * Function to format the year.
    */
-  subGroupTitleMapping?: Record<string, string>
+  yearFormatter?: (year: string) => string
   /**
    * Boolean to control the visibility of the excerpt toggle.
    */
   showExcerptToggle?: boolean
   /**
-   * Boolean to control the visibility of the title.
+   * Title of the section.
    */
-  showTitle?: boolean
+  title: string
+  /**
+   * Boolean to control the visibility of the introduction.
+   */
+  showIntro?: boolean
+  /**
+   * Introduction.
+   */
+  intro?: string
   /**
    * Function to format the date.
    */
   dateFormatter?: (date: Date) => string
 }>()
 
-const posts = computed(() => {
-  // Map group titles and subgroup titles if provided
-  return Object.fromEntries(
-    Object.entries(props.posts).map(([group, posts]) => [
-      props.groupTitleMapping?.[group] || group,
-      Object.fromEntries(
-        Object.entries(posts).map(([subgroup, posts]) => [
-          props.subGroupTitleMapping?.[subgroup] || subgroup,
-          posts,
-        ]),
-      ),
-    ]),
-  )
+const { t, locale } = useI18n({
+  messages: {
+    en: {
+      excerptToggle: {
+        show: 'showing',
+        hide: 'hiding',
+        prefix: 'Excerpt',
+        suffix: '',
+      },
+    },
+    zh: {
+      excerptToggle: {
+        show: '显示',
+        hide: '隐藏',
+        prefix: '已',
+        suffix: '摘要',
+      },
+    },
+  },
 })
 
-const excerptVisible = ref(Object.fromEntries(Object.keys(posts).map(group => [group, false])))
+const excerptVisible = ref(false)
 </script>
 
 <template>
   <un-page-content
-    v-for="[group, groupedPosts] in Object.entries(posts)"
-    :key="group"
     un-min-h-100vh
+    un-block
   >
     <ProgressBarHeader
-      v-if="showTitle"
-      :id="group"
-      :title="group"
+      v-if="props.title"
+      :id="props.title"
+      :title="props.title"
+      :intro="props.showIntro ? props.intro : ''"
     >
       <template #default>
         <div
@@ -75,11 +90,13 @@ const excerptVisible = ref(Object.fromEntries(Object.keys(posts).map(group => [g
             un-flex="~ row"
             un-items-center
           >
-            <CheckboxToggle
-              :id="`${group}-excerpt`"
-              :model-value="excerptVisible[group]"
-              model-text="摘要"
-              @update:model-value="excerptVisible[group] = $event"
+            <QCheckbox
+              :id="`${props.title}-excerpt`"
+              :model-value="excerptVisible"
+              :label-prefix="t('excerptToggle.prefix')"
+              :label-text="{ checked: t('excerptToggle.show'), unchecked: t('excerptToggle.hide') }"
+              :label-suffix="t('excerptToggle.suffix')"
+              @update:model-value="excerptVisible = $event"
             />
           </div>
         </div>
@@ -92,34 +109,35 @@ const excerptVisible = ref(Object.fromEntries(Object.keys(posts).map(group => [g
       un-w-full
     >
       <div
-        v-for="[subGroup, subGroupedPosts] in Object.entries(groupedPosts)"
-        :key="subGroup"
+        v-for="year in props.groupByYear ? Array.from(new Set(props.posts.map(post => new Date(post.created).getFullYear().toString()))).sort((a, b) => parseInt(b) - parseInt(a)) : ['-']"
+        :key="year"
         un-py-10
         un-flex="~ col"
         un-gap-4
         un-w-full
       >
         <div
-
           un-text="neutral-600 dark:neutral-400 2xl"
-
-          style="writing-mode: vertical-lr;"
-
+          :style="locale === 'zh' ? { writingMode: 'vertical-lr' } : {}"
           un-px-4
           un-text-3xl
           un-sticky
           un-top-50
+          un-pt-10
           un-z-2
           un-w-fit
         >
-          {{ subGroup !== '-' ? subGroup : '' }}
+          {{ year !== '-' ? props.yearFormatter ? props.yearFormatter(year) : year : '' }}
         </div>
         <div
-          v-for="post in subGroupedPosts"
+          v-for="post in props.groupByYear
+            ? props.posts.filter(p => {
+              return new Date(p.created).getFullYear().toString() === year
+            })
+              .sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime())
+            : [...props.posts].sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime())"
           :key="post.url"
-
           un-flex="~ col"
-
           un-gap-2
           un-items-end
           un-relative
@@ -137,7 +155,7 @@ const excerptVisible = ref(Object.fromEntries(Object.keys(posts).map(group => [g
               un-whitespace-nowrap
             >
               {{ dateFormatter
-                ? dateFormatter(post.created) : new Date(post.created).toLocaleDateString('zh-CN', {
+                ? dateFormatter(post.created) : new Date(post.created).toLocaleDateString(locale, {
                   year: 'numeric',
                   month: 'long',
                   day: 'numeric',
@@ -145,9 +163,9 @@ const excerptVisible = ref(Object.fromEntries(Object.keys(posts).map(group => [g
             </div>
             <LinkUnderline
               :href="post.url"
-              :text="post.frontmatter.title"
+              :text="post.title"
               :tooltip="true"
-              :tooltip-text="post.frontmatter.title"
+              :tooltip-text="post.title"
               un-text="neutral-700 dark:neutral-300 hover:neutral-950 dark:hover:neutral-50 2xl"
               un-before="bg-emerald-600 dark:bg-emerald-600/80"
               un-text-align="right"
@@ -159,7 +177,7 @@ const excerptVisible = ref(Object.fromEntries(Object.keys(posts).map(group => [g
           </div>
           <!-- Post excerpt -->
           <div
-            v-show="excerptVisible[group] && post.excerpt"
+            v-show="excerptVisible && post.excerpt"
             un-text-neutral-500
             class="markdown-rendered"
             v-html="post.excerpt?.replace(/<p>|<\/p>/g, '')"
@@ -167,9 +185,8 @@ const excerptVisible = ref(Object.fromEntries(Object.keys(posts).map(group => [g
         </div>
       </div>
     </div>
-
     <slot
-      :name="`empty-message-addons-${group}`"
+      name="empty-message-addons"
     />
   </un-page-content>
 </template>
