@@ -32,8 +32,8 @@ async function fetchActivity() {
 
     activity.value = await response.json()
     error.value = null
-    // Detect if the activity is sleeping (`updatedAt` older than 5 minute)
-    if (!activity.value.updatedAt) {
+    // Detect if the activity is sleeping (`timestamp` older than 5 minute)
+    if (!activity.value.timestamp) {
       sleeping.value = true
       return
     }

@@ -15,7 +15,7 @@ export interface ActivityMedia {
 
 export interface Activity {
   active: boolean
-  timestamp?: number
+  timestamp?: string
   updatedAt?: string
   process?: ActivityProcess | null
   media?: ActivityMedia | null
